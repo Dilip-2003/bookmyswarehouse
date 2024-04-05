@@ -7,7 +7,7 @@ import 'package:bookmywarehouse/ui_components/login_signup_page/login_button.dar
 import 'package:bookmywarehouse/ui_components/login_signup_page/password_text_field.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/sign_in_button.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/welcome.dart';
-import 'package:bookmywarehouse/widgets/home_screen.dart';
+import 'package:bookmywarehouse/widgets/navigation_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreens extends StatelessWidget {
@@ -75,14 +75,14 @@ class LoginScreens extends StatelessWidget {
               ),
               LoginButton(
                 borderColor: BasicColor.primary,
-                textColor: Color(0xFFFFFFFF),
+                textColor: const Color(0xFFFFFFFF),
                 color: BasicColor.primary,
                 btnText: 'Log in',
                 callback: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
+                      builder: (context) => const BottomNavBar(),
                     ),
                   );
                   print('login button pressed');

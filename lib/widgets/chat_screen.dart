@@ -1,9 +1,7 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/chat/chatappbar.dart';
 import 'package:bookmywarehouse/ui_components/chat/chatroom.dart';
-import 'package:bookmywarehouse/widgets/custom_bottom_navbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -23,7 +21,6 @@ class ChatScreen extends StatelessWidget {
           colors: Color(0xFFF2F2F3),
         ),
       ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
       body: const ChatScreenBody(),
     );
   }
@@ -46,7 +43,7 @@ class ChatScreenBody extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ChatRoom(),
+                  builder: (context) => const ChatRoom(),
                 ));
             print('switching chatscreen to chat room');
           },

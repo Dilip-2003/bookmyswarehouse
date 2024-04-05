@@ -82,7 +82,7 @@ class SignUpScreens extends StatelessWidget {
               ),
               LoginButton(
                 borderColor: BasicColor.primary,
-                textColor: Color(0xFFFFFFFF),
+                textColor: const Color(0xFFFFFFFF),
                 color: BasicColor.primary,
                 btnText: 'Create account',
                 callback: () {

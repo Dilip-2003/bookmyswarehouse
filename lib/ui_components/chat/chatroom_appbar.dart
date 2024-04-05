@@ -8,7 +8,7 @@ class ChatRoomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.sizeOf(context).width;
-    return Container(
+    return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.08,
       width: width,
       child: Row(
@@ -25,7 +25,7 @@ class ChatRoomAppBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Dilip Sarkar',
+                  '  Dilip Sarkar',
                   style: GoogleFonts.poppins(
                     textStyle: TextStyle(
                         fontSize: 18,
@@ -34,7 +34,13 @@ class ChatRoomAppBar extends StatelessWidget {
                         fontWeight: FontWeight.w800),
                   ),
                 ),
-                const Icon(Icons.menu),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.menu,
+                    size: 30,
+                  ),
+                )
               ],
             ),
           )
