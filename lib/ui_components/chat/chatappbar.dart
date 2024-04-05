@@ -19,7 +19,7 @@ class ChatAppBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: const EdgeInsets.only(top: 5),
+          margin: const EdgeInsets.only(top: 5, bottom: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(81),
             color: colors,
@@ -29,10 +29,7 @@ class ChatAppBar extends StatelessWidget {
             controller: chatAppSearchController,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
-              prefixIcon: Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: icons,
-              ),
+              prefixIcon: icons,
               hintText: emailText,
               hintStyle: GoogleFonts.poppins(
                 textStyle: const TextStyle(

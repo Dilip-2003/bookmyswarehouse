@@ -12,6 +12,16 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            // Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.keyboard_arrow_left,
+            size: 30,
+          ),
+        ),
         title: const ChatAppBar(
           icons: Icon(
             Icons.search,
