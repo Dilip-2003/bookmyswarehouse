@@ -75,7 +75,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProperDetailsScreen(),
+                          builder: (context) => const ProperDetailsScreen(),
                         ));
                   },
                   child: Container(
@@ -202,7 +202,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                     Padding(
                                       padding:
                                           EdgeInsets.only(left: width * 0.08),
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.favorite_border,
                                         size: 22,
                                         color: Color(0xFF7D7F88),
