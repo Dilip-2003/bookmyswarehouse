@@ -33,19 +33,19 @@ class ChatRoom extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                RightChat(),
-                LeftChat(),
-                RightChat(),
-                LeftChat(),
-                RightChat(),
-                LeftChat(),
+                const RightChat(),
+                const LeftChat(),
+                const RightChat(),
+                const LeftChat(),
+                const RightChat(),
+                const LeftChat(),
                 SizedBox(
                   height: height * 0.08,
                 )
               ],
             ),
           ),
-          Positioned(
+          const Positioned(
             bottom: 0,
             child: ChatRoomBottomNavBar(
               icons: Icon(

@@ -1,6 +1,7 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/widgets/chat_screen.dart';
 import 'package:bookmywarehouse/widgets/home_screen.dart';
+import 'package:bookmywarehouse/widgets/profilescreen.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBarApp extends StatelessWidget {
@@ -29,7 +30,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     HomeScreen(),
     ChatScreen(),
     HomeScreen(),
-    HomeScreen(),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -41,6 +42,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
