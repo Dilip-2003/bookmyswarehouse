@@ -24,8 +24,6 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     HomeScreen(),
@@ -84,7 +82,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: BasicColor.primary,
-        unselectedItemColor: Color(0xFF7D8588),
+        unselectedItemColor: const Color(0xFF7D8588),
         showUnselectedLabels: true,
         onTap: _onItemTapped,
       ),

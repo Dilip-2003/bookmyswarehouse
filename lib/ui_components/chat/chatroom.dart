@@ -1,5 +1,6 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/chat/chatroom_appbar.dart';
+import 'package:bookmywarehouse/ui_components/chat/chatroombottomnavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -8,6 +9,7 @@ class ChatRoom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return Scaffold(
       backgroundColor: const Color(0xFFE3E3E7),
       appBar: AppBar(
@@ -24,20 +26,37 @@ class ChatRoom extends StatelessWidget {
         ),
         title: const ChatRoomAppBar(),
       ),
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [
-            RightChat(),
-            LeftChat(),
-            RightChat(),
-            LeftChat(),
-            RightChat(),
-            LeftChat(),
-            SizedBox(
-              height: 10,
-            )
-          ],
-        ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                RightChat(),
+                LeftChat(),
+                RightChat(),
+                LeftChat(),
+                RightChat(),
+                LeftChat(),
+                SizedBox(
+                  height: height * 0.08,
+                )
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: ChatRoomBottomNavBar(
+              icons: Icon(
+                Icons.search,
+                size: 30,
+              ),
+              emailText: 'Search messages',
+              colors: Color(0xFFF2F2F3),
+            ),
+          ),
+        ],
       ),
     );
   }
