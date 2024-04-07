@@ -185,17 +185,19 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                         Text(
                                           'Rs.95,000',
                                           style: GoogleFonts.poppins(
-                                              textStyle: TextStyle(
-                                                  fontSize: 14,
-                                                  color:
-                                                      BasicColor.lightBlack)),
+                                            textStyle: TextStyle(
+                                                fontSize: 14,
+                                                color: BasicColor.lightBlack),
+                                          ),
                                         ),
                                         Text(
                                           '/ month',
                                           style: GoogleFonts.poppins(
-                                              textStyle: const TextStyle(
-                                                  fontSize: 14,
-                                                  color: Color(0xFF7D7F88))),
+                                            textStyle: const TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF7D7F88),
+                                            ),
+                                          ),
                                         )
                                       ],
                                     ),

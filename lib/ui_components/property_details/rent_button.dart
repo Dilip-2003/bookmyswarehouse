@@ -1,4 +1,5 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/widgets/checkout.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -52,6 +53,11 @@ class RentButton extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CheckOut(),
+                  ));
               print('rent button clicked');
             },
             child: Container(
