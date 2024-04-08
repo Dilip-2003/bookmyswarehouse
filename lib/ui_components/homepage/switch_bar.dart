@@ -25,7 +25,6 @@ class _SwitchBarHomeState extends State<SwitchBarHome> {
       ),
       height: height * 0.07,
       width: width * 0.9,
-      margin: EdgeInsets.symmetric(horizontal: width * 0.05),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

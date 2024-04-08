@@ -1,3 +1,4 @@
+import 'package:bookmywarehouse/widgets/filter_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,6 +35,11 @@ class SearchFieldHome extends StatelessWidget {
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(
               onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Filter(),
+                    ));
                 print('filter button pressed');
               },
               icon: Image.asset(
