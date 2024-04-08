@@ -35,7 +35,7 @@ class _FilterState extends State<Filter> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FilterSearchBar(),
+                const FilterSearchBar(),
                 SizedBox(
                   height: width * 0.05,
                 ),
@@ -47,7 +47,7 @@ class _FilterState extends State<Filter> {
                   title: 'How long do you want to stay?',
                 ),
                 const SizedBox(height: 10),
-                StayTime(),
+                const StayTime(),
                 SizedBox(
                   height: width * 0.05,
                 ),
@@ -55,16 +55,16 @@ class _FilterState extends State<Filter> {
                   title: 'Property Type',
                 ),
                 const SizedBox(height: 10),
-                PropertyType(),
+                const PropertyType(),
                 SizedBox(
                   height: width * 0.05,
                 ),
-                PriceRange(),
+                const PriceRange(),
                 SizedBox(
                   height: width * 0.02,
                 ),
                 Header(title: 'Rooms and Beds'),
-                RoomAndBed(),
+                const RoomAndBed(),
                 SizedBox(
                   height: width * 0.05,
                 ),
@@ -74,15 +74,15 @@ class _FilterState extends State<Filter> {
                     Header(title: 'Property Facilities'),
                     TextButton(
                       onPressed: () {},
-                      child: Text('See more'),
+                      child: const Text('See more'),
                     ),
                   ],
                 ),
                 PropertyFacility(),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                FilterButton(),
+                const FilterButton(),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/widgets/search_result.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -41,21 +42,31 @@ class FilterButton extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            height: height * 0.05,
-            width: width * 0.4,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              color: BasicColor.deepBlack,
-            ),
-            child: Center(
-              child: Text(
-                'Show Results',
-                style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                      fontSize: 16,
-                      letterSpacing: 0.02,
-                      color: BasicColor.deepWhite),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchResults(),
+                ),
+              );
+            },
+            child: Container(
+              height: height * 0.05,
+              width: width * 0.4,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                color: BasicColor.deepBlack,
+              ),
+              child: Center(
+                child: Text(
+                  'Show Results',
+                  style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        fontSize: 16,
+                        letterSpacing: 0.02,
+                        color: BasicColor.deepWhite),
+                  ),
                 ),
               ),
             ),

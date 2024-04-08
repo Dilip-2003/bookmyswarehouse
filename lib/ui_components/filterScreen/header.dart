@@ -2,6 +2,7 @@ import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// ignore: must_be_immutable
 class Header extends StatelessWidget {
   Header({super.key, required this.title});
   String title;
