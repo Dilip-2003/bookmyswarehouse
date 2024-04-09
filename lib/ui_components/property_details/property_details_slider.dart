@@ -1,5 +1,6 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProDetailsSlider extends StatelessWidget {
   const ProDetailsSlider({super.key});
@@ -56,7 +57,31 @@ class ProDetailsSlider extends StatelessWidget {
               )
             ],
           ),
-        )
+        ),
+        Positioned(
+          right: 10,
+          bottom: 10,
+          child: Container(
+            height: 35,
+            width: 70,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: BasicColor.deepWhite,
+            ),
+            child: Center(
+              child: Text(
+                '1/11',
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                    fontSize: 18,
+                    color: BasicColor.lightBlack,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

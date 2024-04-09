@@ -31,7 +31,7 @@ class GooogleSignInButton extends StatelessWidget {
           children: [
             Container(
                 width: width * 0.1,
-                padding: EdgeInsets.only(left: 15),
+                padding: const EdgeInsets.only(left: 15),
                 child: Image.asset(
                   'assets/images/Icon.png',
                   height: 24,

@@ -18,41 +18,41 @@ class ProfileSectionTwo extends StatelessWidget {
           children: [
             const SectionTwo(
               icons: Icon(Icons.person),
-              title: 'xyz@gmail.com',
+              title: 'Personal details',
             ),
             SizedBox(
               height: height * 0.035,
             ),
             const SectionTwo(
-              icons: Icon(Icons.person),
-              title: 'xyz@gmail.com',
+              icons: Icon(Icons.settings),
+              title: 'Settings',
             ),
             SizedBox(
               height: height * 0.035,
             ),
             const SectionTwo(
-              icons: Icon(Icons.person),
-              title: 'xyz@gmail.com',
+              icons: Icon(Icons.credit_card),
+              title: 'Payment details',
             ),
             SizedBox(
               height: height * 0.035,
             ),
             const SectionTwo(
-              icons: Icon(Icons.person),
-              title: 'xyz@gmail.com',
+              icons: Icon(Icons.message_rounded),
+              title: 'FAQ',
             ),
             SizedBox(
               height: height * 0.035,
             ),
-            Divider(
+            const Divider(
               height: 1,
             ),
             SizedBox(
               height: height * 0.05,
             ),
             const SectionTwo(
-              icons: Icon(Icons.person),
-              title: 'xyz@gmail.com',
+              icons: Icon(Icons.toggle_off),
+              title: 'Switch to hosting',
             ),
           ],
         ),
@@ -91,10 +91,10 @@ class SectionTwo extends StatelessWidget {
               Text(
                 title,
                 style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                     fontSize: 20,
                     letterSpacing: 0.13,
-                    color: Color(0xFF7D7F88),
+                    color: BasicColor.lightBlack,
                   ),
                 ),
               ),

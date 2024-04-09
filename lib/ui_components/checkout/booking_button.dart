@@ -9,24 +9,28 @@ class BookingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
-    return InkWell(
-      onTap: () {
-        print('booking button pressed');
-      },
-      child: Container(
-        width: width * 0.9,
-        height: height * 0.07,
-        margin: EdgeInsets.only(bottom: height * 0.05),
-        decoration: BoxDecoration(
-            color: BasicColor.primary, borderRadius: BorderRadius.circular(50)),
-        child: Center(
-          child: Text(
-            'Place booking request',
-            style: GoogleFonts.poppins(
+    return Padding(
+      padding: EdgeInsets.only(bottom: height * 0.02),
+      child: InkWell(
+        onTap: () {
+          print('booking button pressed');
+        },
+        child: Container(
+          width: width * 0.9,
+          height: height * 0.07,
+          decoration: BoxDecoration(
+              color: BasicColor.primary,
+              borderRadius: BorderRadius.circular(50)),
+          child: Center(
+            child: Text(
+              'Place booking request',
+              style: GoogleFonts.poppins(
                 textStyle: TextStyle(
                     fontSize: 20,
                     color: BasicColor.deepWhite,
-                    fontWeight: FontWeight.w700)),
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
           ),
         ),
       ),

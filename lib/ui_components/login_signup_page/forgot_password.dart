@@ -18,7 +18,7 @@ class ForgotPassWord extends StatelessWidget {
           child: Text(
             'Forgot password?',
             style: GoogleFonts.poppins(
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     letterSpacing: 0.02,

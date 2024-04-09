@@ -9,8 +9,8 @@ class PriceBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.sizeOf(context).width * 0.1,
-      width: MediaQuery.sizeOf(context).width * 0.3,
+      height: MediaQuery.sizeOf(context).width * 0.08,
+      width: MediaQuery.sizeOf(context).width * 0.2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         color: BasicColor.deepWhite,
@@ -20,7 +20,7 @@ class PriceBox extends StatelessWidget {
           title,
           style: GoogleFonts.poppins(
             textStyle: TextStyle(
-              fontSize: 18,
+              fontSize: 12,
               fontWeight: FontWeight.w600,
               letterSpacing: 0.02,
               color: BasicColor.deepBlack,

@@ -12,7 +12,7 @@ class DividerOR extends StatelessWidget {
       height: 60,
       child: Stack(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: 25),
             child: Divider(
               thickness: 1,
@@ -25,16 +25,16 @@ class DividerOR extends StatelessWidget {
             child: Container(
               width: width * 0.2,
               height: height * 0.05,
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
               decoration: BoxDecoration(
-                color: Color(0xFFF3F0FF),
+                color: const Color(0xFFF3F0FF),
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Center(
                 child: Text(
                   'OR',
                   style: GoogleFonts.inter(
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.08,
