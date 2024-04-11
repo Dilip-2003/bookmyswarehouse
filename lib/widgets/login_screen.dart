@@ -6,6 +6,7 @@ import 'package:bookmywarehouse/ui_components/login_signup_page/google_signin_bu
 import 'package:bookmywarehouse/ui_components/login_signup_page/login_button.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/password_text_field.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/sign_in_button.dart';
+import 'package:bookmywarehouse/ui_components/login_signup_page/singin_with_phn.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/welcome.dart';
 import 'package:bookmywarehouse/widgets/navigation_page.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class LoginScreens extends StatelessWidget {
                     'Log In to your account to explore your dream Warehouse !',
               ),
               SizedBox(
-                height: height * 0.035,
+                height: height * 0.02,
               ),
               EmailTextComponents(
                 userName: 'Username',
@@ -58,7 +59,7 @@ class LoginScreens extends StatelessWidget {
                 colors: const Color(0xFFF1F1FE),
               ),
               SizedBox(
-                height: height * 0.035,
+                height: height * 0.02,
               ),
               const PasswordTextComponents(
                 userName: 'Password',
@@ -93,11 +94,19 @@ class LoginScreens extends StatelessWidget {
               ),
               const ForgotPassWord(),
               SizedBox(
-                height: height * 0.035,
+                height: height * 0.015,
               ),
               const DividerOR(),
               SizedBox(
-                height: height * 0.035,
+                height: height * 0.015,
+              ),
+              const SignInWithPhone(
+                btnText: 'Sign in with Phone Number',
+                colors: Color(0xFFFFFFFF),
+                borderColors: Color(0xFFE2E8F0),
+              ),
+              SizedBox(
+                height: height * 0.015,
               ),
               const SignInButton(
                 btnText: 'Sign in with Apple',
@@ -105,7 +114,7 @@ class LoginScreens extends StatelessWidget {
                 borderColors: Color(0xFF222831),
               ),
               SizedBox(
-                height: height * 0.035,
+                height: height * 0.015,
               ),
               const GooogleSignInButton(
                 btnText: 'Sign in with Google',
