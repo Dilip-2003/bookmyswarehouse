@@ -6,7 +6,6 @@ import 'package:bookmywarehouse/ui_components/filterScreen/property_type.dart';
 import 'package:bookmywarehouse/ui_components/filterScreen/rent_range.dart';
 import 'package:bookmywarehouse/ui_components/filterScreen/room_and_bed.dart';
 import 'package:bookmywarehouse/ui_components/filterScreen/stay_time.dart';
-import 'package:bookmywarehouse/ui_components/homepage/switch_bar.dart';
 import 'package:flutter/material.dart';
 
 class Filter extends StatefulWidget {
@@ -39,7 +38,6 @@ class _FilterState extends State<Filter> {
                 SizedBox(
                   height: width * 0.05,
                 ),
-                SwitchBarHome(),
                 SizedBox(
                   height: width * 0.05,
                 ),

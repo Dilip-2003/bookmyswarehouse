@@ -1,4 +1,3 @@
-import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/search_result/appbar.dart';
 import 'package:bookmywarehouse/ui_components/search_result/item_list.dart';
 import 'package:bookmywarehouse/ui_components/search_result/pricebox.dart';
@@ -24,83 +23,78 @@ class SearchResults extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: const CustomAppBarSearchResults(),
       ),
-      body: Stack(
-        children: [
-          Image.asset(
-            'assets/images/map.png',
-            height: height,
-            width: width,
-            fit: BoxFit.cover,
-          ),
-          const Positioned(
-            top: 60,
-            left: 30,
-            child: PriceBox(
-              title: 'Rs. 54125',
+      body: SingleChildScrollView(
+        reverse: true,
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Image.asset(
+                  'assets/images/map.png',
+                  height: height,
+                  width: width,
+                  fit: BoxFit.cover,
+                ),
+                const Positioned(
+                  top: 60,
+                  left: 30,
+                  child: PriceBox(
+                    title: 'Rs. 54125',
+                  ),
+                ),
+                const Positioned(
+                  top: 100,
+                  child: PriceBox(
+                    title: 'Rs. 54125',
+                  ),
+                ),
+                const Positioned(
+                  top: 100,
+                  left: 100,
+                  child: PriceBox(
+                    title: 'Rs. 54125',
+                  ),
+                ),
+                const Positioned(
+                  top: 50,
+                  right: 50,
+                  child: PriceBox(
+                    title: 'Rs. 54125',
+                  ),
+                ),
+                const Positioned(
+                  top: 100,
+                  right: 20,
+                  child: PriceBox(
+                    title: 'Rs. 54125',
+                  ),
+                ),
+                const Positioned(
+                  top: 120,
+                  right: 100,
+                  child: PriceBox(
+                    title: 'Rs. 54125',
+                  ),
+                ),
+                const Positioned(
+                  top: 40,
+                  right: 170,
+                  child: PriceBox(
+                    title: 'Rs. 54125',
+                  ),
+                ),
+                const Positioned(
+                  top: 10,
+                  left: 20,
+                  child: PriceBox(
+                    title: 'Rs. 54125',
+                  ),
+                ),
+              ],
             ),
-          ),
-          const Positioned(
-            top: 100,
-            child: PriceBox(
-              title: 'Rs. 54125',
-            ),
-          ),
-          const Positioned(
-            top: 100,
-            left: 100,
-            child: PriceBox(
-              title: 'Rs. 54125',
-            ),
-          ),
-          const Positioned(
-            top: 50,
-            right: 50,
-            child: PriceBox(
-              title: 'Rs. 54125',
-            ),
-          ),
-          const Positioned(
-            top: 100,
-            right: 20,
-            child: PriceBox(
-              title: 'Rs. 54125',
-            ),
-          ),
-          const Positioned(
-            top: 120,
-            right: 100,
-            child: PriceBox(
-              title: 'Rs. 54125',
-            ),
-          ),
-          const Positioned(
-            top: 40,
-            right: 170,
-            child: PriceBox(
-              title: 'Rs. 54125',
-            ),
-          ),
-          const Positioned(
-            top: 10,
-            left: 20,
-            child: PriceBox(
-              title: 'Rs. 54125',
-            ),
-          ),
-          Positioned(
-            top: height * 0.2,
-            child: Container(
-              height: height * 0.7,
-              width: width,
-              decoration: BoxDecoration(
-                  color: BasicColor.lightWhite,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(25),
-                      topRight: Radius.circular(25))),
-              child: const ItemList(),
-            ),
-          )
-        ],
+            ItemList(),
+          ],
+        ),
       ),
     );
   }

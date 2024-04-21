@@ -3,9 +3,7 @@ import 'package:bookmywarehouse/ui_components/homepage/home_page_appbar.dart';
 import 'package:bookmywarehouse/ui_components/homepage/customslider.dart';
 import 'package:bookmywarehouse/ui_components/homepage/customslider2.dart';
 import 'package:bookmywarehouse/ui_components/homepage/search_field.dart';
-import 'package:bookmywarehouse/ui_components/homepage/switch_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,23 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: height * 0.02,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 22.0),
-            child: Text(
-              'What do you need?',
-              style: GoogleFonts.poppins(
-                textStyle: const TextStyle(
-                    fontSize: 18,
-                    color: Color(0xFF1A1E25),
-                    letterSpacing: 0.15,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: height * 0.02,
-          ),
-          SwitchBarHome(),
           SizedBox(
             height: height * 0.02,
           ),
