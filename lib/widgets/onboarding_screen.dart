@@ -144,10 +144,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           textColor: const Color(0xFFFFFFFF),
                           callback: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginScreens(),
-                                ));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreens(),
+                              ),
+                            );
                           },
                         ),
                         SizedBox(

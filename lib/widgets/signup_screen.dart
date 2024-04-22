@@ -46,16 +46,16 @@ class SignUpScreens extends StatelessWidget {
               SizedBox(
                 height: height * 0.02,
               ),
-              EmailTextComponents(
-                userName: 'Username',
-                icons: Icon(
-                  Icons.person,
-                  color: BasicColor.primary,
-                  size: 22,
-                ),
-                emailText: 'ricozindia@gmail.com',
-                colors: const Color(0xFFF1F1FE),
-              ),
+              // EmailTextComponents(
+              //   userName: 'Username',
+              //   icons: Icon(
+              //     Icons.person,
+              //     color: BasicColor.primary,
+              //     size: 22,
+              //   ),
+              //   emailText: 'ricozindia@gmail.com',
+              //   colors: const Color(0xFFF1F1FE),
+              // ),
               SizedBox(
                 height: height * 0.02,
               ),

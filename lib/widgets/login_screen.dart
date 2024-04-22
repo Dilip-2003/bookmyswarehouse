@@ -1,14 +1,10 @@
-import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/divider.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/email_text_field.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/forgot_password.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/google_signin_button.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/login_button.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/password_text_field.dart';
+import 'package:bookmywarehouse/ui_components/login_signup_page/mail_password.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/sign_in_button.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/singin_with_phn.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/welcome.dart';
-import 'package:bookmywarehouse/widgets/navigation_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreens extends StatelessWidget {
@@ -48,47 +44,7 @@ class LoginScreens extends StatelessWidget {
               SizedBox(
                 height: height * 0.02,
               ),
-              EmailTextComponents(
-                userName: 'Username',
-                icons: Icon(
-                  Icons.person,
-                  color: BasicColor.primary,
-                  size: 22,
-                ),
-                emailText: 'ricozindia@gmail.com',
-                colors: const Color(0xFFF1F1FE),
-              ),
-              SizedBox(
-                height: height * 0.02,
-              ),
-              const PasswordTextComponents(
-                userName: 'Password',
-                icons: Icon(
-                  Icons.key,
-                  color: Color(0xFF7D7F88),
-                  size: 22,
-                ),
-                emailText: 'Insert your password here',
-                colors: Color(0xFFF2F2F3),
-              ),
-              SizedBox(
-                height: height * 0.035,
-              ),
-              LoginButton(
-                borderColor: BasicColor.primary,
-                textColor: const Color(0xFFFFFFFF),
-                color: BasicColor.primary,
-                btnText: 'Log in',
-                callback: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BottomNavBar(),
-                    ),
-                  );
-                  print('login button pressed');
-                },
-              ),
+              const MailAndPasswordVerification(),
               SizedBox(
                 height: height * 0.015,
               ),
