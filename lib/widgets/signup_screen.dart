@@ -1,11 +1,7 @@
-import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/divider.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/email_text_field.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/google_signin_button.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/login_button.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/password_text_field.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/phone_text_field.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/sign_in_button.dart';
+import 'package:bookmywarehouse/ui_components/login_signup_page/signupwith_verification.dart';
 import 'package:bookmywarehouse/ui_components/login_signup_page/welcome.dart';
 import 'package:flutter/material.dart';
 
@@ -46,58 +42,13 @@ class SignUpScreens extends StatelessWidget {
               SizedBox(
                 height: height * 0.02,
               ),
-              // EmailTextComponents(
-              //   userName: 'Username',
-              //   icons: Icon(
-              //     Icons.person,
-              //     color: BasicColor.primary,
-              //     size: 22,
-              //   ),
-              //   emailText: 'ricozindia@gmail.com',
-              //   colors: const Color(0xFFF1F1FE),
-              // ),
-              SizedBox(
-                height: height * 0.02,
-              ),
-              const PasswordTextComponents(
-                userName: 'Password',
-                icons: Icon(
-                  Icons.key,
-                  color: Color(0xFF7D7F88),
-                  size: 22,
-                ),
-                emailText: 'Insert your password here',
-                colors: Color(0xFFF2F2F3),
-              ),
-              SizedBox(
-                height: height * 0.02,
-              ),
-              const PhoneTextField(
-                userName: 'Phone number',
-                emailText: 'Enter your phone number',
-                colors: Color(0xFFF2F2F3),
-              ),
-              SizedBox(
-                height: height * 0.02,
-              ),
-              LoginButton(
-                borderColor: BasicColor.primary,
-                textColor: const Color(0xFFFFFFFF),
-                color: BasicColor.primary,
-                btnText: 'Create account',
-                callback: () {
-                  print('login button pressed');
-                },
-              ),
-              SizedBox(
-                height: height * 0.02,
-              ),
+              SignUpWithVerifications(),
               const DividerOR(),
               SizedBox(
                 height: height * 0.02,
               ),
               const SignInButton(
-                btnText: 'Sign in with Apple',
+                btnText: 'Sign up with Apple',
                 colors: Color(0xFF222831),
                 borderColors: Color(0xFF222831),
               ),
@@ -105,7 +56,7 @@ class SignUpScreens extends StatelessWidget {
                 height: height * 0.02,
               ),
               const GooogleSignInButton(
-                btnText: 'Sign in with Google',
+                btnText: 'Sign up with Google',
                 colors: Color(0xFFFFFFFF),
                 borderColors: Color(0xFFE2E8F0),
               ),

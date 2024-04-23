@@ -1,32 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SignInButton extends StatelessWidget {
-  const SignInButton(
-      {super.key,
-      required this.btnText,
-      required this.colors,
-      required this.borderColors});
+class SignInButton extends StatefulWidget {
+  const SignInButton({
+    Key? key,
+    required this.btnText,
+    required this.colors,
+    required this.borderColors,
+  }) : super(key: key);
+
   final String btnText;
   final Color colors, borderColors;
+
+  @override
+  _SignInButtonState createState() => _SignInButtonState();
+}
+
+class _SignInButtonState extends State<SignInButton> {
+  bool _isPressed = false;
+
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
-    return InkWell(
-      onTap: () {
-        print('login button pressed');
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
+    return GestureDetector(
+      onTapDown: (_) {
+        setState(() {
+          _isPressed = true;
+        });
       },
-      child: Container(
+      onTapUp: (_) {
+        setState(() {
+          _isPressed = false;
+        });
+        print('sign in with apple button pressed');
+      },
+      onTapCancel: () {
+        setState(() {
+          _isPressed = false;
+        });
+      },
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 150),
         height: height * 0.07,
         width: width * 0.9,
         decoration: BoxDecoration(
-            color: colors,
-            borderRadius: BorderRadius.circular(81),
-            border: Border.all(
-              width: 1,
-              color: borderColors,
-            )),
+          color: _isPressed ? Colors.grey.withOpacity(0.5) : widget.colors,
+          borderRadius: BorderRadius.circular(81),
+          border: Border.all(
+            width: 1,
+            color:
+                _isPressed ? Colors.grey.withOpacity(0.5) : widget.borderColors,
+          ),
+        ),
         child: Row(
           children: [
             Container(
@@ -42,7 +69,7 @@ class SignInButton extends StatelessWidget {
               width: width * 0.75,
               child: Center(
                 child: Text(
-                  btnText,
+                  widget.btnText,
                   style: GoogleFonts.inter(
                     textStyle: const TextStyle(
                       fontSize: 16,

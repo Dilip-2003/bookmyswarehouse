@@ -1,8 +1,8 @@
-import 'package:bookmywarehouse/ui_components/login_signup_page/welcome.dart';
 import 'package:bookmywarehouse/widgets/navigation_page.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
@@ -38,36 +38,34 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   void sendOTP() {
-    // Code to send OTP to the provided email or phone number
-    print('OTP sent to: ${_phoneNumberController.text}');
-    setState(() {
-      btnText = 'Resend OTP';
-      _sendButtonActive = !_sendButtonActive;
-      _otpFieldVisible = true; // Show the OTP field after sending OTP
-      _showSnackBar('OTP sent. You can resend OTP after 30 seconds.');
-    });
-    // Start a timer to activate resend button after 30 seconds
-    Future.delayed(const Duration(seconds: 10), () {
+    String phoneNumber = _phoneNumberController.text.trim();
+    if (phoneNumber.isEmpty) {
+      _showSnackBar('Please enter a phone number');
+    } else if (!_isValidPhoneNumber(phoneNumber)) {
+      _showSnackBar('Invalid phone number');
+    } else {
+      // Code to send OTP to the provided phone number
+      print('OTP sent to: $phoneNumber');
       setState(() {
-        _sendButtonActive = !_sendButtonActive;
+        btnText = 'Resend OTP';
+        _sendButtonActive = false;
+        _otpFieldVisible = true; // Show the OTP field after sending OTP
+        _showSnackBar('OTP sent. You can resend OTP after 30 seconds.');
       });
-    });
+      // Start a timer to activate resend button after 30 seconds
+      Future.delayed(const Duration(seconds: 30), () {
+        setState(() {
+          _sendButtonActive = true;
+        });
+      });
+    }
   }
 
-  // void resendOTP() {
-  //   // Code to resend OTP to the provided email or phone number
-  //   print('Resending OTP to: ${_phoneNumberController.text}');
-  //   setState(() {
-  //     _resendButtonActive = !_resendButtonActive;
-  //   });
-  //   // Start a timer to activate resend button after 30 seconds
-  //   Future.delayed(const Duration(seconds: 10), () {
-  //     setState(() {
-  //       _resendButtonActive = !_resendButtonActive;
-  //     });
-  //   });
-  //   _showSnackBar('OTP resent. You can resend OTP again after 30 seconds.');
-  // }
+  bool _isValidPhoneNumber(String phoneNumber) {
+    // You can implement your own validation logic here
+    // For simplicity, we're just checking if it's a numeric value with a minimum length
+    return phoneNumber.length >= 10 && int.tryParse(phoneNumber) != null;
+  }
 
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -108,11 +106,6 @@ class _OtpScreenState extends State<OtpScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const WelcomeColum(
-              text1: 'Welcome!',
-              text2: 'Log In to your account to explore your dream Warehouse !',
-            ),
-            SizedBox(height: height * 0.05),
             Text(
               widget.userName,
               style: GoogleFonts.poppins(
@@ -124,56 +117,38 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
               ),
             ),
-            Container(
-              width: width * 0.9,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(81),
-                color: widget.colors,
-              ),
-              height: height * 0.06,
-              child: TextField(
-                controller: _phoneNumberController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  prefixIcon: widget.icons,
-                  hintText: widget.emailText,
-                  hintStyle: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: 0.02,
-                    ),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(81),
+            IntlPhoneField(
+              controller: _phoneNumberController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.all(16),
+                prefixIcon: widget.icons,
+                hintText: widget.emailText,
+                hintStyle: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 0.02,
                   ),
                 ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(81),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
             ),
             if (_otpFieldVisible) // Display OTP field only if visible
               Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'OTP',
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            letterSpacing: 0.02,
-                            color: Color(0xFF1A1E25),
-                          ),
-                        ),
+                  Text(
+                    'OTP',
+                    style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: 0.02,
+                        color: Color(0xFF1A1E25),
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
+                    ),
                   ),
                   OTPTextField(
                     controller: _otpController,
@@ -195,17 +170,15 @@ class _OtpScreenState extends State<OtpScreen> {
                       }
                     },
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
                   ElevatedButton(
                     onPressed: () {
                       print('verified number');
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const BottomNavBar(),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BottomNavBar(),
+                        ),
+                      );
                       // Navigate to next screen or perform action after OTP verification
                     },
                     child: const Text("Verify"),
@@ -227,10 +200,6 @@ class _OtpScreenState extends State<OtpScreen> {
                   },
                   child: const Text('Clear'),
                 ),
-                // ElevatedButton(
-                //   onPressed: _resendButtonActive ? resendOTP : null,
-                //   child: const Text('Resend OTP'),
-                // ),
                 ElevatedButton(
                   onPressed: _sendButtonActive ? sendOTP : null,
                   child: Text(btnText),
