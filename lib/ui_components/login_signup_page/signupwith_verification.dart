@@ -1,12 +1,13 @@
-import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/email_text_field.dart';
-import 'package:bookmywarehouse/widgets/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/ui_components/login_signup_page/email_text_field.dart';
+import 'package:bookmywarehouse/widgets/login_screen.dart';
 
 class SignUpWithVerifications extends StatefulWidget {
-  const SignUpWithVerifications({Key? key}) : super(key: key);
+  const SignUpWithVerifications({super.key});
 
   @override
   State<SignUpWithVerifications> createState() =>
@@ -21,6 +22,47 @@ class _SignUpWithVerificationsState extends State<SignUpWithVerifications> {
   String? emailError;
   String? passwordError;
   String? phoneError;
+  bool _creatingAccount = false;
+
+  void _createAccount() {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    if (email.contains('@') && email.contains('.')) {
+      if (password.length >= 8) {
+        // Validation passed, start account creation
+        setState(() {
+          _creatingAccount = true;
+        });
+        // Simulate account creation process with a delay
+        Future.delayed(const Duration(seconds: 2), () {
+          // After account creation, navigate to the next page
+          if (phoneController.text.isNotEmpty) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginScreens(),
+              ),
+            );
+          } else {
+            setState(() {
+              phoneError = 'please enter the phone number';
+              _creatingAccount = false; // Reset state if account creation fails
+            });
+          }
+        });
+      } else {
+        setState(() {
+          passwordError = 'Password should be at least 8 characters';
+        });
+      }
+    } else {
+      setState(() {
+        emailError = 'Enter a valid username';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -136,6 +178,7 @@ class _SignUpWithVerificationsState extends State<SignUpWithVerifications> {
               });
             },
             controller: phoneController,
+            initialCountryCode: 'IN',
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(16),
               hintText: 'Enter your phone number',
@@ -158,35 +201,7 @@ class _SignUpWithVerificationsState extends State<SignUpWithVerifications> {
             height: height * 0.02,
           ),
           InkWell(
-            onTap: () {
-              String email = emailController.text;
-              String password = passwordController.text;
-
-              if (email.contains('@') && email.contains('.')) {
-                if (password.length >= 8) {
-                  // Validation passed, navigate to next page
-                  if (phoneController.text.isNotEmpty) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const BottomNavBar()),
-                    );
-                  } else {
-                    setState(() {
-                      phoneError = 'please enter the phone number';
-                    });
-                  }
-                } else {
-                  setState(() {
-                    passwordError = 'Password should be at least 8 characters';
-                  });
-                }
-              } else {
-                setState(() {
-                  emailError = 'Enter a valid username';
-                });
-              }
-            },
+            onTap: _creatingAccount ? null : _createAccount,
             child: Container(
               height: height * 0.07,
               width: width * 0.9,
@@ -199,16 +214,21 @@ class _SignUpWithVerificationsState extends State<SignUpWithVerifications> {
                 ),
               ),
               child: Center(
-                child: Text(
-                  'Create account',
-                  style: GoogleFonts.plusJakartaSans(
-                    textStyle: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFFFFFFFF),
-                    ),
-                  ),
-                ),
+                child: _creatingAccount
+                    ? const SpinKitCircle(
+                        color: Colors.white, // Choose your desired color
+                        size: 30.0, // Adjust the size as needed
+                      )
+                    : Text(
+                        'Create account',
+                        style: GoogleFonts.plusJakartaSans(
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFFFFFFFF),
+                          ),
+                        ),
+                      ),
               ),
             ),
           ),

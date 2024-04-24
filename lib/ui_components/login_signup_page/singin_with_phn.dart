@@ -89,7 +89,7 @@ class _SignInWithPhoneState extends State<SignInWithPhone> {
   }
 
   void _navigateToOtpScreen(BuildContext context) {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => OtpScreen(

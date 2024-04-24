@@ -3,9 +3,10 @@ import 'package:bookmywarehouse/ui_components/login_signup_page/email_text_field
 import 'package:bookmywarehouse/widgets/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class MailAndPasswordVerification extends StatefulWidget {
-  const MailAndPasswordVerification({Key? key}) : super(key: key);
+  const MailAndPasswordVerification({super.key});
 
   @override
   State<MailAndPasswordVerification> createState() =>
@@ -19,6 +20,37 @@ class _MailAndPasswordVerificationState
   bool isPasswordVisible = false;
   String? emailError;
   String? passwordError;
+  bool _loggingIn = false;
+
+  void _login() {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    if (email.contains('@') && email.contains('.')) {
+      if (password.length >= 8) {
+        // Validation passed, start login process
+        setState(() {
+          _loggingIn = true;
+        });
+        // Simulate login process with a delay
+        Future.delayed(const Duration(seconds: 2), () {
+          // After login, navigate to the next page
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const BottomNavBar()),
+          );
+        });
+      } else {
+        setState(() {
+          passwordError = 'Password should be at least 8 characters';
+        });
+      }
+    } else {
+      setState(() {
+        emailError = 'Enter a valid username';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,51 +159,34 @@ class _MailAndPasswordVerificationState
           SizedBox(
             height: height * 0.035,
           ),
-          InkWell(
-            onTap: () {
-              String email = emailController.text;
-              String password = passwordController.text;
-
-              if (email.contains('@') && email.contains('.')) {
-                if (password.length >= 8) {
-                  // Validation passed, navigate to next page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const BottomNavBar()),
-                  );
-                } else {
-                  setState(() {
-                    passwordError = 'Password should be at least 8 characters';
-                  });
-                }
-              } else {
-                setState(() {
-                  emailError = 'Enter a valid username';
-                });
-              }
-            },
-            child: Container(
-              height: height * 0.07,
-              width: width * 0.9,
-              decoration: BoxDecoration(
-                color: BasicColor.primary,
-                borderRadius: BorderRadius.circular(81),
-                border: Border.all(
-                  width: 1,
-                  color: BasicColor.primary,
+          GestureDetector(
+            onTap: _loggingIn ? null : _login,
+            child: Material(
+              elevation: _loggingIn ? 0 : 4,
+              borderRadius: BorderRadius.circular(81),
+              color: BasicColor.primary,
+              child: Container(
+                height: height * 0.07,
+                width: width * 0.9,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(81),
                 ),
-              ),
-              child: Center(
-                child: Text(
-                  'Log in',
-                  style: GoogleFonts.plusJakartaSans(
-                    textStyle: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFFFFFFFF),
-                    ),
-                  ),
+                child: Center(
+                  child: _loggingIn
+                      ? const SpinKitCircle(
+                          color: Colors.white, // Choose your desired color
+                          size: 30.0, // Adjust the size as needed
+                        )
+                      : Text(
+                          'Log in',
+                          style: GoogleFonts.plusJakartaSans(
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFFFFFFFF),
+                            ),
+                          ),
+                        ),
                 ),
               ),
             ),
