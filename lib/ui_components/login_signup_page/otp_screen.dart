@@ -10,12 +10,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({
-    Key? key,
+    super.key,
     required this.userName,
     required this.icons,
     required this.emailText,
     required this.colors,
-  }) : super(key: key);
+  });
 
   final String emailText, userName;
   final Icon icons;
@@ -46,15 +46,14 @@ class _OtpScreenState extends State<OtpScreen> {
     if (phoneNumber.isEmpty) {
       _showSnackBar('Please enter a phone number');
     } else {
-      // Code to send OTP to the provided phone number
       print('OTP sent to: $phoneNumber');
       setState(() {
         btnText = 'Resend OTP';
         _sendButtonActive = false;
-        _otpFieldVisible = true; // Show the OTP field after sending OTP
+        _otpFieldVisible = true;
         _showSnackBar('OTP sent. You can resend OTP after 30 seconds.');
       });
-      // Start a timer to activate resend button after 30 seconds
+
       Future.delayed(const Duration(seconds: 30), () {
         setState(() {
           _sendButtonActive = true;
@@ -67,7 +66,7 @@ class _OtpScreenState extends State<OtpScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        duration: const Duration(seconds: 5),
+        duration: const Duration(seconds: 1),
       ),
     );
   }
