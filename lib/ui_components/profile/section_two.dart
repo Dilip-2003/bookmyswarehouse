@@ -1,4 +1,5 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/ui_components/profile/personal_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,29 +17,40 @@ class ProfileSectionTwo extends StatelessWidget {
         padding: EdgeInsets.only(top: height * 0.05),
         child: Column(
           children: [
-            const SectionTwo(
-              icons: Icon(Icons.person),
+            SectionTwo(
+              callBack: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PersonalDetails(),
+                  ),
+                );
+              },
+              icons: const Icon(Icons.person),
               title: 'Personal details',
             ),
             SizedBox(
               height: height * 0.035,
             ),
-            const SectionTwo(
-              icons: Icon(Icons.settings),
+            SectionTwo(
+              callBack: () {},
+              icons: const Icon(Icons.settings),
               title: 'Settings',
             ),
             SizedBox(
               height: height * 0.035,
             ),
-            const SectionTwo(
-              icons: Icon(Icons.credit_card),
+            SectionTwo(
+              callBack: () {},
+              icons: const Icon(Icons.credit_card),
               title: 'Payment details',
             ),
             SizedBox(
               height: height * 0.035,
             ),
-            const SectionTwo(
-              icons: Icon(Icons.message_rounded),
+            SectionTwo(
+              callBack: () {},
+              icons: const Icon(Icons.message_rounded),
               title: 'FAQ',
             ),
             SizedBox(
@@ -50,8 +62,9 @@ class ProfileSectionTwo extends StatelessWidget {
             SizedBox(
               height: height * 0.05,
             ),
-            const SectionTwo(
-              icons: Icon(Icons.toggle_off),
+            SectionTwo(
+              callBack: () {},
+              icons: const Icon(Icons.toggle_off),
               title: 'Switch to hosting',
             ),
           ],
@@ -61,10 +74,16 @@ class ProfileSectionTwo extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class SectionTwo extends StatelessWidget {
-  const SectionTwo({super.key, required this.icons, required this.title});
+  SectionTwo(
+      {super.key,
+      required this.icons,
+      required this.title,
+      required this.callBack});
   final Icon icons;
   final String title;
+  VoidCallback callBack;
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.sizeOf(context).width;
@@ -98,11 +117,9 @@ class SectionTwo extends StatelessWidget {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  print('profile settings button pressed');
-                },
-                child: const Icon(
+              IconButton(
+                onPressed: callBack,
+                icon: const Icon(
                   Icons.keyboard_arrow_right,
                   size: 35,
                 ),

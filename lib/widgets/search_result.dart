@@ -27,7 +27,6 @@ class SearchResults extends StatelessWidget {
         reverse: true,
         child: Column(
           children: [
-            ItemList(),
             Stack(
               children: [
                 Image.asset(
@@ -93,6 +92,7 @@ class SearchResults extends StatelessWidget {
                 ),
               ],
             ),
+            ItemList(),
           ],
         ),
       ),
