@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileAppBar extends StatelessWidget {
-  const ProfileAppBar({super.key});
-
+  const ProfileAppBar({required this.text, super.key});
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Profile',
+      text,
       style: GoogleFonts.lato(
           textStyle: TextStyle(
         color: Color(0xFF222222),

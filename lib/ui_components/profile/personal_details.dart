@@ -1,9 +1,10 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/profile/appbar.dart';
+import 'package:bookmywarehouse/ui_components/profile/edit_profile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
+import 'package:user_profile_avatar/user_profile_avatar.dart';
 
 class PersonalDetails extends StatelessWidget {
   const PersonalDetails({super.key});
@@ -15,7 +16,9 @@ class PersonalDetails extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF3F3F3),
       appBar: AppBar(
-        title: const ProfileAppBar(),
+        title: const ProfileAppBar(
+          text: 'Personal Details',
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -25,11 +28,10 @@ class PersonalDetails extends StatelessWidget {
               SizedBox(
                 height: height * 0.2,
                 width: width * 0.9,
-                child: const Center(
-                  child: CircleAvatar(
+                child: Center(
+                  child: UserProfileAvatar(
+                    avatarUrl: '',
                     radius: 50,
-                    backgroundImage:
-                        AssetImage('assets/images/profileIcon.png'),
                   ),
                 ),
               ),
@@ -187,7 +189,13 @@ class SectionFour extends StatelessWidget {
         ),
         CustomCard(
           icons: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditProfile(),
+                  ));
+            },
             icon: const Icon(
               Icons.edit_sharp,
               size: 20,

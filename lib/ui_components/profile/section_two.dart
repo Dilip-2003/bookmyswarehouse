@@ -1,5 +1,6 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/profile/personal_details.dart';
+import 'package:bookmywarehouse/ui_components/profile/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -33,7 +34,14 @@ class ProfileSectionTwo extends StatelessWidget {
               height: height * 0.035,
             ),
             SectionTwo(
-              callBack: () {},
+              callBack: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SettingsScreen(),
+                  ),
+                );
+              },
               icons: const Icon(Icons.settings),
               title: 'Settings',
             ),

@@ -47,6 +47,7 @@ dependencies:
   flutter_spinkit: ^5.2.1
   lottie: ^3.1.0
   email_validator: ^2.1.17
+  user_profile_avatar: ^0.1.2
 
 dev_dependencies:
   flutter_test:
