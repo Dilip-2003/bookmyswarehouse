@@ -171,6 +171,7 @@ class EditProfile extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class CustomButton extends StatefulWidget {
   CustomButton({super.key, required this.btnText, required this.callback});
   final String btnText;
@@ -180,8 +181,6 @@ class CustomButton extends StatefulWidget {
 }
 
 class _CustomButtonState extends State<CustomButton> {
-  bool _isPressed = false;
-
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;

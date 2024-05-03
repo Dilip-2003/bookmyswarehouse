@@ -48,6 +48,7 @@ dependencies:
   lottie: ^3.1.0
   email_validator: ^2.1.17
   user_profile_avatar: ^0.1.2
+  switcher_button: ^0.0.4
 
 dev_dependencies:
   flutter_test:

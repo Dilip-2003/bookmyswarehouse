@@ -1,7 +1,8 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/profile/appbar.dart';
+import 'package:bookmywarehouse/ui_components/profile/help.dart';
+import 'package:bookmywarehouse/ui_components/profile/notifications_setting.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:user_profile_avatar/user_profile_avatar.dart';
 
@@ -60,6 +61,11 @@ class SettingsScreen extends StatelessWidget {
                 color: BasicColor.deepBlack,
                 isSubtile: true,
                 callback: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NotificationSettings(),
+                      ));
                   print('notifications screen open');
                 },
                 title: 'Notifications',
@@ -75,6 +81,11 @@ class SettingsScreen extends StatelessWidget {
               SettingCard(
                 color: BasicColor.deepBlack,
                 callback: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HelpAndSupport(),
+                      ));
                   print('help screen open');
                 },
                 isSubtile: true,
