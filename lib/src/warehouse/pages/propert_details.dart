@@ -1,13 +1,13 @@
-import 'package:bookmywarehouse/ui_components/property_details/house_facility.dart';
-import 'package:bookmywarehouse/ui_components/property_details/map.dart';
-import 'package:bookmywarehouse/ui_components/property_details/neighboour.dart';
-import 'package:bookmywarehouse/ui_components/property_details/owner_details.dart';
-import 'package:bookmywarehouse/ui_components/property_details/property_details_slider.dart';
-import 'package:bookmywarehouse/ui_components/property_details/public_facility.dart';
-import 'package:bookmywarehouse/ui_components/property_details/rent_button.dart';
-import 'package:bookmywarehouse/ui_components/property_details/testimonials.dart';
-import 'package:bookmywarehouse/ui_components/property_details/warehouse_details.dart';
-import 'package:bookmywarehouse/ui_components/property_details/watch_360.dart';
+import 'package:bookmywarehouse/src/warehouse/widgets/house_facility.dart';
+import 'package:bookmywarehouse/src/warehouse/widgets/map.dart';
+import 'package:bookmywarehouse/src/warehouse/widgets/neighboour.dart';
+import 'package:bookmywarehouse/src/warehouse/widgets/owner_details.dart';
+import 'package:bookmywarehouse/src/warehouse/widgets/property_details_slider.dart';
+import 'package:bookmywarehouse/src/warehouse/widgets/public_facility.dart';
+import 'package:bookmywarehouse/src/warehouse/widgets/rent_button.dart';
+import 'package:bookmywarehouse/src/warehouse/widgets/testimonials.dart';
+import 'package:bookmywarehouse/src/warehouse/widgets/warehouse_details.dart';
+import 'package:bookmywarehouse/src/warehouse/widgets/watch_360.dart';
 import 'package:flutter/material.dart';
 
 class ProperDetailsScreen extends StatefulWidget {

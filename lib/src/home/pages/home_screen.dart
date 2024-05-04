@@ -1,8 +1,8 @@
-import 'package:bookmywarehouse/ui_components/homepage/banner.dart';
-import 'package:bookmywarehouse/ui_components/homepage/home_page_appbar.dart';
-import 'package:bookmywarehouse/ui_components/homepage/customslider.dart';
-import 'package:bookmywarehouse/ui_components/homepage/customslider2.dart';
-import 'package:bookmywarehouse/ui_components/homepage/search_field.dart';
+import 'package:bookmywarehouse/src/home/widgets/banner.dart';
+import 'package:bookmywarehouse/src/home/widgets/home_page_appbar.dart';
+import 'package:bookmywarehouse/src/home/widgets/customslider.dart';
+import 'package:bookmywarehouse/src/home/widgets/customslider2.dart';
+import 'package:bookmywarehouse/src/home/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/ui_components/property_details/heading.dart';
-import 'package:bookmywarehouse/ui_components/property_details/readmore.dart';
+import 'package:bookmywarehouse/src/warehouse/widgets/heading.dart';
+import 'package:bookmywarehouse/src/warehouse/widgets/readmore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

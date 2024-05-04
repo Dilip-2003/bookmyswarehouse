@@ -4,24 +4,20 @@ import 'package:bookmywarehouse/common/exceptions/api_excetion.dart';
 import 'package:bookmywarehouse/common/failure/failure.dart';
 import 'package:bookmywarehouse/models/failures/api_failure.dart';
 import 'package:bookmywarehouse/models/ware_house_model.dart';
-import 'package:bookmywarehouse/src/home/repository/remote_repository.dart';
-import 'package:fpdart/fpdart.dart';
-import 'package:http/http.dart' as http;
+import 'package:bookmywarehouse/src/warehouse/repository/warehouse_repository.dart';
+import 'package:fpdart/src/either.dart';
+import 'package:http/http.dart'as http;
 
-class RemoteDataSource implements RemoteRepository {
+
+class RemoteDataSource implements WarehouseRepository{
   @override
-  Future<Either<Failure, Map<String,dynamic>>> fetchData(
-      String location) async {
+  Future<Either<Failure, Map<String, dynamic>>> fetchWarehouse(String uuid)async {
     try {
       final response = await http.get(
           Uri.parse("https://663529759bb0df2359a3fcbe.mockapi.io/warehouse"));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        final wareHouseData =
-            data["warehouse"].map((e) => WareHouseModel.fromMap(e)).toList();
-        
-
-        return Right({"wareHouseData":wareHouseData});
+        return Right(data);
       } else {
         throw ApiExcetion(message: "Unable to Fetch Data");
       }
