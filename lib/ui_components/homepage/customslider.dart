@@ -14,6 +14,7 @@ class CustomSliderHome extends StatefulWidget {
 }
 
 class _CustomSliderHomeState extends State<CustomSliderHome> {
+  bool isFav = false;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -36,11 +37,13 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                     Text(
                       widget.title,
                       style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              fontSize: 18,
-                              letterSpacing: 0.13,
-                              color: BasicColor.deepBlack,
-                              fontWeight: FontWeight.w800)),
+                        textStyle: TextStyle(
+                          fontSize: 18,
+                          letterSpacing: 0.13,
+                          color: BasicColor.deepBlack,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
                     ),
                     Text(
                       widget.subTitle,
@@ -82,141 +85,173 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                     margin: const EdgeInsets.only(left: 10),
                     width: width * 0.86,
                     height: height * 0.15,
-                    child: Container(
-                      color: Colors.white54,
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                bottomLeft: Radius.circular(10)),
-                            child: Image.asset(
-                              'assets/images/Frame 7.png',
-                              height: height * 0.22,
-                              width: width * 0.33,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Container(
-                            width: width * 0.53,
-                            padding: EdgeInsets.only(left: width * 0.02),
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(10),
-                                    bottomRight: Radius.circular(10)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.white24,
-                                    blurRadius: 5.0,
-                                    spreadRadius: 5.0,
-                                    offset: Offset(4, 1),
-                                  )
-                                ]),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      ' ⭐ ',
-                                      style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                              fontSize: 12,
-                                              color: BasicColor.secondary)),
-                                    ),
-                                    Text(
-                                      '4.8 ',
-                                      style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                              fontSize: 12,
-                                              color: BasicColor.lightBlack)),
-                                    ),
-                                    Text(
-                                      '(73) ',
-                                      style: GoogleFonts.poppins(
-                                          textStyle: const TextStyle(
-                                              fontSize: 12,
-                                              color: Color(0xFF7D7F88))),
-                                    )
-                                  ],
+                    child: Stack(
+                      children: [
+                        Container(
+                          color: Colors.white54,
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10)),
+                                child: Image.asset(
+                                  'assets/images/Frame 7.png',
+                                  height: height * 0.22,
+                                  width: width * 0.33,
+                                  fit: BoxFit.cover,
                                 ),
-                                SizedBox(
-                                  width: width * 0.5,
-                                  // height: height * 0.05,
-                                  child: Text(
-                                    'Warehouse in Ghaziabad',
-                                    style: GoogleFonts.poppins(
-                                        textStyle: TextStyle(
-                                            fontSize: 16,
-                                            letterSpacing: 0.13,
-                                            color: BasicColor.deepBlack,
-                                            fontWeight: FontWeight.w500)),
-                                  ),
-                                ),
-                                Text(
-                                  'Ghaziabad, NCR',
-                                  style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                          fontSize: 14,
-                                          color: Color(0xFF7D7F88))),
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.house_rounded,
-                                      color: Colors.grey,
-                                    ),
-                                    Text(
-                                      '988 m2',
-                                      style: GoogleFonts.poppins(
-                                          textStyle: const TextStyle(
-                                              fontSize: 14,
-                                              color: Color(0xFF7D7F88))),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              ),
+                              Container(
+                                width: width * 0.53,
+                                padding: EdgeInsets.only(left: width * 0.02),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.white24,
+                                        blurRadius: 5.0,
+                                        spreadRadius: 5.0,
+                                        offset: Offset(4, 1),
+                                      )
+                                    ]),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Row(
                                       children: [
                                         Text(
-                                          'Rs.95,000',
+                                          ' ⭐ ',
                                           style: GoogleFonts.poppins(
-                                            textStyle: TextStyle(
-                                                fontSize: 14,
-                                                color: BasicColor.lightBlack),
-                                          ),
+                                              textStyle: TextStyle(
+                                                  fontSize: 12,
+                                                  color: BasicColor.secondary)),
                                         ),
                                         Text(
-                                          '/ month',
+                                          '4.8 ',
                                           style: GoogleFonts.poppins(
-                                            textStyle: const TextStyle(
-                                              fontSize: 14,
-                                              color: Color(0xFF7D7F88),
-                                            ),
-                                          ),
+                                              textStyle: TextStyle(
+                                                  fontSize: 12,
+                                                  color:
+                                                      BasicColor.lightBlack)),
+                                        ),
+                                        Text(
+                                          '(73) ',
+                                          style: GoogleFonts.poppins(
+                                              textStyle: const TextStyle(
+                                                  fontSize: 12,
+                                                  color: Color(0xFF7D7F88))),
                                         )
                                       ],
                                     ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.only(left: width * 0.08),
-                                      child: const Icon(
-                                        Icons.favorite_border,
-                                        size: 22,
-                                        color: Color(0xFF7D7F88),
+                                    SizedBox(
+                                      width: width * 0.5,
+                                      // height: height * 0.05,
+                                      child: Text(
+                                        'Warehouse in Ghaziabad',
+                                        style: GoogleFonts.poppins(
+                                            textStyle: TextStyle(
+                                                fontSize: 16,
+                                                letterSpacing: 0.13,
+                                                color: BasicColor.deepBlack,
+                                                fontWeight: FontWeight.w500)),
                                       ),
+                                    ),
+                                    Text(
+                                      'Ghaziabad, NCR',
+                                      style: GoogleFonts.poppins(
+                                          textStyle: const TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF7D7F88))),
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.house_rounded,
+                                          color: Colors.grey,
+                                        ),
+                                        Text(
+                                          '988 m2',
+                                          style: GoogleFonts.poppins(
+                                              textStyle: const TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color(0xFF7D7F88))),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Rs.95,000',
+                                              style: GoogleFonts.poppins(
+                                                textStyle: TextStyle(
+                                                    fontSize: 14,
+                                                    color:
+                                                        BasicColor.lightBlack),
+                                              ),
+                                            ),
+                                            Text(
+                                              '/ month',
+                                              style: GoogleFonts.poppins(
+                                                textStyle: const TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color(0xFF7D7F88),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        // Padding(
+                                        //   padding: EdgeInsets.only(
+                                        //       left: width * 0.08),
+                                        //   child: const Icon(
+                                        //     Icons.favorite_border,
+                                        //     size: 22,
+                                        //     color: Color(0xFF7D7F88),
+                                        //   ),
+                                        // )
+                                      ],
                                     )
                                   ],
-                                )
-                              ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 10,
+                          right: 10,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: width * 0.08),
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  isFav != isFav;
+                                });
+                              },
+                              icon: isFav
+                                  ? Icon(
+                                      Icons.favorite,
+                                      size: 22,
+                                      color: BasicColor.primary,
+                                    )
+                                  : Icon(
+                                      Icons.favorite_border,
+                                      size: 22,
+                                      color: Color(0xFF7D7F88),
+                                    ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 );
