@@ -1,7 +1,7 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/login_button.dart';
-import 'package:bookmywarehouse/widgets/login_screen.dart';
-import 'package:bookmywarehouse/widgets/signup_screen.dart';
+import 'package:bookmywarehouse/src/auth/widgets/login_button.dart';
+import 'package:bookmywarehouse/src/auth/pages/login_screen.dart';
+import 'package:bookmywarehouse/src/auth/pages/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
