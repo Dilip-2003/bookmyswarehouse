@@ -7,6 +7,8 @@ class SavedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
@@ -19,7 +21,10 @@ class SavedScreen extends StatelessWidget {
           emailText: 'Search Saved Properites',
         ),
       ),
-      body: const SavedItem(),
+      body: Padding(
+        padding: EdgeInsets.only(left: width * 0.02),
+        child: SavedItem(),
+      ),
     );
   }
 }

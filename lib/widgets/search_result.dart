@@ -7,9 +7,8 @@ class SearchResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
     return Scaffold(
+      backgroundColor: const Color(0xFFF3F3F3),
       appBar: AppBar(
         backgroundColor: Colors.white54,
         leading: IconButton(
@@ -22,19 +21,7 @@ class SearchResults extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: const CustomAppBarSearchResults(),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Image.asset(
-              'assets/images/map.png',
-              height: height * 0.8,
-              width: width,
-              fit: BoxFit.cover,
-            ),
-            ItemList(),
-          ],
-        ),
-      ),
+      body: ItemList(),
     );
   }
 }

@@ -1,9 +1,37 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 
-class ProDetailsSlider extends StatelessWidget {
+class ProDetailsSlider extends StatefulWidget {
   const ProDetailsSlider({super.key});
+
+  @override
+  State<ProDetailsSlider> createState() => _ProDetailsSliderState();
+}
+
+class _ProDetailsSliderState extends State<ProDetailsSlider> {
+  List<dynamic> imgList = [
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+    'assets/images/Frame 7.png',
+  ];
+  final CarouselController carouselController = CarouselController();
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -11,51 +39,70 @@ class ProDetailsSlider extends StatelessWidget {
     var height = MediaQuery.sizeOf(context).height;
     return Stack(
       children: [
-        Image.asset(
-          'assets/images/picture+buttons.png',
-          width: width,
-          height: height * 0.3,
-          fit: BoxFit.cover,
-        ),
+        CarouselSlider(
+            carouselController: carouselController,
+            items: imgList
+                .map((img) => Image.asset(
+                      img,
+                      fit: BoxFit.cover,
+                      width: width,
+                    ))
+                .toList(),
+            options: CarouselOptions(
+              scrollPhysics: BouncingScrollPhysics(),
+              // autoPlay: true,
+              aspectRatio: 2,
+              viewportFraction: 1,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+            )),
         Positioned(
-          top: height * 0.05,
-          child: Row(
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  height: width * 0.15,
-                  width: width * 0.15,
-                  margin: EdgeInsets.only(left: width * 0.05),
-                  decoration: BoxDecoration(
-                    color: BasicColor.deepWhite,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Icon(
-                    Icons.keyboard_arrow_left,
-                    size: width * 0.1,
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  height: width * 0.15,
-                  width: width * 0.15,
-                  margin: EdgeInsets.only(left: width * 0.6),
-                  decoration: BoxDecoration(
-                    color: BasicColor.deepWhite,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Icon(
-                    Icons.share,
-                    size: width * 0.07,
+          top: height * 0.04,
+          left: height * 0.01,
+          right: height * 0.01,
+          child: SizedBox(
+            width: width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: width * 0.12,
+                    width: width * 0.12,
+                    decoration: BoxDecoration(
+                      color: BasicColor.deepWhite,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Icon(
+                      Icons.keyboard_arrow_left,
+                      size: width * 0.1,
+                    ),
                   ),
                 ),
-              )
-            ],
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    height: width * 0.12,
+                    width: width * 0.12,
+                    margin: EdgeInsets.only(left: width * 0.6),
+                    decoration: BoxDecoration(
+                      color: BasicColor.deepWhite,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Icon(
+                      Icons.share,
+                      size: width * 0.07,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         Positioned(
@@ -70,7 +117,7 @@ class ProDetailsSlider extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                '1/11',
+                '${currentIndex + 1}/${imgList.length}',
                 style: GoogleFonts.poppins(
                   textStyle: TextStyle(
                     fontSize: 18,

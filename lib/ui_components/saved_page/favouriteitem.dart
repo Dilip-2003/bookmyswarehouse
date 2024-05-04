@@ -22,25 +22,47 @@ class _SavedItemState extends State<SavedItem> {
       itemCount: 10,
       itemBuilder: (context, index) {
         return Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: width * 0.05,
-            vertical: width * 0.02,
+          child: PropertyCard(),
+        );
+      },
+    );
+  }
+}
+
+class PropertyCard extends StatefulWidget {
+  const PropertyCard({super.key});
+
+  @override
+  State<PropertyCard> createState() => _PropertyCardState();
+}
+
+class _PropertyCardState extends State<PropertyCard> {
+  bool isFav = false;
+
+  @override
+  Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    return InkWell(
+      onTap: () {
+        print('property details clicked');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ProperDetailsScreen(),
           ),
-          child: InkWell(
-            onTap: () {
-              print('property details clicked');
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProperDetailsScreen(),
-                  ));
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              width: width * 0.9,
-              height: height * 0.25,
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: width * 0.05,
+          vertical: height * 0.01,
+        ),
+        width: width * 0.86,
+        height: height * 0.2,
+        child: Stack(
+          children: [
+            Container(
               child: Row(
                 children: [
                   ClipRRect(
@@ -49,13 +71,13 @@ class _SavedItemState extends State<SavedItem> {
                         bottomLeft: Radius.circular(10)),
                     child: Image.asset(
                       'assets/images/Frame 7.png',
-                      height: height * 0.25,
+                      height: height * 0.22,
                       width: width * 0.33,
                       fit: BoxFit.cover,
                     ),
                   ),
                   Container(
-                    width: width * 0.57,
+                    width: width * 0.53,
                     padding: EdgeInsets.only(left: width * 0.02),
                     decoration: const BoxDecoration(
                         color: Colors.white,
@@ -137,16 +159,19 @@ class _SavedItemState extends State<SavedItem> {
                                 Text(
                                   'Rs.95,000',
                                   style: GoogleFonts.poppins(
-                                      textStyle: TextStyle(
-                                          fontSize: 14,
-                                          color: BasicColor.lightBlack)),
+                                    textStyle: TextStyle(
+                                        fontSize: 14,
+                                        color: BasicColor.lightBlack),
+                                  ),
                                 ),
                                 Text(
                                   '/ month',
                                   style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                          fontSize: 14,
-                                          color: Color(0xFF7D7F88))),
+                                    textStyle: const TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0xFF7D7F88),
+                                    ),
+                                  ),
                                 )
                               ],
                             ),
@@ -158,9 +183,32 @@ class _SavedItemState extends State<SavedItem> {
                 ],
               ),
             ),
-          ),
-        );
-      },
+            Positioned(
+              bottom: 0,
+              right: width * 0.05,
+              child: IconButton(
+                onPressed: () {
+                  setState(() {
+                    print('object');
+                    isFav = !isFav;
+                  });
+                },
+                icon: isFav
+                    ? Icon(
+                        Icons.favorite,
+                        size: 25,
+                        color: BasicColor.primary,
+                      )
+                    : const Icon(
+                        Icons.favorite_border,
+                        size: 25,
+                        color: Color(0xFF7D7F88),
+                      ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
