@@ -1,6 +1,5 @@
 import 'package:bookmywarehouse/ui_components/search_result/appbar.dart';
 import 'package:bookmywarehouse/ui_components/search_result/item_list.dart';
-import 'package:bookmywarehouse/ui_components/search_result/pricebox.dart';
 import 'package:flutter/material.dart';
 
 class SearchResults extends StatelessWidget {
@@ -24,73 +23,13 @@ class SearchResults extends StatelessWidget {
         title: const CustomAppBarSearchResults(),
       ),
       body: SingleChildScrollView(
-        reverse: true,
         child: Column(
           children: [
-            Stack(
-              children: [
-                Image.asset(
-                  'assets/images/map.png',
-                  height: height,
-                  width: width,
-                  fit: BoxFit.cover,
-                ),
-                const Positioned(
-                  top: 60,
-                  left: 30,
-                  child: PriceBox(
-                    title: 'Rs. 54125',
-                  ),
-                ),
-                const Positioned(
-                  top: 100,
-                  child: PriceBox(
-                    title: 'Rs. 54125',
-                  ),
-                ),
-                const Positioned(
-                  top: 100,
-                  left: 100,
-                  child: PriceBox(
-                    title: 'Rs. 54125',
-                  ),
-                ),
-                const Positioned(
-                  top: 50,
-                  right: 50,
-                  child: PriceBox(
-                    title: 'Rs. 54125',
-                  ),
-                ),
-                const Positioned(
-                  top: 100,
-                  right: 20,
-                  child: PriceBox(
-                    title: 'Rs. 54125',
-                  ),
-                ),
-                const Positioned(
-                  top: 120,
-                  right: 100,
-                  child: PriceBox(
-                    title: 'Rs. 54125',
-                  ),
-                ),
-                const Positioned(
-                  top: 40,
-                  right: 170,
-                  child: PriceBox(
-                    title: 'Rs. 54125',
-                  ),
-                ),
-                const Positioned(
-                  top: 10,
-                  left: 20,
-                  child: PriceBox(
-                    title: 'Rs. 54125',
-                  ),
-                ),
-              ],
+            Image.asset(
+              'assets/images/map.png',
+              height: height * 0.8,
+              width: width,
+              fit: BoxFit.cover,
             ),
             ItemList(),
           ],

@@ -39,12 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: height * 0.02,
           ),
-          SizedBox(
-            height: height * 0.02,
-          ),
-          SizedBox(
-            height: height * 0.02,
-          ),
           const CustomSliderHome(
             title: 'Near your location',
             subTitle: '243 properties in India',

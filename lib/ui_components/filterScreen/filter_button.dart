@@ -24,7 +24,7 @@ class FilterButton extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.refresh_outlined,
                     size: 20,
                   ),
@@ -47,7 +47,7 @@ class FilterButton extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SearchResults(),
+                  builder: (context) => const SearchResults(),
                 ),
               );
             },
