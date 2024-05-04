@@ -42,7 +42,7 @@ class SignUpScreens extends StatelessWidget {
               SizedBox(
                 height: height * 0.02,
               ),
-              SignUpWithVerifications(),
+              const SignUpWithVerifications(),
               const DividerOR(),
               SizedBox(
                 height: height * 0.02,

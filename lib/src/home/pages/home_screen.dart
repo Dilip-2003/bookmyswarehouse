@@ -27,9 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
             height: height * 0.03,
           ),
           const HomePageNavbar(),
-          SizedBox(
-            height: height * 0.02,
-          ),
           const SearchFieldHome(
             colors: Color(0xFFE3E3E7),
             hintText: 'Search address, city, location',

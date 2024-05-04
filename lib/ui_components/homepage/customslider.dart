@@ -17,6 +17,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
   bool isFav = false;
   @override
   Widget build(BuildContext context) {
+    print(isFav);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -76,10 +77,11 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                   onTap: () {
                     print('property details clicked');
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ProperDetailsScreen(),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProperDetailsScreen(),
+                      ),
+                    );
                   },
                   child: Container(
                     margin: const EdgeInsets.only(left: 10),
@@ -227,28 +229,26 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                           ),
                         ),
                         Positioned(
-                          bottom: 10,
-                          right: 10,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: width * 0.08),
-                            child: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  isFav != isFav;
-                                });
-                              },
-                              icon: isFav
-                                  ? Icon(
-                                      Icons.favorite,
-                                      size: 22,
-                                      color: BasicColor.primary,
-                                    )
-                                  : Icon(
-                                      Icons.favorite_border,
-                                      size: 22,
-                                      color: Color(0xFF7D7F88),
-                                    ),
-                            ),
+                          bottom: 0,
+                          right: 0,
+                          child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                print('object');
+                                isFav = !isFav;
+                              });
+                            },
+                            icon: isFav
+                                ? Icon(
+                                    Icons.favorite,
+                                    size: 25,
+                                    color: BasicColor.primary,
+                                  )
+                                : const Icon(
+                                    Icons.favorite_border,
+                                    size: 25,
+                                    color: Color(0xFF7D7F88),
+                                  ),
                           ),
                         ),
                       ],

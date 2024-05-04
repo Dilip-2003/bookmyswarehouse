@@ -5,7 +5,7 @@ import 'package:bookmywarehouse/common/failure/failure.dart';
 import 'package:bookmywarehouse/models/failures/api_failure.dart';
 import 'package:bookmywarehouse/models/ware_house_model.dart';
 import 'package:bookmywarehouse/src/home/repository/remote_repository.dart';
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
 
 class RemoteDataSource implements RemoteRepository {
