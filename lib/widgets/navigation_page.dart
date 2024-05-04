@@ -1,6 +1,6 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/widgets/chat_screen.dart';
-import 'package:bookmywarehouse/widgets/explore_screen.dart';
+import 'package:bookmywarehouse/src/home/pages/chat_screen.dart';
+import 'package:bookmywarehouse/src/home/pages/explore_screen.dart';
 import 'package:bookmywarehouse/src/home/pages/home_screen.dart';
 import 'package:bookmywarehouse/widgets/profilescreen.dart';
 import 'package:bookmywarehouse/widgets/savded_screen.dart';

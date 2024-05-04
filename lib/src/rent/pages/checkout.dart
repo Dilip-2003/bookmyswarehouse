@@ -1,10 +1,10 @@
-import 'package:bookmywarehouse/ui_components/checkout/booking_button.dart';
-import 'package:bookmywarehouse/ui_components/checkout/checkout_appbar.dart';
-import 'package:bookmywarehouse/ui_components/checkout/house_details.dart';
-import 'package:bookmywarehouse/ui_components/checkout/input_details.dart';
-import 'package:bookmywarehouse/ui_components/checkout/payment_gateway.dart';
-import 'package:bookmywarehouse/ui_components/checkout/policies.dart';
-import 'package:bookmywarehouse/ui_components/checkout/price_details.dart';
+import 'package:bookmywarehouse/src/rent/widgets/booking_button.dart';
+import 'package:bookmywarehouse/src/rent/widgets/checkout_appbar.dart';
+import 'package:bookmywarehouse/src/rent/widgets/house_details.dart';
+import 'package:bookmywarehouse/src/rent/widgets/input_details.dart';
+import 'package:bookmywarehouse/src/rent/widgets/payment_gateway.dart';
+import 'package:bookmywarehouse/src/rent/widgets/policies.dart';
+import 'package:bookmywarehouse/src/rent/widgets/price_details.dart';
 import 'package:flutter/material.dart';
 
 class CheckOut extends StatelessWidget {
