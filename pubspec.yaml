@@ -49,6 +49,8 @@ dependencies:
   email_validator: ^2.1.17
   user_profile_avatar: ^0.1.2
   switcher_button: ^0.0.4
+  fpdart: ^1.1.0
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:

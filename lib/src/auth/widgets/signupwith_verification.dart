@@ -1,44 +1,55 @@
-import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/email_text_field.dart';
-import 'package:bookmywarehouse/widgets/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/src/auth/widgets/email_text_field.dart';
+import 'package:bookmywarehouse/src/auth/pages/login_screen.dart';
 
-class MailAndPasswordVerification extends StatefulWidget {
-  const MailAndPasswordVerification({super.key});
+class SignUpWithVerifications extends StatefulWidget {
+  const SignUpWithVerifications({super.key});
 
   @override
-  State<MailAndPasswordVerification> createState() =>
-      _MailAndPasswordVerificationState();
+  State<SignUpWithVerifications> createState() =>
+      _SignUpWithVerificationsState();
 }
 
-class _MailAndPasswordVerificationState
-    extends State<MailAndPasswordVerification> {
+class _SignUpWithVerificationsState extends State<SignUpWithVerifications> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   bool isPasswordVisible = false;
   String? emailError;
   String? passwordError;
-  bool _loggingIn = false;
+  String? phoneError;
+  bool _creatingAccount = false;
 
-  void _login() {
+  void _createAccount() {
     String email = emailController.text;
     String password = passwordController.text;
 
     if (email.contains('@') && email.contains('.')) {
       if (password.length >= 8) {
-        // Validation passed, start login process
+        // Validation passed, start account creation
         setState(() {
-          _loggingIn = true;
+          _creatingAccount = true;
         });
-        // Simulate login process with a delay
+        // Simulate account creation process with a delay
         Future.delayed(const Duration(seconds: 2), () {
-          // After login, navigate to the next page
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const BottomNavBar()),
-          );
+          // After account creation, navigate to the next page
+          if (phoneController.text.isNotEmpty) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginScreens(),
+              ),
+            );
+          } else {
+            setState(() {
+              phoneError = 'please enter the phone number';
+              _creatingAccount = false; // Reset state if account creation fails
+            });
+          }
         });
       } else {
         setState(() {
@@ -58,7 +69,7 @@ class _MailAndPasswordVerificationState
     var width = MediaQuery.of(context).size.width;
 
     return SizedBox(
-      height: height * 0.322,
+      height: height * 0.5,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -157,37 +168,67 @@ class _MailAndPasswordVerificationState
             ),
           ),
           SizedBox(
-            height: height * 0.035,
+            height: height * 0.02,
           ),
-          GestureDetector(
-            onTap: _loggingIn ? null : _login,
-            child: Material(
-              elevation: _loggingIn ? 0 : 4,
-              borderRadius: BorderRadius.circular(81),
-              color: BasicColor.primary,
-              child: Container(
-                height: height * 0.07,
-                width: width * 0.9,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(81),
+          const EmailTextComponents(userName: 'Phone number'),
+          IntlPhoneField(
+            onChanged: (value) {
+              setState(() {
+                phoneError = null;
+              });
+            },
+            controller: phoneController,
+            initialCountryCode: 'IN',
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.all(16),
+              hintText: 'Enter your phone number',
+              errorText: phoneError,
+              hintStyle: GoogleFonts.poppins(
+                textStyle: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0.02,
                 ),
-                child: Center(
-                  child: _loggingIn
-                      ? const SpinKitCircle(
-                          color: Colors.white, // Choose your desired color
-                          size: 30.0, // Adjust the size as needed
-                        )
-                      : Text(
-                          'Log in',
-                          style: GoogleFonts.plusJakartaSans(
-                            textStyle: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFFFFFFFF),
-                            ),
+              ),
+              border: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color(0xFFE3E3E7), width: 1),
+                borderRadius: BorderRadius.circular(81),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: height * 0.02,
+          ),
+          InkWell(
+            onTap: _creatingAccount ? null : _createAccount,
+            child: Container(
+              height: height * 0.07,
+              width: width * 0.9,
+              decoration: BoxDecoration(
+                color: BasicColor.primary,
+                borderRadius: BorderRadius.circular(81),
+                border: Border.all(
+                  width: 1,
+                  color: BasicColor.primary,
+                ),
+              ),
+              child: Center(
+                child: _creatingAccount
+                    ? const SpinKitCircle(
+                        color: Colors.white, // Choose your desired color
+                        size: 30.0, // Adjust the size as needed
+                      )
+                    : Text(
+                        'Create account',
+                        style: GoogleFonts.plusJakartaSans(
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFFFFFFFF),
                           ),
                         ),
-                ),
+                      ),
               ),
             ),
           ),

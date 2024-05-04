@@ -1,12 +1,14 @@
-import 'package:bookmywarehouse/ui_components/login_signup_page/divider.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/google_signin_button.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/sign_in_button.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/signupwith_verification.dart';
-import 'package:bookmywarehouse/ui_components/login_signup_page/welcome.dart';
+import 'package:bookmywarehouse/src/auth/widgets/divider.dart';
+import 'package:bookmywarehouse/src/auth/widgets/forgot_password.dart';
+import 'package:bookmywarehouse/src/auth/widgets/google_signin_button.dart';
+import 'package:bookmywarehouse/src/auth/widgets/mail_password.dart';
+import 'package:bookmywarehouse/src/auth/widgets/sign_in_button.dart';
+import 'package:bookmywarehouse/src/auth/widgets/singin_with_phn.dart';
+import 'package:bookmywarehouse/src/auth/widgets/welcome.dart';
 import 'package:flutter/material.dart';
 
-class SignUpScreens extends StatelessWidget {
-  const SignUpScreens({super.key});
+class LoginScreens extends StatelessWidget {
+  const LoginScreens({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,28 +37,43 @@ class SignUpScreens extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const WelcomeColum(
-                text1: 'Let’s explore together!',
+                text1: 'Welcome!',
                 text2:
-                    'Create your Placoo account to explore your dream place to live across the whole world!',
+                    'Log In to your account to explore your dream Warehouse !',
               ),
               SizedBox(
                 height: height * 0.02,
               ),
-              SignUpWithVerifications(),
+              const MailAndPasswordVerification(),
+              SizedBox(
+                height: height * 0.015,
+              ),
+              const ForgotPassWord(),
+              SizedBox(
+                height: height * 0.015,
+              ),
               const DividerOR(),
               SizedBox(
-                height: height * 0.02,
+                height: height * 0.015,
+              ),
+              const SignInWithPhone(
+                btnText: 'Sign in with Phone Number',
+                colors: Color(0xFFFFFFFF),
+                borderColors: Color(0xFFE2E8F0),
+              ),
+              SizedBox(
+                height: height * 0.015,
               ),
               const SignInButton(
-                btnText: 'Sign up with Apple',
+                btnText: 'Sign in with Apple',
                 colors: Color(0xFF222831),
                 borderColors: Color(0xFF222831),
               ),
               SizedBox(
-                height: height * 0.02,
+                height: height * 0.015,
               ),
               const GooogleSignInButton(
-                btnText: 'Sign up with Google',
+                btnText: 'Sign in with Google',
                 colors: Color(0xFFFFFFFF),
                 borderColors: Color(0xFFE2E8F0),
               ),
