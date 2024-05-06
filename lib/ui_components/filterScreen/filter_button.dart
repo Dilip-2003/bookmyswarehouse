@@ -1,11 +1,17 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/widgets/search_result.dart';
+import 'package:bookmywarehouse/ui_components/filterScreen/popup.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FilterButton extends StatelessWidget {
-  const FilterButton({super.key});
+class FilterButton extends StatefulWidget {
+  FilterButton({super.key, required this.callback});
+  final VoidCallback callback;
 
+  @override
+  State<FilterButton> createState() => _FilterButtonState();
+}
+
+class _FilterButtonState extends State<FilterButton> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -43,14 +49,7 @@ class FilterButton extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SearchResults(),
-                ),
-              );
-            },
+            onTap: widget.callback,
             child: Container(
               height: height * 0.05,
               width: width * 0.4,

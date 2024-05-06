@@ -7,9 +7,15 @@ import 'package:bookmywarehouse/src/rent/widgets/policies.dart';
 import 'package:bookmywarehouse/src/rent/widgets/price_details.dart';
 import 'package:flutter/material.dart';
 
-class CheckOut extends StatelessWidget {
-  const CheckOut({super.key});
+class CheckOut extends StatefulWidget {
+  const CheckOut({super.key, required this.days, required this.guest});
+  final String days, guest;
 
+  @override
+  State<CheckOut> createState() => _CheckOutState();
+}
+
+class _CheckOutState extends State<CheckOut> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -41,7 +47,10 @@ class CheckOut extends StatelessWidget {
                 SizedBox(
                   height: height * 0.02,
                 ),
-                const InputDetails(),
+                InputDetails(
+                  days: widget.days,
+                  guest: widget.guest,
+                ),
                 SizedBox(
                   height: height * 0.02,
                 ),

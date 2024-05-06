@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InputDetails extends StatelessWidget {
-  const InputDetails({super.key});
-
+  const InputDetails({super.key, required this.days, required this.guest});
+  final String days, guest;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -67,7 +67,7 @@ class InputDetails extends StatelessWidget {
                 ),
               ),
               Text(
-                '11 Nov - 5 Dec',
+                '$days Days',
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 18,
@@ -96,7 +96,7 @@ class InputDetails extends StatelessWidget {
                 ),
               ),
               Text(
-                '3 guests',
+                '$guest guests',
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 18,

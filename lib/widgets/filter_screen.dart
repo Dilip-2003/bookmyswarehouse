@@ -6,6 +6,7 @@ import 'package:bookmywarehouse/ui_components/filterScreen/property_type.dart';
 import 'package:bookmywarehouse/ui_components/filterScreen/rent_range.dart';
 import 'package:bookmywarehouse/ui_components/filterScreen/room_and_bed.dart';
 import 'package:bookmywarehouse/ui_components/filterScreen/stay_time.dart';
+import 'package:bookmywarehouse/widgets/search_result.dart';
 import 'package:flutter/material.dart';
 
 class Filter extends StatefulWidget {
@@ -38,14 +39,13 @@ class _FilterState extends State<Filter> {
                 SizedBox(
                   height: width * 0.05,
                 ),
-                SizedBox(
-                  height: width * 0.05,
-                ),
                 Header(
                   title: 'How long do you want to stay?',
                 ),
                 const SizedBox(height: 10),
-                const StayTime(),
+                StayTime(
+                  selectedDays: 0,
+                ),
                 SizedBox(
                   height: width * 0.05,
                 ),
@@ -80,7 +80,15 @@ class _FilterState extends State<Filter> {
                 const SizedBox(
                   height: 10,
                 ),
-                const FilterButton(),
+                FilterButton(
+                  callback: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SearchResults(),
+                        ));
+                  },
+                ),
               ],
             ),
           ),

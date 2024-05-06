@@ -24,7 +24,7 @@ class _HomePageNavbarState extends State<HomePageNavbar> {
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) {
       print('permission not granted');
-      // LocationPermission askPermission = await Geolocator.requestPermission();
+      LocationPermission askPermission = await Geolocator.requestPermission();
     } else {
       Position currentPosition = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.best);
