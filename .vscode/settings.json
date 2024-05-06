@@ -1,4 +1,5 @@
 {
     "java.compile.nullAnalysis.mode": "disabled",
-    "cmake.sourceDirectory": "/home/dilip/Desktop/bookmywarehouse/linux"
+    "cmake.sourceDirectory": "/home/dilip/Desktop/bookmywarehouse/linux",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
