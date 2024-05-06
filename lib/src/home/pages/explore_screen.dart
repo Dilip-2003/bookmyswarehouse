@@ -1,6 +1,6 @@
-import 'package:bookmywarehouse/ui_components/explore/explore_slider.dart';
-import 'package:bookmywarehouse/ui_components/explore/explore_slider_two.dart';
-import 'package:bookmywarehouse/ui_components/homepage/search_field.dart';
+import 'package:bookmywarehouse/src/home/widgets/explore_slider.dart';
+import 'package:bookmywarehouse/src/home/widgets/explore_slider_two.dart';
+import 'package:bookmywarehouse/src/home/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
 class ExploreScreen extends StatefulWidget {

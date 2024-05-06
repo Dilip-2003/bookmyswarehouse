@@ -1,6 +1,6 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/ui_components/chat/chatroom_appbar.dart';
-import 'package:bookmywarehouse/ui_components/chat/chatroombottomnavbar.dart';
+import 'package:bookmywarehouse/src/chat/widgets/chatroom_appbar.dart';
+import 'package:bookmywarehouse/src/chat/widgets/chatroombottomnavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

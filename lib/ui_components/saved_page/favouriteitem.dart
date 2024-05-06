@@ -1,5 +1,5 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/widgets/propert_details.dart';
+import 'package:bookmywarehouse/src/warehouse/pages/propert_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

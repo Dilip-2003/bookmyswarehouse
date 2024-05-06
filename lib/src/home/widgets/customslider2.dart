@@ -1,67 +1,59 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/widgets/propert_details.dart';
+import 'package:bookmywarehouse/src/warehouse/pages/propert_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ExploreSliderTwo extends StatefulWidget {
-  const ExploreSliderTwo({
+class CustomSliderTwoHome extends StatefulWidget {
+  const CustomSliderTwoHome({
     super.key,
     required this.title,
-    required this.subTitle2,
   });
-  final String title, subTitle2;
+  final String title;
 
   @override
-  State<ExploreSliderTwo> createState() => _ExploreSliderTwoState();
+  State<CustomSliderTwoHome> createState() => _CustomSliderTwoHomeState();
 }
 
-class _ExploreSliderTwoState extends State<ExploreSliderTwo> {
+class _CustomSliderTwoHomeState extends State<CustomSliderTwoHome> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
     return Container(
-      height: height * 0.36,
+      height: height * 0.42,
       width: width,
-      margin: EdgeInsets.symmetric(
-        horizontal: width * 0.02,
-        vertical: width * 0.02,
-      ),
+      margin: EdgeInsets.symmetric(horizontal: width * 0.02),
       child: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: width * 0.7,
-                  height: height * 0.06,
-                  child: Text(
-                    widget.title,
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          fontSize: 18,
-                          letterSpacing: 0.13,
-                          color: BasicColor.deepBlack,
-                          fontWeight: FontWeight.w800),
-                    ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                height: height * 0.08,
+                width: width * 0.5,
+                child: Text(
+                  widget.title,
+                  style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        fontSize: 18,
+                        letterSpacing: 0.13,
+                        color: BasicColor.deepBlack,
+                        fontWeight: FontWeight.w800),
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    print('see all clicked');
-                  },
-                  child: const Text('See all'),
-                )
-              ],
-            ),
+              ),
+              TextButton(
+                onPressed: () {
+                  print('see all clicked');
+                },
+                child: const Text('See all'),
+              )
+            ],
           ),
-          Container(
+          SizedBox(
             width: width,
             height: height * 0.28,
-            margin: EdgeInsets.only(top: 10),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: 10,
@@ -111,7 +103,7 @@ class _ExploreSliderTwoState extends State<ExploreSliderTwo> {
                               height: height * 0.02,
                               width: width * 0.5,
                               child: Text(
-                                widget.subTitle2,
+                                '345 rented props ',
                                 style: GoogleFonts.poppins(
                                     textStyle: const TextStyle(
                                   fontSize: 14,
