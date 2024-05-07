@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ChatRoomAppBar extends StatelessWidget {
-  const ChatRoomAppBar({super.key});
-
+  ChatRoomAppBar({super.key, required this.name});
+  final String name;
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.sizeOf(context).width;
@@ -25,7 +25,7 @@ class ChatRoomAppBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '  Dilip Sarkar',
+                  name,
                   style: GoogleFonts.poppins(
                     textStyle: TextStyle(
                         fontSize: 18,

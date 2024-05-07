@@ -48,7 +48,8 @@ class ChatScreenBody extends StatelessWidget {
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (context, index) {
-        return Chats(height: height, width: width, formattedTime: formattedTime);
+        return Chats(
+            height: height, width: width, formattedTime: formattedTime);
       },
     );
   }
@@ -73,7 +74,9 @@ class Chats extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ChatRoom(),
+              builder: (context) => ChatRoom(
+                name: 'Dilip Sarkar',
+              ),
             ));
         print('switching chatscreen to chat room');
       },

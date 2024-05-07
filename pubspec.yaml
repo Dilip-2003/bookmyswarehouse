@@ -56,6 +56,9 @@ dependencies:
   google_maps_flutter: ^2.6.1
   carousel_slider: ^4.2.1
   syncfusion_flutter_datepicker: ^25.1.42
+  get: ^4.6.6
+  url_launcher: ^6.2.6
+  flutter_phone_direct_caller: ^2.1.1
 
 dev_dependencies:
   flutter_test:

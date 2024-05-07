@@ -43,9 +43,7 @@ class _FilterState extends State<Filter> {
                   title: 'How long do you want to stay?',
                 ),
                 const SizedBox(height: 10),
-                StayTime(
-                  selectedDays: 0,
-                ),
+                StayTime(),
                 SizedBox(
                   height: width * 0.05,
                 ),

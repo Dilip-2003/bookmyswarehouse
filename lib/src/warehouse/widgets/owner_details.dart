@@ -1,13 +1,20 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/src/chat/pages/chatroom.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
-class OwnerDetails extends StatelessWidget {
-  const OwnerDetails({super.key});
+class OwnerDetails extends StatefulWidget {
+  const OwnerDetails({Key? key}) : super(key: key);
 
   @override
+  State<OwnerDetails> createState() => _OwnerDetailsState();
+}
+
+class _OwnerDetailsState extends State<OwnerDetails> {
+  @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.sizeOf(context).width;
+    var width = MediaQuery.of(context).size.width;
 
     return Container(
       height: width * 0.14,
@@ -62,7 +69,18 @@ class OwnerDetails extends StatelessWidget {
                       )
                     ]),
                 child: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.message_rounded)),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChatRoom(
+                          name: 'Rajesh Kumar',
+                        ),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.message_rounded),
+                ),
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -77,12 +95,25 @@ class OwnerDetails extends StatelessWidget {
                       )
                     ]),
                 child: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.call_rounded)),
+                  onPressed: () {
+                    _callNumber('9064364294');
+                  },
+                  icon: const Icon(Icons.call_rounded),
+                ),
               )
             ],
           )
         ],
       ),
     );
+  }
+
+  // Function to call a number
+  void _callNumber(String phoneNumber) async {
+    try {
+      await FlutterPhoneDirectCaller.callNumber(phoneNumber);
+    } catch (e) {
+      print('Error calling phone number: $e');
+    }
   }
 }

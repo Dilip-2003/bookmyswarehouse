@@ -1,9 +1,15 @@
+import 'package:bookmywarehouse/src/getx/getx_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// ignore: must_be_immutable
 class InputDetails extends StatelessWidget {
-  const InputDetails({super.key, required this.days, required this.guest});
-  final String days, guest;
+  InputDetails({
+    super.key,
+  });
+  AppServices _appServices = Get.find();
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -55,7 +61,7 @@ class InputDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Date',
+                'No Of Days',
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                       fontSize: 20,
@@ -66,18 +72,20 @@ class InputDetails extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
               ),
-              Text(
-                '$days Days',
-                style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
-                    fontSize: 18,
-                    color: Color(
-                      0xFF7D7F88,
+              Obx(
+                () => Text(
+                  '${_appServices.noofDays} Days',
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                      fontSize: 18,
+                      color: Color(
+                        0xFF7D7F88,
+                      ),
+                      letterSpacing: 0.02,
                     ),
-                    letterSpacing: 0.02,
                   ),
                 ),
-              ),
+              )
             ],
           ),
           Column(
@@ -95,18 +103,20 @@ class InputDetails extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
               ),
-              Text(
-                '$guest guests',
-                style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
-                    fontSize: 18,
-                    color: Color(
-                      0xFF7D7F88,
+              Obx(
+                () => Text(
+                  '${_appServices.noofGuest} guests',
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                      fontSize: 18,
+                      color: Color(
+                        0xFF7D7F88,
+                      ),
+                      letterSpacing: 0.02,
                     ),
-                    letterSpacing: 0.02,
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ],

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ChatRoom extends StatelessWidget {
-  const ChatRoom({super.key});
-
+  ChatRoom({super.key, required this.name});
+  final String name;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -24,7 +24,9 @@ class ChatRoom extends StatelessWidget {
             color: BasicColor.deepBlack,
           ),
         ),
-        title: const ChatRoomAppBar(),
+        title: ChatRoomAppBar(
+          name: name,
+        ),
       ),
       body: Stack(
         children: [

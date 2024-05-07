@@ -1,10 +1,13 @@
+import 'package:bookmywarehouse/src/getx/getx_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class StayTime extends StatefulWidget {
-  StayTime({super.key, required this.selectedDays});
-  int selectedDays = 0;
+  StayTime({
+    super.key,
+  });
 
   @override
   State<StayTime> createState() => _StayTimeState();
@@ -14,6 +17,8 @@ class _StayTimeState extends State<StayTime> {
   final DateRangePickerController dateRangePickerController =
       DateRangePickerController();
   bool isCalendarVisible = false;
+  final AppServices _appServices = Get.find();
+  int selectedDays = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,23 +46,22 @@ class _StayTimeState extends State<StayTime> {
               ),
               Expanded(
                 child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      isCalendarVisible = !isCalendarVisible;
-                    });
-                  },
-                  child: Text(
-                    widget.selectedDays > 0
-                        ? '${widget.selectedDays} Days'
-                        : "0 Days",
-                    style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.02,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
+                    onTap: () {
+                      setState(() {
+                        isCalendarVisible = !isCalendarVisible;
+                      });
+                    },
+                    child: Text(
+                      _appServices.noofDays > 0
+                          ? '${_appServices.noofDays} Days'
+                          : "0 Days",
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.02,
+                        color: Colors.black,
+                      ),
+                    )),
               ),
             ],
           ),
@@ -77,7 +81,8 @@ class _StayTimeState extends State<StayTime> {
               onCancel: () {
                 setState(() {
                   isCalendarVisible = false;
-                  widget.selectedDays = 0;
+                  selectedDays = 0;
+                  _appServices.noofDays = RxInt(selectedDays);
                 });
               },
               onSubmit: (value) {
@@ -87,10 +92,11 @@ class _StayTimeState extends State<StayTime> {
                   if (value is PickerDateRange) {
                     DateTime startDate = value.startDate!;
                     DateTime endDate = value.endDate!;
-                    widget.selectedDays =
-                        endDate.difference(startDate).inDays + 1;
+                    selectedDays = endDate.difference(startDate).inDays + 1;
+                    _appServices.dayUpdate(selectedDays);
                   } else {
-                    widget.selectedDays = 0;
+                    selectedDays = 0;
+                    _appServices.noofDays = RxInt(0);
                   }
                 });
               },

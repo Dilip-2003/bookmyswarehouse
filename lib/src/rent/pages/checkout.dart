@@ -8,8 +8,7 @@ import 'package:bookmywarehouse/src/rent/widgets/price_details.dart';
 import 'package:flutter/material.dart';
 
 class CheckOut extends StatefulWidget {
-  const CheckOut({super.key, required this.days, required this.guest});
-  final String days, guest;
+  const CheckOut({super.key});
 
   @override
   State<CheckOut> createState() => _CheckOutState();
@@ -47,10 +46,7 @@ class _CheckOutState extends State<CheckOut> {
                 SizedBox(
                   height: height * 0.02,
                 ),
-                InputDetails(
-                  days: widget.days,
-                  guest: widget.guest,
-                ),
+                InputDetails(),
                 SizedBox(
                   height: height * 0.02,
                 ),

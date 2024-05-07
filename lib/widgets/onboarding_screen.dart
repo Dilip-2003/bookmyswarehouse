@@ -2,7 +2,9 @@ import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/src/auth/widgets/login_button.dart';
 import 'package:bookmywarehouse/src/auth/pages/login_screen.dart';
 import 'package:bookmywarehouse/src/auth/pages/signup_screen.dart';
+import 'package:bookmywarehouse/src/getx/getx_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -13,6 +15,7 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  final AppServices appService = Get.put(AppServices());
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
