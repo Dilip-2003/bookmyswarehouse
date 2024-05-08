@@ -1,4 +1,5 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/data/datalist.dart';
 import 'package:bookmywarehouse/src/warehouse/pages/propert_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,8 @@ class CustomSliderHome extends StatefulWidget {
 }
 
 class _CustomSliderHomeState extends State<CustomSliderHome> {
+  // WareHouseList house = WareHouseList();
+  List<Map<String, dynamic>> houseList = WareHouseList.warehouseList;
   bool isFav = false;
   @override
   Widget build(BuildContext context) {
@@ -71,15 +74,16 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
             height: height * 0.205,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: houseList.length,
               itemBuilder: (context, index) {
+                final wareHouse = houseList[index];
                 return InkWell(
                   onTap: () {
                     print('property details clicked');
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ProperDetailsScreen(),
+                        builder: (context) => ProperDetailsScreen(),
                       ),
                     );
                   },
@@ -98,7 +102,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                     topLeft: Radius.circular(10),
                                     bottomLeft: Radius.circular(10)),
                                 child: Image.asset(
-                                  'assets/images/Frame 7.png',
+                                  wareHouse['image'],
                                   height: height * 0.22,
                                   width: width * 0.33,
                                   fit: BoxFit.cover,
@@ -135,7 +139,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                                   color: BasicColor.secondary)),
                                         ),
                                         Text(
-                                          '4.8 ',
+                                          wareHouse['stars'],
                                           style: GoogleFonts.poppins(
                                               textStyle: TextStyle(
                                                   fontSize: 12,
@@ -143,7 +147,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                                       BasicColor.lightBlack)),
                                         ),
                                         Text(
-                                          '(73) ',
+                                          ' (${wareHouse['reviewers']})',
                                           style: GoogleFonts.poppins(
                                               textStyle: const TextStyle(
                                                   fontSize: 12,
@@ -155,7 +159,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                       width: width * 0.5,
                                       // height: height * 0.05,
                                       child: Text(
-                                        'Warehouse in Ghaziabad',
+                                        wareHouse['title'],
                                         style: GoogleFonts.poppins(
                                             textStyle: TextStyle(
                                                 fontSize: 16,
@@ -165,7 +169,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                       ),
                                     ),
                                     Text(
-                                      'Ghaziabad, NCR',
+                                      wareHouse['address'],
                                       style: GoogleFonts.poppins(
                                           textStyle: const TextStyle(
                                               fontSize: 14,
@@ -178,7 +182,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                           color: Colors.grey,
                                         ),
                                         Text(
-                                          '988 m2',
+                                          '${wareHouse['area']} Sq. Metre',
                                           style: GoogleFonts.poppins(
                                               textStyle: const TextStyle(
                                                   fontSize: 14,
@@ -192,7 +196,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                         Row(
                                           children: [
                                             Text(
-                                              'Rs.95,000',
+                                              'Rs.${wareHouse['rent']}',
                                               style: GoogleFonts.poppins(
                                                 textStyle: TextStyle(
                                                     fontSize: 14,
@@ -201,7 +205,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                               ),
                                             ),
                                             Text(
-                                              '/ month',
+                                              '/day',
                                               style: GoogleFonts.poppins(
                                                 textStyle: const TextStyle(
                                                   fontSize: 14,
@@ -211,15 +215,6 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                             )
                                           ],
                                         ),
-                                        // Padding(
-                                        //   padding: EdgeInsets.only(
-                                        //       left: width * 0.08),
-                                        //   child: const Icon(
-                                        //     Icons.favorite_border,
-                                        //     size: 22,
-                                        //     color: Color(0xFF7D7F88),
-                                        //   ),
-                                        // )
                                       ],
                                     )
                                   ],
