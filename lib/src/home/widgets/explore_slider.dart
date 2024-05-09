@@ -1,4 +1,5 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/data/datalist.dart';
 import 'package:bookmywarehouse/src/warehouse/pages/propert_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,6 +17,8 @@ class ExploreSlider extends StatefulWidget {
 }
 
 class _ExploreSliderState extends State<ExploreSlider> {
+  List<Map<String, dynamic>> houseList = WareHouseList.warehouseList;
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -55,12 +58,16 @@ class _ExploreSliderState extends State<ExploreSlider> {
               scrollDirection: Axis.horizontal,
               itemCount: 10,
               itemBuilder: (context, index) {
+                final wareHouse = houseList[index];
+
                 return InkWell(
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProperDetailsScreen(),
+                          builder: (context) => ProperDetailsScreen(
+                            warehouse: wareHouse,
+                          ),
                         ));
                     print('property details clicked');
                   },

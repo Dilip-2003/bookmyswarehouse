@@ -5,8 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class OwnerDetails extends StatefulWidget {
-  const OwnerDetails({Key? key}) : super(key: key);
-
+  OwnerDetails({
+    Key? key,
+    required this.ownerName,
+    required this.ownerPhone,
+  }) : super(key: key);
+  final String ownerName, ownerPhone;
   @override
   State<OwnerDetails> createState() => _OwnerDetailsState();
 }
@@ -37,7 +41,7 @@ class _OwnerDetailsState extends State<OwnerDetails> {
               Column(
                 children: [
                   Text(
-                    ' Rajesh Kumar',
+                    widget.ownerName,
                     style: GoogleFonts.poppins(
                       textStyle:
                           TextStyle(fontSize: 16, color: BasicColor.lightBlack),
@@ -74,7 +78,7 @@ class _OwnerDetailsState extends State<OwnerDetails> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ChatRoom(
-                          name: 'Rajesh Kumar',
+                          name: widget.ownerName,
                         ),
                       ),
                     );
@@ -96,7 +100,7 @@ class _OwnerDetailsState extends State<OwnerDetails> {
                     ]),
                 child: IconButton(
                   onPressed: () {
-                    _callNumber('9064364294');
+                    _callNumber(widget.ownerPhone);
                   },
                   icon: const Icon(Icons.call_rounded),
                 ),

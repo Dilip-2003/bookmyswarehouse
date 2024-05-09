@@ -10,7 +10,8 @@ import 'package:bookmywarehouse/widgets/search_result.dart';
 import 'package:flutter/material.dart';
 
 class Filter extends StatefulWidget {
-  const Filter({super.key});
+  Filter({super.key, required this.text});
+  final String text;
 
   @override
   State<Filter> createState() => _FilterState();
@@ -35,7 +36,9 @@ class _FilterState extends State<Filter> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const FilterSearchBar(),
+                FilterSearchBar(
+                  text: widget.text,
+                ),
                 SizedBox(
                   height: width * 0.05,
                 ),
@@ -83,7 +86,9 @@ class _FilterState extends State<Filter> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SearchResults(),
+                          builder: (context) => SearchResults(
+                            text: widget.text,
+                          ),
                         ));
                   },
                 ),

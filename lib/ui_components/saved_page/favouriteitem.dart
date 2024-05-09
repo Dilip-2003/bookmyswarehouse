@@ -1,4 +1,5 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/data/datalist.dart';
 import 'package:bookmywarehouse/src/warehouse/pages/propert_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,16 +14,20 @@ class SavedItem extends StatefulWidget {
 }
 
 class _SavedItemState extends State<SavedItem> {
+  List<Map<String, dynamic>> houseList = WareHouseList.warehouseList;
+
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    // var height = MediaQuery.of(context).size.height;
+    // var width = MediaQuery.of(context).size.width;
 
     return ListView.builder(
-      itemCount: 10,
+      itemCount: houseList.length,
       itemBuilder: (context, index) {
         return Container(
-          child: PropertyCard(),
+          child: PropertyCard(
+            warehouse: houseList[index],
+          ),
         );
       },
     );
@@ -30,7 +35,11 @@ class _SavedItemState extends State<SavedItem> {
 }
 
 class PropertyCard extends StatefulWidget {
-  const PropertyCard({super.key});
+  PropertyCard({
+    super.key,
+    required this.warehouse,
+  });
+  Map<String, dynamic> warehouse;
 
   @override
   State<PropertyCard> createState() => _PropertyCardState();
@@ -38,7 +47,6 @@ class PropertyCard extends StatefulWidget {
 
 class _PropertyCardState extends State<PropertyCard> {
   bool isFav = false;
-
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -49,7 +57,9 @@ class _PropertyCardState extends State<PropertyCard> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const ProperDetailsScreen(),
+            builder: (context) => ProperDetailsScreen(
+              warehouse: widget.warehouse,
+            ),
           ),
         );
       },
@@ -70,7 +80,7 @@ class _PropertyCardState extends State<PropertyCard> {
                         topLeft: Radius.circular(10),
                         bottomLeft: Radius.circular(10)),
                     child: Image.asset(
-                      'assets/images/Frame 7.png',
+                      widget.warehouse['image'],
                       height: height * 0.22,
                       width: width * 0.33,
                       fit: BoxFit.cover,
@@ -106,14 +116,14 @@ class _PropertyCardState extends State<PropertyCard> {
                                       color: BasicColor.secondary)),
                             ),
                             Text(
-                              '4.8 ',
+                              widget.warehouse['stars'],
                               style: GoogleFonts.poppins(
                                   textStyle: TextStyle(
                                       fontSize: 12,
                                       color: BasicColor.lightBlack)),
                             ),
                             Text(
-                              '(73) ',
+                              '(${widget.warehouse['reviewers']}) ',
                               style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
                                       fontSize: 12, color: Color(0xFF7D7F88))),
@@ -123,7 +133,7 @@ class _PropertyCardState extends State<PropertyCard> {
                         SizedBox(
                           width: width * 0.5,
                           child: Text(
-                            'Warehouse in Ghaziabad',
+                            widget.warehouse['title'],
                             style: GoogleFonts.poppins(
                                 textStyle: TextStyle(
                                     fontSize: 16,
@@ -133,7 +143,7 @@ class _PropertyCardState extends State<PropertyCard> {
                           ),
                         ),
                         Text(
-                          'Ghaziabad, NCR',
+                          widget.warehouse['address'],
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
                                   fontSize: 14, color: Color(0xFF7D7F88))),
@@ -145,7 +155,7 @@ class _PropertyCardState extends State<PropertyCard> {
                               color: Colors.grey,
                             ),
                             Text(
-                              '988 m2',
+                              '${widget.warehouse['area']} sq. metre',
                               style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
                                       fontSize: 14, color: Color(0xFF7D7F88))),
@@ -157,15 +167,16 @@ class _PropertyCardState extends State<PropertyCard> {
                             Row(
                               children: [
                                 Text(
-                                  'Rs.95,000',
+                                  'Rs. ${widget.warehouse['rent']}',
                                   style: GoogleFonts.poppins(
                                     textStyle: TextStyle(
                                         fontSize: 14,
+                                        fontWeight: FontWeight.w600,
                                         color: BasicColor.lightBlack),
                                   ),
                                 ),
                                 Text(
-                                  '/ month',
+                                  '/ day',
                                   style: GoogleFonts.poppins(
                                     textStyle: const TextStyle(
                                       fontSize: 14,

@@ -11,7 +11,8 @@ import 'package:bookmywarehouse/src/warehouse/widgets/watch_360.dart';
 import 'package:flutter/material.dart';
 
 class ProperDetailsScreen extends StatefulWidget {
-  const ProperDetailsScreen({super.key});
+  const ProperDetailsScreen({super.key, required this.warehouse});
+  final Map<String, dynamic> warehouse;
 
   @override
   State<ProperDetailsScreen> createState() => _ProperDetailsScreenState();
@@ -20,48 +21,66 @@ class ProperDetailsScreen extends StatefulWidget {
 class _ProperDetailsScreenState extends State<ProperDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ProDetailsSlider(),
-            SizedBox(
+            ProDetailsSlider(
+              imgList: widget.warehouse['imageList'],
+            ),
+            const SizedBox(
               height: 15,
             ),
-            Watch360(),
-            SizedBox(
+            const Watch360(),
+            const SizedBox(
               height: 25,
             ),
-            WareHouseDetais(),
-            SizedBox(
+            WareHouseDetais(
+              address: widget.warehouse['address'],
+              area: widget.warehouse['area'],
+              reviewers: widget.warehouse['reviewers'],
+              stars: widget.warehouse['stars'],
+              title: widget.warehouse['title'],
+            ),
+            const SizedBox(
               height: 15,
             ),
-            OwnerDetails(),
-            SizedBox(
+            OwnerDetails(
+              ownerName: widget.warehouse['ownerdetails']['name'],
+              ownerPhone: widget.warehouse['ownerdetails']['phone'],
+            ),
+            const SizedBox(
               height: 15,
             ),
-            WareHouseFacility(),
-            SizedBox(
+            const WareHouseFacility(),
+            const SizedBox(
               height: 15,
             ),
-            MapPropertDetails(),
-            SizedBox(
+            const MapPropertDetails(),
+            const SizedBox(
               height: 15,
             ),
-            PublicFacilities(),
-            SizedBox(
+            PublicFacilities(
+              canteenDis: widget.warehouse['facilities']['canteen'],
+              hospitalDis: widget.warehouse['facilities']['hospital'],
+              marketDis: widget.warehouse['facilities']['market'],
+              trainDis: widget.warehouse['facilities']['train'],
+            ),
+            const SizedBox(
               height: 15,
             ),
-            NeighBour(),
-            SizedBox(
+            const NeighBour(),
+            const SizedBox(
               height: 15,
             ),
-            TestiMonials(),
-            SizedBox(
+            const TestiMonials(),
+            const SizedBox(
               height: 25,
             ),
-            RentButton(),
-            SizedBox(
+            RentButton(
+              warehouse: widget.warehouse,
+            ),
+            const SizedBox(
               height: 10,
             ),
           ],

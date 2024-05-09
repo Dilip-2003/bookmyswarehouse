@@ -1,14 +1,19 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/src/getx/getx_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PriceDetails extends StatelessWidget {
-  const PriceDetails({super.key});
+  PriceDetails({super.key, required this.rent});
+  final String rent;
+  final AppServices _appServices = Get.find();
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
+
     return Container(
       height: height * .27,
       width: width * .9,
@@ -57,9 +62,9 @@ class PriceDetails extends StatelessWidget {
             children: [
               SizedBox(
                 height: height * 0.06,
-                width: width * 0.62,
+                width: width * 0.5,
                 child: Text(
-                  'Staying duration (24 days)',
+                  'Staying duration (${_appServices.noofDays.value} days)',
                   style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
                       fontSize: 18,
@@ -72,7 +77,7 @@ class PriceDetails extends StatelessWidget {
                 ),
               ),
               Text(
-                '\$2,360',
+                'Rs. ${int.parse(rent) * _appServices.noofDays.value}',
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 18,
@@ -101,7 +106,7 @@ class PriceDetails extends StatelessWidget {
                 ),
               ),
               Text(
-                '\$200',
+                'Rs. ${int.parse(rent) * _appServices.noofDays.value * 0.03}',
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 18,
@@ -129,7 +134,7 @@ class PriceDetails extends StatelessWidget {
                 ),
               ),
               Text(
-                '\$2560',
+                'Rs. ${int.parse(rent) * _appServices.noofDays.value + int.parse(rent) * _appServices.noofDays.value * 0.03}',
                 style: GoogleFonts.poppins(
                   textStyle: TextStyle(
                     fontSize: 20,

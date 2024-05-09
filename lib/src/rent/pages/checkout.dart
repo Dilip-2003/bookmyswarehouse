@@ -8,7 +8,8 @@ import 'package:bookmywarehouse/src/rent/widgets/price_details.dart';
 import 'package:flutter/material.dart';
 
 class CheckOut extends StatefulWidget {
-  const CheckOut({super.key});
+  CheckOut({super.key, required this.warehouse});
+  final Map<String, dynamic> warehouse;
 
   @override
   State<CheckOut> createState() => _CheckOutState();
@@ -42,7 +43,9 @@ class _CheckOutState extends State<CheckOut> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const HouseDetails(),
+                HouseDetails(
+                  warehouse: widget.warehouse,
+                ),
                 SizedBox(
                   height: height * 0.02,
                 ),
@@ -50,7 +53,9 @@ class _CheckOutState extends State<CheckOut> {
                 SizedBox(
                   height: height * 0.02,
                 ),
-                const PriceDetails(),
+                PriceDetails(
+                  rent: widget.warehouse['rent'],
+                ),
                 SizedBox(
                   height: height * 0.02,
                 ),

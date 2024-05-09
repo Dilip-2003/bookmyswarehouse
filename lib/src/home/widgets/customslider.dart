@@ -15,7 +15,6 @@ class CustomSliderHome extends StatefulWidget {
 }
 
 class _CustomSliderHomeState extends State<CustomSliderHome> {
-  // WareHouseList house = WareHouseList();
   List<Map<String, dynamic>> houseList = WareHouseList.warehouseList;
   bool isFav = false;
   @override
@@ -23,6 +22,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
     print(isFav);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    var length = houseList.length;
 
     return Container(
       height: height * 0.28,
@@ -49,15 +49,26 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                         ),
                       ),
                     ),
-                    Text(
-                      widget.subTitle,
-                      style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                        fontSize: 13,
-                        letterSpacing: 0.13,
-                        color: Color(0xFF7D7F88),
-                      )),
-                    ),
+                    widget.subTitle == ''
+                        ? Text(
+                            widget.subTitle,
+                            style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                              fontSize: 13,
+                              letterSpacing: 0.13,
+                              color: Color(0xFF7D7F88),
+                            )),
+                          )
+                        : Text(
+                            '$length ${widget.subTitle}',
+                            style: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                fontSize: 13,
+                                letterSpacing: 0.13,
+                                color: Color(0xFF7D7F88),
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ),
@@ -83,7 +94,9 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProperDetailsScreen(),
+                        builder: (context) => ProperDetailsScreen(
+                          warehouse: wareHouse,
+                        ),
                       ),
                     );
                   },
@@ -200,6 +213,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                               style: GoogleFonts.poppins(
                                                 textStyle: TextStyle(
                                                     fontSize: 14,
+                                                    fontWeight: FontWeight.w600,
                                                     color:
                                                         BasicColor.lightBlack),
                                               ),

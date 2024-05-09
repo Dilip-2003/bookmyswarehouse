@@ -3,7 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PublicFacilities extends StatelessWidget {
-  const PublicFacilities({super.key});
+  PublicFacilities({
+    super.key,
+    required this.marketDis,
+    required this.canteenDis,
+    required this.hospitalDis,
+    required this.trainDis,
+  });
+
+  final String marketDis, hospitalDis, canteenDis, trainDis;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +23,7 @@ class PublicFacilities extends StatelessWidget {
       height: height * 0.25,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             'Nearest public facilities',
@@ -28,28 +36,29 @@ class PublicFacilities extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   FacitlityItem(
                     title: 'Minimarket',
-                    distance: '200 m',
-                    icon: Icon(
+                    distance: marketDis,
+                    icon: const Icon(
                       Icons.shopping_bag,
                       color: Color(0xFF7D7F88),
                       size: 24,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   FacitlityItem(
                     title: 'Hospital',
-                    distance: '130 m',
-                    icon: Icon(
+                    distance: hospitalDis,
+                    icon: const Icon(
                       Icons.local_hospital,
                       color: Color(0xFF7D7F88),
                       size: 24,
@@ -62,20 +71,20 @@ class PublicFacilities extends StatelessWidget {
                 children: [
                   FacitlityItem(
                     title: 'Public Canteen',
-                    distance: '400 m',
-                    icon: Icon(
+                    distance: canteenDis,
+                    icon: const Icon(
                       Icons.restaurant,
                       color: Color(0xFF7D7F88),
                       size: 24,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   FacitlityItem(
                     title: 'Train',
-                    distance: '500 m',
-                    icon: Icon(
+                    distance: trainDis,
+                    icon: const Icon(
                       Icons.train,
                       color: Color(0xFF7D7F88),
                       size: 24,
@@ -111,6 +120,7 @@ class FacitlityItem extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 10.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,

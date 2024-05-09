@@ -4,7 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FilterSearchBar extends StatelessWidget {
-  const FilterSearchBar({super.key});
+  FilterSearchBar({
+    super.key,
+    required this.text,
+  });
+  String text;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +37,10 @@ class FilterSearchBar extends StatelessWidget {
             child: TextField(
               controller: fileterSearchController,
               keyboardType: TextInputType.text,
+              readOnly: true,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
-                hintText: 'Noida, NCR',
+                hintText: text,
                 hintStyle: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 16,

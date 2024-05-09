@@ -38,7 +38,9 @@ class SearchFieldHome extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Filter(),
+                      builder: (context) => Filter(
+                        text: searchController.text.toString(),
+                      ),
                     ));
                 print('filter button pressed');
               },

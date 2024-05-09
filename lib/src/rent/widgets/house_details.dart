@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HouseDetails extends StatelessWidget {
-  const HouseDetails({super.key});
+  HouseDetails({super.key, required this.warehouse});
+  final Map<String, dynamic> warehouse;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class HouseDetails extends StatelessWidget {
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
             child: Image.asset(
-              'assets/images/house.png',
+              warehouse['image'],
               height: height * 0.25,
               width: width * 0.35,
               fit: BoxFit.cover,
@@ -44,13 +45,13 @@ class HouseDetails extends StatelessWidget {
                               fontSize: 14, color: BasicColor.secondary)),
                     ),
                     Text(
-                      '4.8 ',
+                      warehouse['stars'],
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(
                               fontSize: 14, color: BasicColor.lightBlack)),
                     ),
                     Text(
-                      '(73) ',
+                      '(${warehouse['reviewers']}) ',
                       style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                               fontSize: 14, color: Color(0xFF7D7F88))),
@@ -63,7 +64,7 @@ class HouseDetails extends StatelessWidget {
                     SizedBox(
                       width: width * 0.5,
                       child: Text(
-                        'Warehouse in Ghaziabad',
+                        warehouse['title'],
                         style: GoogleFonts.poppins(
                             textStyle: TextStyle(
                                 fontSize: 20,
@@ -76,7 +77,7 @@ class HouseDetails extends StatelessWidget {
                       height: height * 0.01,
                     ),
                     Text(
-                      'Ghaziabad, NCR',
+                      warehouse['address'],
                       style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                               fontSize: 16, color: Color(0xFF7D7F88))),
@@ -86,7 +87,7 @@ class HouseDetails extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Rs.95,000',
+                      'Rs.${warehouse['rent']}',
                       style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                             fontSize: 18,
@@ -95,7 +96,7 @@ class HouseDetails extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '/ month',
+                      '/ day',
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 14,

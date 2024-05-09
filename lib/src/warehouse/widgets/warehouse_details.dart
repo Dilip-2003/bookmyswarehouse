@@ -3,8 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WareHouseDetais extends StatefulWidget {
-  const WareHouseDetais({super.key});
-
+  WareHouseDetais({
+    super.key,
+    required this.stars,
+    required this.reviewers,
+    required this.address,
+    required this.area,
+    required this.title,
+  });
+  final String stars, reviewers, area, address, title;
   @override
   State<WareHouseDetais> createState() => _WareHouseDetaisState();
 }
@@ -22,10 +29,10 @@ class _WareHouseDetaisState extends State<WareHouseDetais> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                height: height * 0.08,
+                // height: height * 0.08,
                 width: width * 0.6,
                 child: Text(
-                  'Entire Warehouse in Noida, Sector 62 ',
+                  widget.title,
                   style: GoogleFonts.poppins(
                       textStyle: TextStyle(
                           fontSize: 20,
@@ -64,13 +71,13 @@ class _WareHouseDetaisState extends State<WareHouseDetais> {
                                 fontSize: 12, color: BasicColor.secondary)),
                       ),
                       Text(
-                        '  4.8 ',
+                        widget.stars,
                         style: GoogleFonts.poppins(
                             textStyle: TextStyle(
                                 fontSize: 12, color: BasicColor.lightBlack)),
                       ),
                       Text(
-                        '  (73 reviews) ',
+                        '  (${widget.reviewers} reviews) ',
                         style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
                                 fontSize: 12, color: Color(0xFF7D7F88))),
@@ -85,7 +92,7 @@ class _WareHouseDetaisState extends State<WareHouseDetais> {
                         size: 20,
                       ),
                       Text(
-                        'Noida, Sector 62',
+                        widget.address,
                         style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
                                 fontSize: 12, color: Color(0xFF7D7F88))),
@@ -121,7 +128,7 @@ class _WareHouseDetaisState extends State<WareHouseDetais> {
                         size: width * 0.05,
                       ),
                       Text(
-                        '   1874 m2',
+                        '${widget.area} sq. metre',
                         style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
                                 fontSize: 12, color: Color(0xFF7D7F88))),

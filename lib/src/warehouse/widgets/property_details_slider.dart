@@ -4,31 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProDetailsSlider extends StatefulWidget {
-  const ProDetailsSlider({super.key});
-
+  ProDetailsSlider({
+    super.key,
+    required this.imgList,
+  });
+  List<dynamic> imgList;
   @override
   State<ProDetailsSlider> createState() => _ProDetailsSliderState();
 }
 
 class _ProDetailsSliderState extends State<ProDetailsSlider> {
-  List<dynamic> imgList = [
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-    'assets/images/Frame 7.png',
-  ];
+  // List<dynamic> imgList = [
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  //   'assets/images/Frame 7.png',
+  // ];
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
 
@@ -40,7 +43,7 @@ class _ProDetailsSliderState extends State<ProDetailsSlider> {
       children: [
         CarouselSlider(
             carouselController: carouselController,
-            items: imgList
+            items: widget.imgList
                 .map((img) => Image.asset(
                       img,
                       fit: BoxFit.cover,
@@ -116,7 +119,7 @@ class _ProDetailsSliderState extends State<ProDetailsSlider> {
             ),
             child: Center(
               child: Text(
-                '${currentIndex + 1}/${imgList.length}',
+                '${currentIndex + 1}/${widget.imgList.length}',
                 style: GoogleFonts.poppins(
                   textStyle: TextStyle(
                     fontSize: 18,

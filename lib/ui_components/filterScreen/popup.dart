@@ -10,7 +10,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PopUpScreen extends StatefulWidget {
-  PopUpScreen({Key? key}) : super(key: key);
+  PopUpScreen({Key? key, required this.warehouse}) : super(key: key);
+  final Map<String, dynamic> warehouse;
 
   @override
   State<PopUpScreen> createState() => _PopUpScreenState();
@@ -80,6 +81,7 @@ class _PopUpScreenState extends State<PopUpScreen> {
               const SizedBox(height: 10),
               RentButton(
                 guest: noOfGuestController.text,
+                warehouse: widget.warehouse,
               ),
               SizedBox(height: height * 0.05),
             ],
@@ -91,7 +93,12 @@ class _PopUpScreenState extends State<PopUpScreen> {
 }
 
 class RentButton extends StatelessWidget {
-  RentButton({Key? key, required this.guest}) : super(key: key);
+  RentButton({
+    Key? key,
+    required this.guest,
+    required this.warehouse,
+  }) : super(key: key);
+  final Map<String, dynamic> warehouse;
 
   final String guest;
 
@@ -110,7 +117,9 @@ class RentButton extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CheckOut(),
+              builder: (context) => CheckOut(
+                warehouse: warehouse,
+              ),
             ),
           );
         } else {

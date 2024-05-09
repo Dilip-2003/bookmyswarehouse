@@ -38,14 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const CustomSliderHome(
             title: 'Near your location',
-            subTitle: '243 properties in India',
+            subTitle: ' properties in India',
           ),
           SizedBox(
             height: height * 0.02,
           ),
           const CustomSliderHome(
             title: 'Top rated in NCR',
-            subTitle: ' ',
+            subTitle: '',
           ),
           SizedBox(
             height: height * 0.02,

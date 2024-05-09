@@ -8,7 +8,7 @@ class InputDetails extends StatelessWidget {
   InputDetails({
     super.key,
   });
-  AppServices _appServices = Get.find();
+  final AppServices _appServices = Get.find();
 
   @override
   Widget build(BuildContext context) {

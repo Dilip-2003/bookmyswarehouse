@@ -1,4 +1,5 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/data/datalist.dart';
 import 'package:bookmywarehouse/src/warehouse/pages/propert_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +16,7 @@ class CustomSliderTwoHome extends StatefulWidget {
 }
 
 class _CustomSliderTwoHomeState extends State<CustomSliderTwoHome> {
+  List<Map<String, dynamic>> houseList = WareHouseList.warehouseList;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -56,14 +58,18 @@ class _CustomSliderTwoHomeState extends State<CustomSliderTwoHome> {
             height: height * 0.28,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: houseList.length,
               itemBuilder: (context, index) {
+                final wareHouse = houseList[index];
                 return InkWell(
                   onTap: () {
+                    // print(wareHouse['city']);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProperDetailsScreen(),
+                          builder: (context) => ProperDetailsScreen(
+                            warehouse: wareHouse,
+                          ),
                         ));
                     print('property details clicked');
                   },
@@ -76,7 +82,7 @@ class _CustomSliderTwoHomeState extends State<CustomSliderTwoHome> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(10)),
                           child: Image.asset(
-                            'assets/images/Frame 7.png',
+                            wareHouse['image'],
                             height: height * 0.23,
                             width: width * 0.46,
                             fit: BoxFit.cover,
@@ -89,7 +95,7 @@ class _CustomSliderTwoHomeState extends State<CustomSliderTwoHome> {
                               height: height * 0.03,
                               width: width * 0.5,
                               child: Text(
-                                'Delhi ',
+                                wareHouse['city'],
                                 style: GoogleFonts.poppins(
                                     textStyle: TextStyle(
                                   fontSize: 16,
@@ -103,7 +109,7 @@ class _CustomSliderTwoHomeState extends State<CustomSliderTwoHome> {
                               height: height * 0.02,
                               width: width * 0.5,
                               child: Text(
-                                '345 rented props ',
+                                '${houseList.length} rented props ',
                                 style: GoogleFonts.poppins(
                                     textStyle: const TextStyle(
                                   fontSize: 14,

@@ -3,7 +3,11 @@ import 'package:bookmywarehouse/ui_components/search_result/item_list.dart';
 import 'package:flutter/material.dart';
 
 class SearchResults extends StatelessWidget {
-  const SearchResults({super.key});
+  SearchResults({
+    super.key,
+    required this.text,
+  });
+  String text;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,9 @@ class SearchResults extends StatelessWidget {
           ),
         ),
         automaticallyImplyLeading: false,
-        title: const CustomAppBarSearchResults(),
+        title: CustomAppBarSearchResults(
+          text: text,
+        ),
       ),
       body: ItemList(),
     );

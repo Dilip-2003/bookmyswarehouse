@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RentButton extends StatelessWidget {
-  const RentButton({super.key});
+  const RentButton({super.key, required this.warehouse});
+  final Map<String, dynamic> warehouse;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class RentButton extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Rs.90,500 ',
+                    'Rs. ${warehouse['rent']}',
                     style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                             fontSize: 16,
@@ -30,7 +31,7 @@ class RentButton extends StatelessWidget {
                             color: BasicColor.deepBlack)),
                   ),
                   Text(
-                    '/ month',
+                    '/ day',
                     style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
                         fontSize: 16,
@@ -56,7 +57,9 @@ class RentButton extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PopUpScreen(),
+                    builder: (context) => PopUpScreen(
+                      warehouse: warehouse,
+                    ),
                   ));
               print('rent button clicked');
             },
