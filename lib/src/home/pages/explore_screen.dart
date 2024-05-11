@@ -1,7 +1,9 @@
+import 'package:bookmywarehouse/src/home/widgets/customslider2.dart';
 import 'package:bookmywarehouse/src/home/widgets/explore_slider.dart';
 import 'package:bookmywarehouse/src/home/widgets/explore_slider_two.dart';
 import 'package:bookmywarehouse/src/home/widgets/search_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
@@ -21,6 +23,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            SizedBox(
+              height: Get.height * 0.02,
+            ),
             const SearchFieldHome(
               colors: Color(0xFFE3E3E7),
               hintText: 'Search address, city, location',
@@ -30,44 +35,18 @@ class _ExploreScreenState extends State<ExploreScreen> {
             SizedBox(
               height: height * 0.01,
             ),
+            const CustomSliderTwoHome(title: 'Find out your next Warehouse!'),
+            SizedBox(
+              height: height * 0.03,
+            ),
+            const ExploreSlider(title: 'Exploring about your living style?'),
+            SizedBox(
+              height: height * 0.03,
+            ),
             const ExploreSliderTwo(
-              title: 'Find out your next Warehouse!',
-              subTitle2: '345 rented props ',
-            ),
+                title: 'Want to discover other experiences?'),
             SizedBox(
               height: height * 0.01,
-            ),
-            const ExploreSlider(
-              title: 'Exploring about your living style?',
-              city: 'Kolkata',
-            ),
-            SizedBox(
-              height: height * 0.01,
-            ),
-            const ExploreSlider(
-              title: 'Want to discover other experiences?',
-              city: 'Hydrabad',
-            ),
-            SizedBox(
-              height: height * 0.01,
-            ),
-            const ExploreSlider(
-              title: 'Find out your next Warehouse!',
-              city: 'Bangalore',
-            ),
-            SizedBox(
-              height: height * 0.01,
-            ),
-            const ExploreSlider(
-              title: 'Exploring about your living style?',
-              city: 'Kolkata',
-            ),
-            SizedBox(
-              height: height * 0.01,
-            ),
-            const ExploreSlider(
-              title: 'Want to discover other experiences?',
-              city: 'Hydrabad',
             ),
           ],
         ),

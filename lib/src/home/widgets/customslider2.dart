@@ -23,7 +23,7 @@ class _CustomSliderTwoHomeState extends State<CustomSliderTwoHome> {
     var width = MediaQuery.of(context).size.width;
 
     return Container(
-      height: height * 0.42,
+      height: height * 0.38,
       width: width,
       margin: EdgeInsets.symmetric(horizontal: width * 0.02),
       child: Column(
@@ -33,7 +33,7 @@ class _CustomSliderTwoHomeState extends State<CustomSliderTwoHome> {
             children: [
               SizedBox(
                 height: height * 0.08,
-                width: width * 0.5,
+                width: width * 0.7,
                 child: Text(
                   widget.title,
                   style: GoogleFonts.poppins(
@@ -63,7 +63,6 @@ class _CustomSliderTwoHomeState extends State<CustomSliderTwoHome> {
                 final wareHouse = houseList[index];
                 return InkWell(
                   onTap: () {
-                    // print(wareHouse['city']);
                     Navigator.push(
                         context,
                         MaterialPageRoute(

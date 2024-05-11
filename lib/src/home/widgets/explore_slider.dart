@@ -1,6 +1,5 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/data/datalist.dart';
-import 'package:bookmywarehouse/src/warehouse/pages/propert_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,9 +7,8 @@ class ExploreSlider extends StatefulWidget {
   const ExploreSlider({
     super.key,
     required this.title,
-    required this.city,
   });
-  final String title, city;
+  final String title;
 
   @override
   State<ExploreSlider> createState() => _ExploreSliderState();
@@ -25,8 +23,8 @@ class _ExploreSliderState extends State<ExploreSlider> {
     var width = MediaQuery.of(context).size.width;
 
     return Container(
-      height: height * 0.39,
-      width: width,
+      height: height * 0.42,
+      // width: width,
       margin: EdgeInsets.symmetric(
         horizontal: width * 0.02,
       ),
@@ -36,9 +34,7 @@ class _ExploreSliderState extends State<ExploreSlider> {
           Container(
             margin: EdgeInsets.symmetric(
               horizontal: width * 0.02,
-              vertical: width * 0.02,
             ),
-            width: width * 0.7,
             height: height * 0.06,
             child: Text(
               widget.title,
@@ -52,60 +48,58 @@ class _ExploreSliderState extends State<ExploreSlider> {
             ),
           ),
           SizedBox(
-            width: width,
-            height: height * 0.28,
+            height: height * 0.36,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: houseList.length,
               itemBuilder: (context, index) {
                 final wareHouse = houseList[index];
 
                 return InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProperDetailsScreen(
-                            warehouse: wareHouse,
-                          ),
-                        ));
-                    print('property details clicked');
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => ProperDetailsScreen(
+                    //         warehouse: wareHouse,
+                    //       ),
+                    //     ));
+                    print('Living Styles clicked');
                   },
-                  child: SizedBox(
-                    width: width * 0.5,
-                    height: height * 0.15,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: BasicColor.deepWhite,
+                        borderRadius: BorderRadius.circular(10)),
+                    margin: EdgeInsets.symmetric(horizontal: width * 0.02),
+                    width: width * 0.6,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10)),
                           child: Image.asset(
-                            'assets/images/Frame 7.png',
-                            height: height * 0.23,
-                            width: width * 0.46,
+                            wareHouse['living']['image'],
+                            height: height * 0.29,
+                            width: width * 0.6,
                             fit: BoxFit.cover,
                           ),
                         ),
-                        Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                left: width * 0.15,
-                                top: width * 0.02,
-                              ),
-                              height: height * 0.03,
-                              width: width * 0.5,
-                              child: Text(
-                                widget.city,
-                                style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                  fontSize: 16,
-                                  color: BasicColor.lightBlack,
-                                  fontWeight: FontWeight.w800,
-                                )),
-                              ),
+                        SizedBox(
+                          height: height * 0.05,
+                          width: width * 0.5,
+                          child: Center(
+                            child: Text(
+                              wareHouse['living']['title'],
+                              style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                fontSize: 16,
+                                color: BasicColor.lightBlack,
+                                fontWeight: FontWeight.w700,
+                              )),
                             ),
-                          ],
+                          ),
                         )
                       ],
                     ),
