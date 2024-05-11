@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "111378890347",
+    "project_id": "bookmywarehouse-74817",
+    "storage_bucket": "bookmywarehouse-74817.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111378890347:android:92f9fd35c4644c536ffb2e",
+        "android_client_info": {
+          "package_name": "com.example.bookmywarehouse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUwFrMf1sxdOuQjwPZgvnMV-TOo0lZ778"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,12 +1,13 @@
-import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/src/auth/widgets/email_text_field.dart';
-import 'package:bookmywarehouse/widgets/navigation_page.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:bookmywarehouse/widgets/navigation_page.dart';
+import 'package:bookmywarehouse/src/auth/widgets/email_text_field.dart';
 
 class MailAndPasswordVerification extends StatefulWidget {
-  const MailAndPasswordVerification({super.key});
+  const MailAndPasswordVerification({Key? key}) : super(key: key);
 
   @override
   State<MailAndPasswordVerification> createState() =>
@@ -22,32 +23,50 @@ class _MailAndPasswordVerificationState
   String? passwordError;
   bool _loggingIn = false;
 
-  void _login() {
+  void _login() async {
     String email = emailController.text;
     String password = passwordController.text;
 
-    if (email.contains('@') && email.contains('.')) {
-      if (password.length >= 8) {
-        // Validation passed, start login process
-        setState(() {
-          _loggingIn = true;
-        });
-        // Simulate login process with a delay
-        Future.delayed(const Duration(seconds: 2), () {
-          // After login, navigate to the next page
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const BottomNavBar()),
-          );
-        });
-      } else {
-        setState(() {
-          passwordError = 'Password should be at least 8 characters';
-        });
-      }
-    } else {
+    setState(() {
+      emailError = null;
+      passwordError = null;
+    });
+
+    if (email.trim().isEmpty || !email.contains('@') || !email.contains('.')) {
       setState(() {
-        emailError = 'Enter a valid username';
+        emailError = 'Enter a valid email address';
+      });
+      return;
+    }
+
+    if (password.trim().isEmpty || password.length < 8) {
+      setState(() {
+        passwordError = 'Password should be at least 8 characters';
+      });
+      return;
+    }
+
+    try {
+      setState(() {
+        _loggingIn = true;
+      });
+
+      // Perform Firebase login
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Navigate to the next page on successful login
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => BottomNavBar()),
+      );
+    } catch (e) {
+      print(e);
+      setState(() {
+        _loggingIn = false;
+        emailError = 'Login failed. Please try again.';
       });
     }
   }
