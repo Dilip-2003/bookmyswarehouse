@@ -12,7 +12,20 @@
           "package_name": "com.example.bookmywarehouse"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "111378890347-fskpi86125b9mdgp5js76mv2sof4k9uq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bookmywarehouse",
+            "certificate_hash": "dec27775253ce2974aabc89b879e8270ff850c8a"
+          }
+        },
+        {
+          "client_id": "111378890347-g911r777vb6jgs6sdlhkl4kucsd0ofaa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAUwFrMf1sxdOuQjwPZgvnMV-TOo0lZ778"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "111378890347-g911r777vb6jgs6sdlhkl4kucsd0ofaa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "111378890347-dgalpntsfctul9f6mhis7hnekrfj7cd4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bookmywarehouse"
+              }
+            }
+          ]
         }
       }
     }

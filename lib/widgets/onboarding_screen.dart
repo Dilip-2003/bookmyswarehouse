@@ -1,7 +1,7 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/src/auth/pages/login_screen.dart';
 import 'package:bookmywarehouse/src/auth/widgets/login_button.dart';
 import 'package:bookmywarehouse/src/auth/pages/signup_screen.dart';
-import 'package:bookmywarehouse/src/auth/wrapper/wrapper.dart';
 import 'package:bookmywarehouse/src/getx/getx_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -149,7 +149,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Wrapper(),
+                                builder: (context) => LoginScreens(),
                               ),
                             );
                           },

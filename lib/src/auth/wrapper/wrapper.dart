@@ -1,5 +1,6 @@
 import 'package:bookmywarehouse/src/auth/pages/login_screen.dart';
 import 'package:bookmywarehouse/widgets/navigation_page.dart';
+import 'package:bookmywarehouse/widgets/onboarding_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -18,9 +19,9 @@ class _WrapperState extends State<Wrapper> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return BottomNavBar();
+            return const BottomNavBar();
           } else {
-            return LoginScreens();
+            return const OnBoardingScreen();
           }
         },
       ),

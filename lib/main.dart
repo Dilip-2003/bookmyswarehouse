@@ -1,3 +1,4 @@
+import 'package:bookmywarehouse/src/auth/wrapper/wrapper.dart';
 import 'package:bookmywarehouse/widgets/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -24,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: OnBoardingScreen(),
+      home: Wrapper(),
     );
   }
 }

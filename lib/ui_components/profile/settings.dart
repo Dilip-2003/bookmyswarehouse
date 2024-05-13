@@ -2,17 +2,70 @@ import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/profile/appbar.dart';
 import 'package:bookmywarehouse/ui_components/profile/help.dart';
 import 'package:bookmywarehouse/ui_components/profile/notifications_setting.dart';
+import 'package:bookmywarehouse/ui_components/profile/personal_details.dart';
+import 'package:bookmywarehouse/widgets/onboarding_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:user_profile_avatar/user_profile_avatar.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _loggingOut = false;
+  String? _userName;
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserDisplayName();
+  }
+
+  Future<void> _getUserDisplayName() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      setState(() {
+        _userName = user.displayName;
+      });
+    }
+  }
+
+  Future<void> signOut() async {
+    setState(() {
+      _loggingOut =
+          true; // Set logging out to true to show the loading indicator
+    });
+
+    try {
+      await GoogleSignIn().signOut();
+      await _auth.signOut();
+      print("User signed out successfully.");
+      // Delay navigation to show the loading indicator for a short duration
+      await Future.delayed(const Duration(seconds: 1));
+      // Navigate to the onboarding screen after sign-out
+      Get.off(() => const OnBoardingScreen());
+    } catch (e) {
+      print("Error signing out: $e");
+      // Handle sign-out errors here, such as showing an error message to the user.
+    } finally {
+      setState(() {
+        _loggingOut = false; // Set logging out to false after navigation
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const ProfileAppBar(
@@ -42,7 +95,7 @@ class SettingsScreen extends StatelessWidget {
                       radius: 40,
                     ),
                     Text(
-                      'Dilip Sarkar',
+                      _userName ?? '', // Display user name here
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
                           color: BasicColor.deepBlack,
@@ -62,10 +115,11 @@ class SettingsScreen extends StatelessWidget {
                 isSubtile: true,
                 callback: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NotificationSettings(),
-                      ));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const NotificationSettings(),
+                    ),
+                  );
                   print('notifications screen open');
                 },
                 title: 'Notifications',
@@ -82,10 +136,11 @@ class SettingsScreen extends StatelessWidget {
                 color: BasicColor.deepBlack,
                 callback: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HelpAndSupport(),
-                      ));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HelpAndSupport(),
+                    ),
+                  );
                   print('help screen open');
                 },
                 isSubtile: true,
@@ -149,20 +204,7 @@ class SettingsScreen extends StatelessWidget {
               SizedBox(
                 height: height * 0.02,
               ),
-              SettingCard(
-                color: Colors.red,
-                callback: () {
-                  print('logout screen open');
-                },
-                isSubtile: false,
-                title: 'Logout',
-                icon: const Icon(
-                  Icons.logout,
-                  size: 30,
-                  color: Colors.red,
-                ),
-                subtile: '',
-              ),
+              LogOutButton(),
               SizedBox(
                 height: height * 0.02,
               ),
@@ -174,27 +216,28 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
 class SettingCard extends StatelessWidget {
-  SettingCard({
-    super.key,
+  const SettingCard({
+    Key? key,
     required this.title,
     required this.icon,
     required this.subtile,
     required this.isSubtile,
     required this.callback,
     required this.color,
-  });
-  String title;
-  String subtile;
-  Icon icon;
-  bool isSubtile;
-  VoidCallback callback;
-  Color color;
+  }) : super(key: key);
+
+  final String title;
+  final String subtile;
+  final Icon icon;
+  final bool isSubtile;
+  final VoidCallback callback;
+  final Color color;
+
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: callback,
       child: Container(

@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -24,41 +26,62 @@ class _SignUpWithVerificationsState extends State<SignUpWithVerifications> {
   String? phoneError;
   bool _creatingAccount = false;
 
-  void _createAccount() {
+  void initState() {
+    super.initState();
+    // Initialize Firebase
+    Firebase.initializeApp();
+  }
+
+  void _createAccount() async {
     String email = emailController.text;
     String password = passwordController.text;
 
-    if (email.contains('@') && email.contains('.')) {
-      if (password.length >= 8) {
-        // Validation passed, start account creation
-        setState(() {
-          _creatingAccount = true;
-        });
-        // Simulate account creation process with a delay
-        Future.delayed(const Duration(seconds: 2), () {
-          // After account creation, navigate to the next page
-          if (phoneController.text.isNotEmpty) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LoginScreens(),
-              ),
-            );
-          } else {
-            setState(() {
-              phoneError = 'please enter the phone number';
-              _creatingAccount = false; // Reset state if account creation fails
-            });
-          }
-        });
+    try {
+      if (email.contains('@') && email.contains('.')) {
+        if (password.length >= 8) {
+          setState(() {
+            _creatingAccount = true;
+          });
+
+          UserCredential userCredential =
+              await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+
+          // Optionally, you can also verify the user's phone number here.
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginScreens(),
+            ),
+          );
+        } else {
+          setState(() {
+            passwordError = 'Password should be at least 8 characters';
+          });
+        }
       } else {
         setState(() {
-          passwordError = 'Password should be at least 8 characters';
+          emailError = 'Enter a valid email';
         });
       }
-    } else {
+    } on FirebaseAuthException catch (e) {
       setState(() {
-        emailError = 'Enter a valid username';
+        _creatingAccount = false;
+        if (e.code == 'weak-password') {
+          passwordError = 'The password provided is too weak.';
+        } else if (e.code == 'email-already-in-use') {
+          emailError = 'The account already exists for that email.';
+        } else {
+          emailError = 'Error: ${e.message}';
+        }
+      });
+    } catch (e) {
+      setState(() {
+        _creatingAccount = false;
+        emailError = 'Error: $e';
       });
     }
   }

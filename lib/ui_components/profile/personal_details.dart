@@ -1,18 +1,22 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/profile/appbar.dart';
 import 'package:bookmywarehouse/ui_components/profile/edit_profile.dart';
+import 'package:bookmywarehouse/widgets/onboarding_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:user_profile_avatar/user_profile_avatar.dart';
 
 class PersonalDetails extends StatelessWidget {
-  const PersonalDetails({super.key});
+  const PersonalDetails({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xFFF3F3F3),
       appBar: AppBar(
@@ -60,18 +64,24 @@ class PersonalDetails extends StatelessWidget {
   }
 }
 
-class DeleteButton extends StatelessWidget {
-  const DeleteButton({super.key});
+class DeleteButton extends StatefulWidget {
+  const DeleteButton({Key? key});
 
   @override
+  State<DeleteButton> createState() => _DeleteButtonState();
+}
+
+class _DeleteButtonState extends State<DeleteButton> {
+  @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () {
         if (kDebugMode) {
           print('delete button pressed');
         }
+        // Add functionality for deleting the account here
       },
       child: Container(
         height: height * 0.08,
@@ -107,18 +117,52 @@ class DeleteButton extends StatelessWidget {
   }
 }
 
-class LogOutButton extends StatelessWidget {
-  const LogOutButton({super.key});
+class LogOutButton extends StatefulWidget {
+  const LogOutButton({Key? key});
+
+  @override
+  State<LogOutButton> createState() => _LogOutButtonState();
+}
+
+class _LogOutButtonState extends State<LogOutButton> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  bool _loggingOut = false;
+
+  Future<void> signOut() async {
+    setState(() {
+      _loggingOut =
+          true; // Set logging out to true to show the loading indicator
+    });
+
+    try {
+      await GoogleSignIn().signOut();
+      await _auth.signOut();
+      print("User signed out successfully.");
+      // Delay navigation to show the loading indicator for a short duration
+      await Future.delayed(const Duration(seconds: 2));
+      // Navigate to the onboarding screen after sign-out
+      Get.off(() => const OnBoardingScreen());
+    } catch (e) {
+      print("Error signing out: $e");
+      // Handle sign-out errors here, such as showing an error message to the user.
+    } finally {
+      setState(() {
+        _loggingOut = false; // Set logging out to false after navigation
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () {
         if (kDebugMode) {
-          print('logout buttton pressed');
+          print('logout button pressed');
         }
+        signOut();
       },
       child: Container(
         height: height * 0.08,
@@ -132,10 +176,15 @@ class LogOutButton extends StatelessWidget {
           children: [
             SizedBox(
               width: width * 0.1,
-              child: const Icon(
-                Icons.logout,
-                size: 30,
-              ),
+              child: _loggingOut
+                  ? const Center(
+                      child:
+                          CircularProgressIndicator()) // Show loading indicator when logging out
+                  : const Icon(
+                      Icons.logout,
+                      color: Colors.red,
+                      size: 30,
+                    ),
             ),
             Container(
               padding: EdgeInsets.only(left: width * 0.03),
@@ -153,7 +202,11 @@ class LogOutButton extends StatelessWidget {
                     )),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (!_loggingOut) {
+                        signOut();
+                      }
+                    },
                     icon: const Icon(
                       Icons.keyboard_arrow_right,
                       size: 30,
@@ -170,7 +223,7 @@ class LogOutButton extends StatelessWidget {
 }
 
 class SectionFour extends StatelessWidget {
-  const SectionFour({super.key});
+  const SectionFour({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -191,10 +244,11 @@ class SectionFour extends StatelessWidget {
           icons: IconButton(
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => EditProfile(),
-                  ));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const EditProfile(),
+                ),
+              );
             },
             icon: const Icon(
               Icons.edit_sharp,
@@ -210,13 +264,13 @@ class SectionFour extends StatelessWidget {
 
 // ignore: must_be_immutable
 class CustomCard extends StatelessWidget {
-  CustomCard({super.key, required this.icons, required this.text});
-  IconButton icons;
+  CustomCard({Key? key, required this.icons, required this.text});
+  final IconButton icons;
   final String text;
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Container(
       height: height * 0.08,
       width: width * 0.43,
@@ -245,12 +299,12 @@ class CustomCard extends StatelessWidget {
 }
 
 class BusinessDetails extends StatelessWidget {
-  const BusinessDetails({super.key});
+  const BusinessDetails({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Container(
       height: height * 0.3,
       width: width * 0.9,
@@ -282,13 +336,13 @@ class BusinessDetails extends StatelessWidget {
 }
 
 class TextBox extends StatelessWidget {
-  const TextBox({super.key, required this.text1, required this.text2});
+  const TextBox({Key? key, required this.text1, required this.text2});
   final String text1, text2;
 
   @override
   Widget build(BuildContext context) {
     // var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
+    var width = MediaQuery.of(context).size.width;
     return SizedBox(
       width: width * 0.6,
       child: Column(
@@ -322,51 +376,73 @@ class TextBox extends StatelessWidget {
 }
 
 class PersonContacts extends StatelessWidget {
-  const PersonContacts({super.key});
+  const PersonContacts({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
-    return Container(
-      height: height * 0.09,
-      width: width * 0.9,
-      padding: EdgeInsets.all(width * 0.03),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: BasicColor.deepWhite,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Hi, Dilip Sarkar',
-            style: GoogleFonts.inter(
-                textStyle: const TextStyle(
-              color: Color(0xFF222222),
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            )),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Icon(
-                Icons.call,
-                size: 16,
-                color: Colors.grey,
-              ),
-              Text(
-                ' +919064364294',
-                style: GoogleFonts.inter(
-                  textStyle: const TextStyle(color: Colors.grey),
-                  fontSize: 14,
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    return FutureBuilder<String>(
+      future: displayName(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // While waiting for the future to complete, you can return a loading indicator
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          // If an error occurs, handle it appropriately
+          return Text('Error: ${snapshot.error}');
+        } else {
+          // If the future completes successfully, display the user's name
+          return Container(
+            height: height * 0.09,
+            width: width * 0.9,
+            padding: EdgeInsets.all(width * 0.03),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: BasicColor.deepWhite,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Hi, ${snapshot.data}', // Display the user's name obtained from the future
+                  style: GoogleFonts.inter(
+                    textStyle: const TextStyle(
+                      color: Color(0xFF222222),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          )
-        ],
-      ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Icon(
+                      Icons.call,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
+                    Text(
+                      ' +919064364294',
+                      style: GoogleFonts.inter(
+                        textStyle: const TextStyle(color: Colors.grey),
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          );
+        }
+      },
     );
+  }
+
+  Future<String> displayName() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final userName = currentUser?.displayName ?? 'User';
+    print(userName);
+    return userName;
   }
 }

@@ -1,5 +1,9 @@
+import 'package:bookmywarehouse/widgets/navigation_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class GooogleSignInButton extends StatefulWidget {
   const GooogleSignInButton({
@@ -17,7 +21,56 @@ class GooogleSignInButton extends StatefulWidget {
 }
 
 class _GooogleSignInButtonState extends State<GooogleSignInButton> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
   bool _isPressed = false;
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        final UserCredential userCredential =
+            await _auth.signInWithCredential(credential);
+        final User? user = userCredential.user;
+
+        if (user != null) {
+          // Show circular loading indicator for 1/2 seconds
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          );
+
+          // Delay the navigation to BottomNavBar
+          await Future.delayed(Duration(milliseconds: 2000));
+
+          // Navigate to BottomNavBar
+          Get.off(BottomNavBar());
+
+          print('Signed in with Google: ${user.displayName}');
+        } else {
+          print('Failed to sign in with Google');
+        }
+      }
+    } catch (error) {
+      // Handle sign-in errors
+      print('Error signing in with Google: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +87,7 @@ class _GooogleSignInButtonState extends State<GooogleSignInButton> {
         setState(() {
           _isPressed = false;
         });
-        print('Google Sign-In button pressed');
+        _signInWithGoogle();
       },
       onTapCancel: () {
         setState(() {
@@ -42,7 +95,7 @@ class _GooogleSignInButtonState extends State<GooogleSignInButton> {
         });
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 150),
+        duration: const Duration(milliseconds: 150),
         height: height * 0.07,
         width: width * 0.9,
         decoration: BoxDecoration(
