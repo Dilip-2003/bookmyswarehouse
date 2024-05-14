@@ -1,7 +1,6 @@
-import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/src/auth/widgets/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'otp_screen.dart';
 
 class SignInWithPhone extends StatefulWidget {
   const SignInWithPhone({
@@ -96,7 +95,7 @@ class _SignInWithPhoneState extends State<SignInWithPhone> {
           userName: 'Phone Number',
           icons: Icon(Icons.phone_android),
           emailText: '9867653250',
-          colors: BasicColor.deepWhite,
+          colors: Colors.white,
         ),
       ),
     );

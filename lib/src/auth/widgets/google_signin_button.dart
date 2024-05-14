@@ -7,16 +7,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class GooogleSignInButton extends StatefulWidget {
   const GooogleSignInButton({
-    Key? key,
+    super.key,
     required this.btnText,
     required this.colors,
     required this.borderColors,
-  }) : super(key: key);
+  });
 
   final String btnText;
   final Color colors, borderColors;
 
   @override
+  // ignore: library_private_types_in_public_api
   _GooogleSignInButtonState createState() => _GooogleSignInButtonState();
 }
 
@@ -46,20 +47,21 @@ class _GooogleSignInButtonState extends State<GooogleSignInButton> {
         if (user != null) {
           // Show circular loading indicator for 1/2 seconds
           showDialog(
+            // ignore: use_build_context_synchronously
             context: context,
             barrierDismissible: false,
             builder: (BuildContext context) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             },
           );
 
           // Delay the navigation to BottomNavBar
-          await Future.delayed(Duration(milliseconds: 2000));
+          await Future.delayed(const Duration(milliseconds: 2000));
 
           // Navigate to BottomNavBar
-          Get.off(BottomNavBar());
+          Get.off(const BottomNavBar());
 
           print('Signed in with Google: ${user.displayName}');
         } else {

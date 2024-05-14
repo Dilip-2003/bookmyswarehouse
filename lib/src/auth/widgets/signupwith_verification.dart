@@ -1,3 +1,4 @@
+import 'package:bookmywarehouse/widgets/navigation_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/src/auth/widgets/email_text_field.dart';
-import 'package:bookmywarehouse/src/auth/pages/login_screen.dart';
 
 class SignUpWithVerifications extends StatefulWidget {
   const SignUpWithVerifications({super.key});
@@ -54,7 +54,7 @@ class _SignUpWithVerificationsState extends State<SignUpWithVerifications> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const LoginScreens(),
+              builder: (context) => BottomNavBar(),
             ),
           );
         } else {
@@ -200,6 +200,8 @@ class _SignUpWithVerificationsState extends State<SignUpWithVerifications> {
                 phoneError = null;
               });
             },
+            keyboardType: TextInputType.number,
+            onSubmitted: (p0) {},
             controller: phoneController,
             initialCountryCode: 'IN',
             decoration: InputDecoration(

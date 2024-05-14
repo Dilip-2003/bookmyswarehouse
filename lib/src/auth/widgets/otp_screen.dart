@@ -1,4 +1,5 @@
 import 'package:bookmywarehouse/widgets/navigation_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
@@ -34,6 +35,8 @@ class _OtpScreenState extends State<OtpScreen> {
   String enteredOtp = ''; // Track the entered OTP
   bool _verifying = false; // Track if verification process is ongoing
 
+  late String _verificationId;
+
   @override
   void initState() {
     super.initState();
@@ -41,24 +44,50 @@ class _OtpScreenState extends State<OtpScreen> {
     _otpController = OtpFieldController();
   }
 
-  void sendOTP() {
+  void sendOTP() async {
     String phoneNumber = _phoneNumberController.text.trim();
     if (phoneNumber.isEmpty) {
       _showSnackBar('Please enter a phone number');
     } else {
-      print('OTP sent to: $phoneNumber');
       setState(() {
-        btnText = 'Resend OTP';
-        _sendButtonActive = false;
-        _otpFieldVisible = true;
-        _showSnackBar('OTP sent. You can resend OTP after 30 seconds.');
+        _verifying = true;
       });
-
-      Future.delayed(const Duration(seconds: 30), () {
-        setState(() {
-          _sendButtonActive = true;
-        });
-      });
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: '+91$phoneNumber',
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await FirebaseAuth.instance.signInWithCredential(credential);
+          _showSnackBar(
+              'Phone number automatically verified and user signed in: ${FirebaseAuth.instance.currentUser?.uid}');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const BottomNavBar()),
+          );
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          _showSnackBar('Failed to verify phone number: ${e.message}');
+          setState(() {
+            _verifying = false;
+          });
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          setState(() {
+            _verificationId = verificationId;
+            btnText = 'Resend OTP';
+            _sendButtonActive = false;
+            _otpFieldVisible = true;
+            _verifying = false;
+          });
+          _showSnackBar('OTP sent. You can resend OTP after 30 seconds.');
+          Future.delayed(const Duration(seconds: 30), () {
+            setState(() {
+              _sendButtonActive = true;
+            });
+          });
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          _verificationId = verificationId;
+        },
+      );
     }
   }
 
@@ -69,6 +98,32 @@ class _OtpScreenState extends State<OtpScreen> {
         duration: const Duration(seconds: 1),
       ),
     );
+  }
+
+  void verifyOTP() async {
+    if (enteredOtp.isEmpty) {
+      _showSnackBar('Please enter OTP');
+    } else {
+      setState(() {
+        _verifying = true;
+      });
+      try {
+        PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: _verificationId,
+          smsCode: enteredOtp,
+        );
+        await FirebaseAuth.instance.signInWithCredential(credential);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomNavBar()),
+        );
+      } catch (e) {
+        _showSnackBar('Failed to sign in: $e');
+        setState(() {
+          _verifying = false;
+        });
+      }
+    }
   }
 
   @override
@@ -85,23 +140,19 @@ class _OtpScreenState extends State<OtpScreen> {
           icon: Icon(
             Icons.keyboard_arrow_left,
             size: width * 0.1,
-            weight: 1.0,
             color: const Color(0xFF1A1E25),
           ),
         ),
       ),
       body: Container(
-        margin: EdgeInsets.only(
-          left: width * 0.05,
-          right: width * 0.05,
-        ),
+        margin: EdgeInsets.symmetric(horizontal: width * 0.05),
         width: width,
         height: height * 0.4,
         child: _verifying
             ? const Center(
                 child: SpinKitCircle(
-                  color: Colors.blue, // Choose your desired color
-                  size: 50.0, // Adjust the size as needed
+                  color: Colors.blue,
+                  size: 50.0,
                 ),
               )
             : Column(
@@ -114,7 +165,6 @@ class _OtpScreenState extends State<OtpScreen> {
                       textStyle: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        letterSpacing: 0.02,
                         color: Color(0xFF1A1E25),
                       ),
                     ),
@@ -131,7 +181,6 @@ class _OtpScreenState extends State<OtpScreen> {
                         textStyle: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
-                          letterSpacing: 0.02,
                         ),
                       ),
                       border: OutlineInputBorder(
@@ -139,69 +188,52 @@ class _OtpScreenState extends State<OtpScreen> {
                       ),
                     ),
                   ),
-                  if (_otpFieldVisible) // Display OTP field only if visible
+                  if (_otpFieldVisible)
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'OTP',
-                              style: GoogleFonts.poppins(
-                                textStyle: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: 0.02,
-                                  color: Color(0xFF1A1E25),
-                                ),
-                              ),
+                        Text(
+                          'OTP',
+                          style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF1A1E25),
                             ),
-                            OTPTextField(
-                              controller: _otpController,
-                              length: 5,
-                              inputFormatter: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ], // Ensure numeric input only
-                              width: MediaQuery.of(context).size.width,
-                              textFieldAlignment: MainAxisAlignment.spaceAround,
-                              fieldWidth: 45,
-                              fieldStyle: FieldStyle.box,
-                              outlineBorderRadius: 15,
-                              style: const TextStyle(fontSize: 17),
-                              onChanged: (otp) {
-                                setState(() {
-                                  enteredOtp = otp;
-                                });
-                              },
-                              onCompleted: (otp) {
-                                if (kDebugMode) {
-                                  print("Completed: $otp");
-                                }
-                              },
-                            ),
-                          ],
+                          ),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            if (enteredOtp.isEmpty) {
-                              _showSnackBar('Please enter OTP');
-                            } else {
-                              setState(() {
-                                _verifying = true; // Start verification process
-                              });
-                              // Simulate verification process with a delay
-                              Future.delayed(const Duration(seconds: 2), () {
-                                // After verification, navigate to the next page
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const BottomNavBar(),
-                                  ),
-                                );
-                              });
+                        OTPTextField(
+                          controller: _otpController,
+                          length: 6,
+                          inputFormatter: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          width: MediaQuery.of(context).size.width,
+                          textFieldAlignment: MainAxisAlignment.spaceAround,
+                          fieldWidth: 45,
+                          fieldStyle: FieldStyle.box,
+                          outlineBorderRadius: 15,
+                          style: const TextStyle(fontSize: 17),
+                          onChanged: (otp) {
+                            setState(() {
+                              enteredOtp = otp;
+                            });
+                          },
+                          onCompleted: (otp) {
+                            if (kDebugMode) {
+                              print("Completed: $otp");
                             }
                           },
-                          child: const Text("Verify"),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: width * 0.32,
+                            vertical: height * 0.02,
+                          ),
+                          child: ElevatedButton(
+                            onPressed: verifyOTP,
+                            child: const Text("Verify"),
+                          ),
                         ),
                       ],
                     ),
@@ -210,12 +242,10 @@ class _OtpScreenState extends State<OtpScreen> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          print("Floating button was pressed.");
-                          btnText = 'Send OTP';
-                          _otpController.clear();
                           setState(() {
-                            // _sendButtonActive = !_sendButtonActive;
-                            _otpFieldVisible = false; // Hide the OTP field
+                            btnText = 'Send OTP';
+                            _otpController.clear();
+                            _otpFieldVisible = false;
                           });
                         },
                         child: const Text('Clear'),

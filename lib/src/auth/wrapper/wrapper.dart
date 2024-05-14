@@ -1,4 +1,3 @@
-import 'package:bookmywarehouse/src/auth/pages/login_screen.dart';
 import 'package:bookmywarehouse/widgets/navigation_page.dart';
 import 'package:bookmywarehouse/widgets/onboarding_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
