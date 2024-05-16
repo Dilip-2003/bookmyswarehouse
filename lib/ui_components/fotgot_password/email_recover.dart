@@ -1,9 +1,10 @@
-import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/ui_components/fotgot_password/email_confirmation.dart';
 import 'package:bookmywarehouse/ui_components/fotgot_password/recover_text.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:email_validator/email_validator.dart';
+import '../../constants/color/base_color.dart';
+import 'email_confirmation.dart'; // Ensure this path is correct
 
 class RecoverViaEmail extends StatefulWidget {
   RecoverViaEmail({super.key});
@@ -15,6 +16,51 @@ class RecoverViaEmail extends StatefulWidget {
 class _RecoverViaEmailState extends State<RecoverViaEmail> {
   TextEditingController emailController = TextEditingController();
   String? emailError;
+  bool _isLoading = false;
+  String _errorMessage = '';
+
+  Future<void> _sendPasswordResetEmail() async {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = '';
+    });
+
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: emailController.text.trim(),
+      );
+      setState(() {
+        _isLoading = false;
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const EmailSent(),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        _isLoading = false;
+        switch (e.code) {
+          case 'invalid-email':
+            emailError = 'The email address is not valid.';
+            break;
+          case 'user-not-found':
+            emailError = 'There is no user corresponding to this email.';
+            break;
+          default:
+            emailError = 'An error occurred. Please try again.';
+            break;
+        }
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+        emailError = 'An unknown error occurred. Please try again.';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.sizeOf(context).width;
@@ -49,18 +95,15 @@ class _RecoverViaEmailState extends State<RecoverViaEmail> {
         ),
       ),
       body: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: width * .05,
-        ),
+        margin: EdgeInsets.symmetric(horizontal: width * .05),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const RecoverText(
-                text1: 'Recover Password',
-                text: 'Enter your email address to recover your password'),
-            SizedBox(
-              height: width * 0.1,
+            RecoverText(
+              text1: 'Recover Password',
+              text: 'Enter your email address to recover your password',
             ),
+            SizedBox(height: width * 0.1),
             SizedBox(
               height: height * 0.07,
               child: TextField(
@@ -89,32 +132,28 @@ class _RecoverViaEmailState extends State<RecoverViaEmail> {
                   ),
                   errorText: emailError,
                   border: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1, color: BasicColor.primary),
-                      borderRadius: BorderRadius.circular(10)),
+                    borderSide: BorderSide(width: 1, color: BasicColor.primary),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
             ),
-            SizedBox(
-              height: height * 0.05,
-            ),
+            if (_errorMessage.isNotEmpty)
+              Text(
+                _errorMessage,
+                style: TextStyle(color: Colors.red),
+              ),
+            SizedBox(height: height * 0.05),
             InkWell(
               onTap: () {
-                print('object');
                 String email = emailController.text;
                 final bool isEmailValid = EmailValidator.validate(email.trim());
                 if (email.isEmpty) {
                   setState(() {
-                    emailError = 'email could not be empty';
+                    emailError = 'Email cannot be empty';
                   });
                 } else if (isEmailValid) {
-                  print('email is valid');
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const EmailSent(),
-                    ),
-                  );
+                  _sendPasswordResetEmail();
                 } else {
                   setState(() {
                     emailError = 'Please enter a valid email';
@@ -129,17 +168,19 @@ class _RecoverViaEmailState extends State<RecoverViaEmail> {
                   color: BasicColor.primary,
                 ),
                 child: Center(
-                  child: Text(
-                    'Send Reset Link',
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w300,
-                        letterSpacing: 0.02,
-                        color: BasicColor.deepWhite,
-                      ),
-                    ),
-                  ),
+                  child: _isLoading
+                      ? CircularProgressIndicator(color: BasicColor.deepWhite)
+                      : Text(
+                          'Send Reset Link',
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w300,
+                              letterSpacing: 0.02,
+                              color: BasicColor.deepWhite,
+                            ),
+                          ),
+                        ),
                 ),
               ),
             ),
@@ -147,5 +188,11 @@ class _RecoverViaEmailState extends State<RecoverViaEmail> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
   }
 }
