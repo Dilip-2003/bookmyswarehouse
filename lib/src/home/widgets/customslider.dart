@@ -1,7 +1,11 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/data/datalist.dart';
+import 'package:bookmywarehouse/src/getx/favourite_controller.dart';
 import 'package:bookmywarehouse/src/warehouse/pages/propert_details.dart';
+import 'package:bookmywarehouse/widgets/favourite_screen.dart';
+import 'package:bookmywarehouse/widgets/savded_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomSliderHome extends StatefulWidget {
@@ -15,11 +19,11 @@ class CustomSliderHome extends StatefulWidget {
 }
 
 class _CustomSliderHomeState extends State<CustomSliderHome> {
+  final FavoriteController favoriteController = Get.put(FavoriteController());
   List<Map<String, dynamic>> houseList = WareHouseList.warehouseList;
-  bool isFav = false;
+
   @override
   Widget build(BuildContext context) {
-    print(isFav);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     var length = houseList.length;
@@ -74,7 +78,7 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
               ),
               TextButton(
                 onPressed: () {
-                  print('see all clicked');
+                  Get.to(() => SavedScreen());
                 },
                 child: const Text('See all'),
               )
@@ -90,7 +94,6 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                 final wareHouse = houseList[index];
                 return InkWell(
                   onTap: () {
-                    print('property details clicked');
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -170,7 +173,6 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                     ),
                                     SizedBox(
                                       width: width * 0.5,
-                                      // height: height * 0.05,
                                       child: Text(
                                         wareHouse['title'],
                                         style: GoogleFonts.poppins(
@@ -204,7 +206,6 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                       ],
                                     ),
                                     Row(
-                                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Row(
                                           children: [
@@ -218,15 +219,13 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                                                         BasicColor.lightBlack),
                                               ),
                                             ),
-                                            Text(
-                                              '/day',
-                                              style: GoogleFonts.poppins(
-                                                textStyle: const TextStyle(
-                                                  fontSize: 14,
-                                                  color: Color(0xFF7D7F88),
-                                                ),
-                                              ),
-                                            )
+                                            Text('/day',
+                                                style: GoogleFonts.poppins(
+                                                  textStyle: const TextStyle(
+                                                    fontSize: 14,
+                                                    color: Color(0xFF7D7F88),
+                                                  ),
+                                                ))
                                           ],
                                         ),
                                       ],
@@ -240,25 +239,26 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
                         Positioned(
                           bottom: 0,
                           right: 0,
-                          child: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                print('object');
-                                isFav = !isFav;
-                              });
-                            },
-                            icon: isFav
-                                ? Icon(
-                                    Icons.favorite,
-                                    size: 25,
-                                    color: BasicColor.primary,
-                                  )
-                                : const Icon(
-                                    Icons.favorite_border,
-                                    size: 25,
-                                    color: Color(0xFF7D7F88),
-                                  ),
-                          ),
+                          child: Obx(() {
+                            bool isFav =
+                                favoriteController.isFavorite(wareHouse);
+                            return IconButton(
+                              onPressed: () {
+                                if (isFav) {
+                                  favoriteController.removeFavorite(wareHouse);
+                                } else {
+                                  favoriteController.addFavorite(wareHouse);
+                                }
+                              },
+                              icon: Icon(
+                                isFav ? Icons.favorite : Icons.favorite_border,
+                                size: 25,
+                                color: isFav
+                                    ? BasicColor.primary
+                                    : Color(0xFF7D7F88),
+                              ),
+                            );
+                          }),
                         ),
                       ],
                     ),

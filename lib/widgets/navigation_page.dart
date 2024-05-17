@@ -2,8 +2,9 @@ import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/src/home/pages/chat_screen.dart';
 import 'package:bookmywarehouse/src/home/pages/explore_screen.dart';
 import 'package:bookmywarehouse/src/home/pages/home_screen.dart';
+import 'package:bookmywarehouse/widgets/favourite_screen.dart';
 import 'package:bookmywarehouse/widgets/profilescreen.dart';
-import 'package:bookmywarehouse/widgets/savded_screen.dart';
+// import 'package:bookmywarehouse/widgets/savded_screen.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBarApp extends StatelessWidget {
@@ -27,12 +28,12 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    ExploreScreen(),
-    ChatScreen(),
-    SavedScreen(),
-    ProfileScreen(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const HomeScreen(),
+    const ExploreScreen(),
+    const ChatScreen(),
+    FavoriteScreen(),
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {

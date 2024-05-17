@@ -4,7 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePageNavbar extends StatefulWidget {
-  const HomePageNavbar({Key? key}) : super(key: key);
+  const HomePageNavbar({super.key});
 
   @override
   State<HomePageNavbar> createState() => _HomePageNavbarState();
@@ -24,7 +24,7 @@ class _HomePageNavbarState extends State<HomePageNavbar> {
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) {
       print('permission not granted');
-      LocationPermission askPermission = await Geolocator.requestPermission();
+      // LocationPermission askPermission = await Geolocator.requestPermission();
     } else {
       Position currentPosition = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.best);
