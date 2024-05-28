@@ -1,3 +1,5 @@
+import 'package:bookmywarehouse/data/datalist.dart';
+import 'package:bookmywarehouse/data/datalist2.dart';
 import 'package:bookmywarehouse/src/home/widgets/banner.dart';
 import 'package:bookmywarehouse/src/home/widgets/home_page_appbar.dart';
 import 'package:bookmywarehouse/src/home/widgets/customslider.dart';
@@ -36,16 +38,19 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: height * 0.02,
           ),
-          const CustomSliderHome(
+          CustomSliderHome(
+            
             title: 'Near your location',
             subTitle: ' properties in India',
+            houseList: WareHouseList2.warehouseList2,
           ),
           SizedBox(
             height: height * 0.02,
           ),
-          const CustomSliderHome(
+          CustomSliderHome(
             title: 'Top rated in NCR',
             subTitle: '',
+            houseList: WareHouseList.warehouseList,
           ),
           SizedBox(
             height: height * 0.02,

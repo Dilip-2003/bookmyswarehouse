@@ -2,7 +2,6 @@ import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/data/datalist.dart';
 import 'package:bookmywarehouse/src/getx/favourite_controller.dart';
 import 'package:bookmywarehouse/src/warehouse/pages/propert_details.dart';
-import 'package:bookmywarehouse/widgets/favourite_screen.dart';
 import 'package:bookmywarehouse/widgets/savded_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,9 +9,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomSliderHome extends StatefulWidget {
   const CustomSliderHome(
-      {super.key, required this.title, required this.subTitle});
+      {super.key,
+      required this.title,
+      required this.subTitle,
+      required this.houseList});
   final String title;
   final String subTitle;
+  final List<Map<String, dynamic>> houseList;
 
   @override
   State<CustomSliderHome> createState() => _CustomSliderHomeState();
@@ -20,13 +23,12 @@ class CustomSliderHome extends StatefulWidget {
 
 class _CustomSliderHomeState extends State<CustomSliderHome> {
   final FavoriteController favoriteController = Get.put(FavoriteController());
-  List<Map<String, dynamic>> houseList = WareHouseList.warehouseList;
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    var length = houseList.length;
+    var length = widget.houseList.length;
 
     return Container(
       height: height * 0.28,
@@ -89,9 +91,9 @@ class _CustomSliderHomeState extends State<CustomSliderHome> {
             height: height * 0.205,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: houseList.length,
+              itemCount: widget.houseList.length,
               itemBuilder: (context, index) {
-                final wareHouse = houseList[index];
+                final wareHouse = widget.houseList[index];
                 return InkWell(
                   onTap: () {
                     Navigator.push(

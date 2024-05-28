@@ -1,5 +1,5 @@
-class WareHouseList {
-  static List<Map<String, dynamic>> warehouseList = [
+class WareHouseList2 {
+  static List<Map<String, dynamic>> warehouseList2 = [
     {
       'id': 1,
       'image': 'assets/photo_list/photo1.jpg',

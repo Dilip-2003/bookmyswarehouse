@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:bookmywarehouse/common/exceptions/api_excetion.dart';
 import 'package:bookmywarehouse/common/failure/failure.dart';
 import 'package:bookmywarehouse/models/failures/api_failure.dart';
@@ -10,7 +9,7 @@ import 'package:http/http.dart' as http;
 
 class RemoteDataSource implements RemoteRepository {
   @override
-  Future<Either<Failure, Map<String,dynamic>>> fetchData(
+  Future<Either<Failure, Map<String, dynamic>>> fetchData(
       String location) async {
     try {
       final response = await http.get(
@@ -19,9 +18,8 @@ class RemoteDataSource implements RemoteRepository {
         final data = jsonDecode(response.body);
         final wareHouseData =
             data["warehouse"].map((e) => WareHouseModel.fromMap(e)).toList();
-        
 
-        return Right({"wareHouseData":wareHouseData});
+        return Right({"wareHouseData": wareHouseData});
       } else {
         throw ApiExcetion(message: "Unable to Fetch Data");
       }
