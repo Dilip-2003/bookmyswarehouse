@@ -1,47 +1,15 @@
+import 'package:bookmywarehouse/src/getx/location_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePageNavbar extends StatefulWidget {
+class HomePageNavbar extends StatelessWidget {
   const HomePageNavbar({super.key});
 
   @override
-  State<HomePageNavbar> createState() => _HomePageNavbarState();
-}
-
-class _HomePageNavbarState extends State<HomePageNavbar> {
-  String cityName = 'Your Location';
-
-  @override
-  void initState() {
-    super.initState();
-    getCurrentLocation();
-  }
-
-  getCurrentLocation() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      print('permission not granted');
-      LocationPermission askPermission = await Geolocator.requestPermission();
-    } else {
-      Position currentPosition = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.best);
-      print(currentPosition.latitude);
-      print(currentPosition.longitude);
-
-      List<Placemark> placemarks = await placemarkFromCoordinates(
-          currentPosition.latitude, currentPosition.longitude);
-
-      setState(() {
-        cityName = placemarks.first.locality ?? 'Your Location';
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final LocationController locationController = Get.put(LocationController());
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -69,18 +37,20 @@ class _HomePageNavbarState extends State<HomePageNavbar> {
                 color: Colors.blue, // Use your desired color
                 size: 20,
               ),
-              Text(
-                ' $cityName',
-                style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black, // Use your desired color
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
+              Obx(() {
+                return Text(
+                  ' ${locationController.cityName.value}',
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.black, // Use your desired color
+                        fontWeight: FontWeight.bold),
+                  ),
+                );
+              }),
               IconButton(
                 onPressed: () {
-                  getCurrentLocation();
+                  locationController.getCurrentLocation();
                 },
                 icon: const Icon(
                   Icons.keyboard_arrow_down,

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "111378890347",
+    "project_id": "bookmywarehouse-74817",
+    "storage_bucket": "bookmywarehouse-74817.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111378890347:android:bdb4e1f2ee0a929b6ffb2e",
+        "android_client_info": {
+          "package_name": "com.bookmywarehouse.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "111378890347-9erjcepbtor01m9hp71qqttm5sadiul8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bookmywarehouse.app",
+            "certificate_hash": "9ba95919ff9f1c8af2bce6ce95ae0a9f00d7ae61"
+          }
+        },
+        {
+          "client_id": "111378890347-g911r777vb6jgs6sdlhkl4kucsd0ofaa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUwFrMf1sxdOuQjwPZgvnMV-TOo0lZ778"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "111378890347-g911r777vb6jgs6sdlhkl4kucsd0ofaa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "111378890347-dgalpntsfctul9f6mhis7hnekrfj7cd4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bookmywarehouse"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
