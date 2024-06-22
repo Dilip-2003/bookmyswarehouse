@@ -26,7 +26,7 @@ class WareHouseList {
       },
       'ownerdetails': {
         'name': 'Aurora Crest',
-        'phone': '7894561230',
+        'phone': '7050062084',
       },
       'imageList': [
         'assets/photo_list/photo1.jpg',
@@ -61,7 +61,7 @@ class WareHouseList {
       },
       'ownerdetails': {
         'name': 'Indrajit Banerjee',
-        'phone': '7894561230',
+        'phone': '7050062084',
       },
       'imageList': [
         'assets/photo_list/photo2.jpg',
@@ -96,7 +96,7 @@ class WareHouseList {
       },
       'ownerdetails': {
         'name': 'Rahul Modak',
-        'phone': '7894561230',
+        'phone': '7050062084',
       },
       'imageList': [
         'assets/photo_list/photo3.jpg',
@@ -131,7 +131,7 @@ class WareHouseList {
       },
       'ownerdetails': {
         'name': 'Rajesh Kumar',
-        'phone': '7894561230',
+        'phone': '7050062084',
       },
       'imageList': [
         'assets/photo_list/photo4.jpg',
@@ -166,7 +166,7 @@ class WareHouseList {
       },
       'ownerdetails': {
         'name': 'Aurora Crest',
-        'phone': '7894561230',
+        'phone': '7050062084',
       },
       'imageList': [
         'assets/photo_list/photo1.jpg',
@@ -201,7 +201,7 @@ class WareHouseList {
       },
       'ownerdetails': {
         'name': 'Indrajit Banerjee',
-        'phone': '7894561230',
+        'phone': '7050062084',
       },
       'imageList': [
         'assets/photo_list/photo2.jpg',
@@ -236,7 +236,7 @@ class WareHouseList {
       },
       'ownerdetails': {
         'name': 'Rahul Modak',
-        'phone': '7894561230',
+        'phone': '7050062084',
       },
       'imageList': [
         'assets/photo_list/photo3.jpg',
@@ -271,7 +271,7 @@ class WareHouseList {
       },
       'ownerdetails': {
         'name': 'Rajesh Kumar',
-        'phone': '7894561230',
+        'phone': '7050062084',
       },
       'imageList': [
         'assets/photo_list/photo4.jpg',

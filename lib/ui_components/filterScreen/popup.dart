@@ -71,6 +71,15 @@ class _PopUpScreenState extends State<PopUpScreen> {
                   Header(title: 'Property Facilities'),
                   TextButton(
                     onPressed: () {
+                      Get.defaultDialog(
+                        title: "Under Process",
+                        middleText: "This page is under process",
+                        textConfirm: "OK",
+                        confirmTextColor: Colors.white,
+                        onConfirm: () {
+                          Get.back();
+                        },
+                      );
                       print(selectedDays);
                     },
                     child: const Text('See more'),

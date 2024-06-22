@@ -2,6 +2,7 @@ import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/data/datalist.dart';
 import 'package:bookmywarehouse/src/warehouse/pages/propert_details.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomSliderTwoHome extends StatefulWidget {
@@ -47,6 +48,15 @@ class _CustomSliderTwoHomeState extends State<CustomSliderTwoHome> {
               ),
               TextButton(
                 onPressed: () {
+                  Get.defaultDialog(
+                    title: "Under Process",
+                    middleText: "This page is under process",
+                    textConfirm: "OK",
+                    confirmTextColor: Colors.white,
+                    onConfirm: () {
+                      Get.back();
+                    },
+                  );
                   print('see all clicked');
                 },
                 child: const Text('See all'),

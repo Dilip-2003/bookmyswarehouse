@@ -2,7 +2,6 @@ import 'package:bookmywarehouse/src/auth/widgets/divider.dart';
 import 'package:bookmywarehouse/src/auth/widgets/forgot_password.dart';
 import 'package:bookmywarehouse/src/auth/widgets/google_signin_button.dart';
 import 'package:bookmywarehouse/src/auth/widgets/mail_password.dart';
-import 'package:bookmywarehouse/src/auth/widgets/sign_in_button.dart';
 import 'package:bookmywarehouse/src/auth/widgets/singin_with_phn.dart';
 import 'package:bookmywarehouse/src/auth/widgets/welcome.dart';
 import 'package:flutter/material.dart';
@@ -64,11 +63,11 @@ class LoginScreens extends StatelessWidget {
               SizedBox(
                 height: height * 0.015,
               ),
-              const SignInButton(
-                btnText: 'Sign in with Apple',
-                colors: Color(0xFF222831),
-                borderColors: Color(0xFF222831),
-              ),
+              // const SignInButton(
+              //   btnText: 'Sign in with Apple',
+              //   colors: Color(0xFF222831),
+              //   borderColors: Color(0xFF222831),
+              // ),
               SizedBox(
                 height: height * 0.015,
               ),

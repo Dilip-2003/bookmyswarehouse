@@ -47,11 +47,11 @@ class SignUpScreens extends StatelessWidget {
               SizedBox(
                 height: height * 0.02,
               ),
-              const SignInButton(
-                btnText: 'Sign up with Apple',
-                colors: Color(0xFF222831),
-                borderColors: Color(0xFF222831),
-              ),
+              // const SignInButton(
+              //   btnText: 'Sign up with Apple',
+              //   colors: Color(0xFF222831),
+              //   borderColors: Color(0xFF222831),
+              // ),
               SizedBox(
                 height: height * 0.02,
               ),

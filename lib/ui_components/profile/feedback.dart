@@ -1,6 +1,7 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/profile/appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FeedBackScreen extends StatefulWidget {
@@ -49,7 +50,17 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
               SizedBox(
                 width: width * 0.65,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.defaultDialog(
+                      title: "Under Process",
+                      middleText: "This page is under process",
+                      textConfirm: "OK",
+                      confirmTextColor: Colors.white,
+                      onConfirm: () {
+                        Get.back();
+                      },
+                    );
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -86,6 +97,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                   onPressed: () {
                     print(feedbackText.text.toString());
                     print('feed back submit');
+                    Get.back();
                   },
                   child: Text(
                     'Submit',

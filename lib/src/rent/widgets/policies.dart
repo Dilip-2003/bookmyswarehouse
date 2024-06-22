@@ -1,5 +1,7 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
+import 'package:bookmywarehouse/ui_components/profile/privacy.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Policy extends StatelessWidget {
@@ -48,6 +50,7 @@ class Policy extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
+                    Get.to(PrivacyAndPolicy());
                     print('Circular add pressed');
                   },
                   icon: const Icon(

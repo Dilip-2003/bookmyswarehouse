@@ -157,6 +157,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SettingCard(
                 color: BasicColor.deepBlack,
                 callback: () {
+                  Get.defaultDialog(
+                    title: "Under Process",
+                    middleText: "This page is under process",
+                    textConfirm: "OK",
+                    confirmTextColor: Colors.white,
+                    onConfirm: () {
+                      Get.back();
+                    },
+                  );
                   print('subscriptions screen open');
                 },
                 isSubtile: false,
@@ -173,6 +182,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SettingCard(
                 color: BasicColor.deepBlack,
                 callback: () {
+                  Get.defaultDialog(
+                    title: "Under Process",
+                    middleText: "This page is under process",
+                    textConfirm: "OK",
+                    confirmTextColor: Colors.white,
+                    onConfirm: () {
+                      Get.back();
+                    },
+                  );
                   print('add account screen open');
                 },
                 isSubtile: false,
@@ -188,6 +206,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               TextButton(
                 onPressed: () {
+                  Get.defaultDialog(
+                    title: "Under Process",
+                    middleText: "This page is under process",
+                    textConfirm: "OK",
+                    confirmTextColor: Colors.white,
+                    onConfirm: () {
+                      Get.back();
+                    },
+                  );
                   print('invite a friend screen called');
                 },
                 child: Text(

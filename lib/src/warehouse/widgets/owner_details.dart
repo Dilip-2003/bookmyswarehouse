@@ -1,5 +1,5 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/src/chat/pages/chatroom.dart';
+import 'package:bookmywarehouse/src/chat/pages/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -76,11 +76,7 @@ class _OwnerDetailsState extends State<OwnerDetails> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => ChatRoom(
-                          name: widget.ownerName,
-                        ),
-                      ),
+                      MaterialPageRoute(builder: (context) => ChatPage()),
                     );
                   },
                   icon: const Icon(Icons.message_rounded),

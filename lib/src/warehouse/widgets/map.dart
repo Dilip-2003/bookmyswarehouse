@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MapPropertDetails extends StatelessWidget {
   const MapPropertDetails({super.key});
@@ -24,7 +25,17 @@ class MapPropertDetails extends StatelessWidget {
             bottom: 0,
 
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.defaultDialog(
+                  title: "Under Process",
+                  middleText: "This page is under process",
+                  textConfirm: "OK",
+                  confirmTextColor: Colors.white,
+                  onConfirm: () {
+                    Get.back();
+                  },
+                );
+              },
               icon: Image.asset(
                 'assets/images/Vector.png',
                 height: 35,

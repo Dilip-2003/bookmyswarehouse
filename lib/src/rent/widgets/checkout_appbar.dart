@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomCheckOutAppBar extends StatelessWidget {
@@ -20,10 +21,23 @@ class CustomCheckOutAppBar extends StatelessWidget {
                   letterSpacing: 0.02,
                   fontWeight: FontWeight.w700)),
         ),
-        const Icon(
-          Icons.help_center,
-          size: 30,
-        ),
+        IconButton(
+          onPressed: () {
+            Get.defaultDialog(
+              title: "Under Process",
+              middleText: "This page is under process",
+              textConfirm: "OK",
+              confirmTextColor: Colors.white,
+              onConfirm: () {
+                Get.back();
+              },
+            );
+          },
+          icon: Icon(
+            Icons.help_center,
+            size: 30,
+          ),
+        )
       ],
     );
   }

@@ -1,5 +1,5 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/src/home/pages/chat_screen.dart';
+import 'package:bookmywarehouse/src/chat/pages/chat_screen.dart';
 import 'package:bookmywarehouse/src/home/pages/explore_screen.dart';
 import 'package:bookmywarehouse/src/home/pages/home_screen.dart';
 import 'package:bookmywarehouse/widgets/favourite_screen.dart';
@@ -31,7 +31,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
     const ExploreScreen(),
-    const ChatScreen(),
+    const ChatRoom(),
     FavoriteScreen(),
     const ProfileScreen(),
   ];

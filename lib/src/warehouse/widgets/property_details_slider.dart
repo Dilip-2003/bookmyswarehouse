@@ -1,8 +1,10 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// ignore: must_be_immutable
 class ProDetailsSlider extends StatefulWidget {
   ProDetailsSlider({
     super.key,
@@ -88,7 +90,17 @@ class _ProDetailsSliderState extends State<ProDetailsSlider> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Get.defaultDialog(
+                      title: "Under Process",
+                      middleText: "This page is under process",
+                      textConfirm: "OK",
+                      confirmTextColor: Colors.white,
+                      onConfirm: () {
+                        Get.back();
+                      },
+                    );
+                  },
                   child: Container(
                     height: width * 0.12,
                     width: width * 0.12,

@@ -42,6 +42,15 @@ class InputDetails extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
+                  Get.defaultDialog(
+                    title: "Under Process",
+                    middleText: "This page is under process",
+                    textConfirm: "OK",
+                    confirmTextColor: Colors.white,
+                    onConfirm: () {
+                      Get.back();
+                    },
+                  );
                   print('edit option clikced');
                 },
                 child: Text(

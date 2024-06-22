@@ -40,16 +40,16 @@ class _WareHouseDetaisState extends State<WareHouseDetais> {
                           color: BasicColor.deepBlack)),
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  print('favourite button clicked');
-                },
-                icon: Icon(
-                  Icons.favorite_border,
-                  color: BasicColor.lightBlack,
-                  size: width * 0.08,
-                ),
-              ),
+              // IconButton(
+              //   onPressed: () {
+              //     print('favourite button clicked');
+              //   },
+              //   icon: Icon(
+              //     Icons.favorite_border,
+              //     color: BasicColor.lightBlack,
+              //     size: width * 0.08,
+              //   ),
+              // ),
             ],
           ),
           const SizedBox(

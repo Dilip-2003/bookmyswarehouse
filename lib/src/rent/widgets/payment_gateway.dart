@@ -1,6 +1,7 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PayMentGateWay extends StatelessWidget {
@@ -105,6 +106,15 @@ class DebitCard extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
+                  Get.defaultDialog(
+                    title: "Under Process",
+                    middleText: "This page is under process",
+                    textConfirm: "OK",
+                    confirmTextColor: Colors.white,
+                    onConfirm: () {
+                      Get.back();
+                    },
+                  );
                   print('Circular add pressed');
                 },
                 icon: const Icon(
@@ -160,6 +170,15 @@ class OnlinePayment extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
+                  Get.defaultDialog(
+                    title: "Under Process",
+                    middleText: "This page is under process",
+                    textConfirm: "OK",
+                    confirmTextColor: Colors.white,
+                    onConfirm: () {
+                      Get.back();
+                    },
+                  );
                   print('Circular add pressed');
                 },
                 icon: const Icon(

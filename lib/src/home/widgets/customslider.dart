@@ -1,5 +1,5 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
-import 'package:bookmywarehouse/data/datalist.dart';
+// import 'package:bookmywarehouse/data/datalist.dart';
 import 'package:bookmywarehouse/src/getx/favourite_controller.dart';
 import 'package:bookmywarehouse/src/warehouse/pages/propert_details.dart';
 import 'package:bookmywarehouse/widgets/savded_screen.dart';

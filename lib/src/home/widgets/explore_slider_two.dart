@@ -1,6 +1,7 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/data/datalist.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ExploreSliderTwo extends StatefulWidget {
@@ -57,13 +58,15 @@ class _ExploreSliderTwoState extends State<ExploreSliderTwo> {
 
                 return InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => ProperDetailsScreen(
-                    //         warehouse: wareHouse,
-                    //       ),
-                    //     ));
+                    Get.defaultDialog(
+                      title: "Under Process",
+                      middleText: "This page is under process",
+                      textConfirm: "OK",
+                      confirmTextColor: Colors.white,
+                      onConfirm: () {
+                        Get.back();
+                      },
+                    );
                     print('Living Styles clicked');
                   },
                   child: Container(

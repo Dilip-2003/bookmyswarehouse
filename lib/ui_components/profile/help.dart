@@ -6,6 +6,7 @@ import 'package:bookmywarehouse/ui_components/profile/help_and_support.dart';
 import 'package:bookmywarehouse/ui_components/profile/privacy.dart';
 import 'package:bookmywarehouse/ui_components/profile/terms.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HelpAndSupport extends StatefulWidget {
@@ -47,7 +48,17 @@ class _HelpAndSupportState extends State<HelpAndSupport> {
                 height: height * 0.05,
               ),
               HelpText(
-                callback: () {},
+                callback: () {
+                  Get.defaultDialog(
+                    title: "Under Process",
+                    middleText: "This page is under process",
+                    textConfirm: "OK",
+                    confirmTextColor: Colors.white,
+                    onConfirm: () {
+                      Get.back();
+                    },
+                  );
+                },
                 text: 'Contact Us',
               ),
               SizedBox(

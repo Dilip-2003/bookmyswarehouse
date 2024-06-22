@@ -42,7 +42,16 @@ class PriceDetails extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  print('edit option clikced');
+                  Get.defaultDialog(
+                    title: "Under Process",
+                    middleText: "This page is under process",
+                    textConfirm: "OK",
+                    confirmTextColor: Colors.white,
+                    onConfirm: () {
+                      Get.back();
+                    },
+                  );
+                  print('more information clikced');
                 },
                 child: Text(
                   'More info',

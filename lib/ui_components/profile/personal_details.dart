@@ -1,6 +1,7 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/profile/appbar.dart';
 import 'package:bookmywarehouse/ui_components/profile/edit_profile.dart';
+import 'package:bookmywarehouse/ui_components/profile/help.dart';
 import 'package:bookmywarehouse/widgets/onboarding_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -72,16 +73,93 @@ class DeleteButton extends StatefulWidget {
 }
 
 class _DeleteButtonState extends State<DeleteButton> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _deleting = false;
+
+  Future<void> reauthenticateUser() async {
+    try {
+      final currentUser = _auth.currentUser;
+      if (currentUser != null) {
+        // Check if the user is signed in with Google
+        if (currentUser.providerData
+            .any((info) => info.providerId == 'google.com')) {
+          final googleUser = await GoogleSignIn().signIn();
+          final googleAuth = await googleUser!.authentication;
+
+          final credential = GoogleAuthProvider.credential(
+            accessToken: googleAuth.accessToken,
+            idToken: googleAuth.idToken,
+          );
+
+          await currentUser.reauthenticateWithCredential(credential);
+        } else {
+          // If the user is signed in with email and password, re-authenticate with email and password
+          // You will need to prompt the user to enter their email and password again
+          // For demonstration purposes, I'm using hardcoded credentials
+          // In a real app, you should use input fields to get the user's email and password
+          final email = "user@example.com";
+          final password = "password";
+
+          final credential =
+              EmailAuthProvider.credential(email: email, password: password);
+          await currentUser.reauthenticateWithCredential(credential);
+        }
+      }
+    } catch (e) {
+      print("Error reauthenticating: $e");
+      throw e; // Re-throw the exception to handle it later
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    setState(() {
+      _deleting = true; // Set deleting to true to show the loading indicator
+    });
+
+    try {
+      final currentUser = _auth.currentUser;
+      if (currentUser != null) {
+        await reauthenticateUser();
+        await currentUser.delete();
+        print("User account deleted successfully.");
+        Get.offAll(() => const OnBoardingScreen());
+      }
+    } catch (e) {
+      print("Error deleting account: $e");
+      // Handle account deletion errors here, such as showing an error message to the user.
+      Get.snackbar("Error", "Unable to delete account. Please try again later.",
+          snackPosition: SnackPosition.BOTTOM);
+    } finally {
+      setState(() {
+        _deleting = false; // Set deleting to false after the operation
+      });
+    }
+  }
+
+  void _showDeleteConfirmationDialog() {
+    Get.defaultDialog(
+      title: "Confirm Delete",
+      middleText: "Are you sure you want to delete your account?",
+      textConfirm: "Yes",
+      textCancel: "No",
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        Get.back(); // Close the dialog
+        deleteAccount(); // Proceed with account deletion
+      },
+      onCancel: () {
+        Get.back(); // Close the dialog without deleting the account
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () {
-        if (kDebugMode) {
-          print('delete button pressed');
-        }
-        // Add functionality for deleting the account here
+        _showDeleteConfirmationDialog();
       },
       child: Container(
         height: height * 0.08,
@@ -93,22 +171,27 @@ class _DeleteButtonState extends State<DeleteButton> {
         ),
         child: Row(
           children: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.delete_outline_outlined,
-                color: Colors.red,
-                size: 30,
-              ),
+            SizedBox(
+              width: width * 0.1,
+              child: _deleting
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : const Icon(
+                      Icons.delete_outline_outlined,
+                      color: Colors.red,
+                      size: 30,
+                    ),
             ),
             Text(
               'Delete Account',
               style: GoogleFonts.lato(
-                  textStyle: const TextStyle(
-                color: Colors.red,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              )),
+                textStyle: const TextStyle(
+                  color: Colors.red,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
           ],
         ),
@@ -232,7 +315,9 @@ class SectionFour extends StatelessWidget {
       children: [
         CustomCard(
           icons: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(HelpAndSupport());
+            },
             icon: const Icon(
               Icons.help_outline,
               size: 28,
@@ -423,7 +508,7 @@ class PersonContacts extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     Text(
-                      ' +919064364294',
+                      ' +919876543210',
                       style: GoogleFonts.inter(
                         textStyle: const TextStyle(color: Colors.grey),
                         fontSize: 14,

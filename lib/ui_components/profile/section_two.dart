@@ -2,6 +2,7 @@ import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:bookmywarehouse/ui_components/profile/personal_details.dart';
 import 'package:bookmywarehouse/ui_components/profile/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileSectionTwo extends StatelessWidget {
@@ -49,7 +50,17 @@ class ProfileSectionTwo extends StatelessWidget {
               height: height * 0.035,
             ),
             SectionTwo(
-              callBack: () {},
+              callBack: () {
+                Get.defaultDialog(
+                  title: "Under Process",
+                  middleText: "This page is under process",
+                  textConfirm: "OK",
+                  confirmTextColor: Colors.white,
+                  onConfirm: () {
+                    Get.back();
+                  },
+                );
+              },
               icons: const Icon(Icons.credit_card),
               title: 'Payment details',
             ),
@@ -57,7 +68,17 @@ class ProfileSectionTwo extends StatelessWidget {
               height: height * 0.035,
             ),
             SectionTwo(
-              callBack: () {},
+              callBack: () {
+                Get.defaultDialog(
+                  title: "Under Process",
+                  middleText: "This page is under process",
+                  textConfirm: "OK",
+                  confirmTextColor: Colors.white,
+                  onConfirm: () {
+                    Get.back();
+                  },
+                );
+              },
               icons: const Icon(Icons.message_rounded),
               title: 'FAQ',
             ),
@@ -71,7 +92,17 @@ class ProfileSectionTwo extends StatelessWidget {
               height: height * 0.05,
             ),
             SectionTwo(
-              callBack: () {},
+              callBack: () {
+                Get.defaultDialog(
+                  title: "Under Process",
+                  middleText: "This page is under process",
+                  textConfirm: "OK",
+                  confirmTextColor: Colors.white,
+                  onConfirm: () {
+                    Get.back();
+                  },
+                );
+              },
               icons: const Icon(Icons.toggle_off),
               title: 'Switch to hosting',
             ),

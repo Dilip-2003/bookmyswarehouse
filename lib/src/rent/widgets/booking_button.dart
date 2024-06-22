@@ -1,5 +1,6 @@
 import 'package:bookmywarehouse/constants/color/base_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BookingButton extends StatelessWidget {
@@ -13,6 +14,15 @@ class BookingButton extends StatelessWidget {
       padding: EdgeInsets.only(bottom: height * 0.02),
       child: InkWell(
         onTap: () {
+          Get.defaultDialog(
+            title: "Under Process",
+            middleText: "This page is under process",
+            textConfirm: "OK",
+            confirmTextColor: Colors.white,
+            onConfirm: () {
+              Get.back();
+            },
+          );
           print('booking button pressed');
         },
         child: Container(

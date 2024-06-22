@@ -8,6 +8,7 @@ import 'package:bookmywarehouse/ui_components/filterScreen/room_and_bed.dart';
 import 'package:bookmywarehouse/ui_components/filterScreen/stay_time.dart';
 import 'package:bookmywarehouse/widgets/search_result.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Filter extends StatefulWidget {
   Filter({super.key, required this.text});
@@ -72,7 +73,17 @@ class _FilterState extends State<Filter> {
                   children: [
                     Header(title: 'Property Facilities'),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.defaultDialog(
+                          title: "Under Process",
+                          middleText: "This page is under process",
+                          textConfirm: "OK",
+                          confirmTextColor: Colors.white,
+                          onConfirm: () {
+                            Get.back();
+                          },
+                        );
+                      },
                       child: const Text('See more'),
                     ),
                   ],

@@ -39,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
             height: height * 0.02,
           ),
           CustomSliderHome(
-            
             title: 'Near your location',
             subTitle: ' properties in India',
             houseList: WareHouseList2.warehouseList2,
